@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Index from './index'; // Assurez-vous que le chemin est correct
 import 'animate.css';
@@ -42,6 +42,9 @@ const ScrollableContainer = styled.div`
   margin-bottom: 2rem;
   cursor: pointer;
   touch-action: pan-y;
+    @media (min-width: 501px) and (max-width: 1650px) {
+   width: 70vw;
+  }
 `;
 
 // Conteneur de contenu individuel
@@ -120,6 +123,9 @@ const Content = styled.div`
     font-size: 1.7rem;
     font-weight: 500;
   }
+     @media (min-width: 501px) and (max-width: 1650px) {
+    font-size: 3rem;
+  }
 `;
 
 const Content2 = styled.div`
@@ -127,6 +133,9 @@ const Content2 = styled.div`
   @media (max-width: 500px) {
     font-size: 1rem;
     font-weight: 500;
+  }
+    @media (min-width: 501px) and (max-width: 1650px) {
+    font-size: 1.7rem;
   }
 `;
 
@@ -156,6 +165,10 @@ const Title = styled.h1`
     margin-top: 5vh;
     margin-bottom: 2vh;
   }
+      @media (min-width: 501px) and (max-width: 1650px) {
+    font-size: 5rem;
+     margin-bottom: 5vh;
+  }
 `;
 
 const Title2 = styled(Title)`
@@ -164,6 +177,9 @@ const Title2 = styled(Title)`
   @media (max-width: 500px) {
     font-size: 3.5rem;
     margin-bottom: 2vh;
+  }
+        @media (min-width: 501px) and (max-width: 1650px) {
+    font-size: 5rem;
   }
 `;
 
@@ -181,23 +197,23 @@ function Aboutme() {
 
   const sections = ['section1', 'section2', 'section3', 'section4'];
 
-  const scrollToNextSection = () => {
+  const scrollToNextSection = useCallback(() => {
     const currentIndex = sections.indexOf(currentSection);
     const nextIndex = Math.min(sections.length - 1, currentIndex + 1);
     const nextSection = sections[nextIndex];
     setCurrentSection(nextSection);
     scrollToSection(nextSection);
-  };
+  }, [currentSection, sections]);
 
-  const scrollToPreviousSection = () => {
+  const scrollToPreviousSection = useCallback(() => {
     const currentIndex = sections.indexOf(currentSection);
     const previousIndex = Math.max(0, currentIndex - 1);
     const previousSection = sections[previousIndex];
     setCurrentSection(previousSection);
     scrollToSection(previousSection);
-  };
+  }, [currentSection, sections]);
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = useCallback((event) => {
     if (event.key === 'ArrowUp') {
       event.preventDefault();
       scrollToPreviousSection();
@@ -205,7 +221,7 @@ function Aboutme() {
       event.preventDefault();
       scrollToNextSection();
     }
-  };
+  }, [scrollToPreviousSection, scrollToNextSection]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -215,7 +231,7 @@ function Aboutme() {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('resize', () => setIsMobile(window.innerWidth <= 768));
     };
-  }, [currentSection, isMobile]);
+  }, [handleKeyDown]);
 
   const handleLeft = () => {
     setAnimate(true);

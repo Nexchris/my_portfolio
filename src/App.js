@@ -1,8 +1,8 @@
 // App.js
 import React, { useState } from 'react';
 import './App.css';
-import Index from './pages/index.js';
-import Menu from './pages/menu.js';
+import Index from './pages/index';
+import Menu from './pages/menu';
 import Background from './pages/background';
 import { Squash as Hamburger } from 'hamburger-react';
 import styled from 'styled-components';
