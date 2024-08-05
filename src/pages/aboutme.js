@@ -1,19 +1,7 @@
-import styled, { keyframes } from 'styled-components';
 import React, { useState, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 import Index from './index'; // Assurez-vous que le chemin est correct
 import 'animate.css';
-
-// Définition des animations
-const zoomIn = keyframes`
-  from {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-`;
 
 const zoomOut = keyframes`
   from {
@@ -28,7 +16,8 @@ const zoomOut = keyframes`
 
 // Conteneur principal avec animation
 const MainContainer = styled.div`
-  animation: ${zoomIn} 0.5s;
+  animation: zoomIn 0.5s;
+  color: black;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -221,11 +210,12 @@ function Aboutme() {
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('resize', () => setIsMobile(window.innerWidth <= 768));
+
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('resize', () => setIsMobile(window.innerWidth <= 768));
     };
-  }, [currentSection]);
+  }, [currentSection, isMobile]);
 
   const handleLeft = () => {
     setAnimate(true);

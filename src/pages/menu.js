@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import 'animate.css';
-import Index from './aboutme';
 
 const Indexcontainer = styled.div`
   display: flex;
@@ -24,19 +23,6 @@ const Text = styled.h1`
   }
 `;
 
-const Button = styled.button`
-  cursor: pointer;
-  border-radius: 5vh;
-  border: none;
-  background-color: black;
-  font-size: 2rem;
-  padding: 1rem;
-  color: white;
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
 
 const Section = styled.div`
   display: ${({ visible }) => (visible ? 'block' : 'none')};

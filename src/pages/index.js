@@ -1,9 +1,9 @@
+// Index.js
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Aboutme from './aboutme';
 import 'animate.css';
 
-// Définition de l'animation zoomOut
 const zoomOut = keyframes`
   from {
     transform: scale(1);
@@ -16,15 +16,17 @@ const zoomOut = keyframes`
 `;
 
 const Indexcontainer = styled.div`
- animation: zoomIn 0.5s;
-  position: absolute;
+  animation: zoomIn 0.5s;
+  position: absolute;  // Position relative pour superposer correctement par rapport à la vidéo
+
+  z-index: 1;  // Assure que le contenu est au-dessus de la vidéo
   display: flex;
-  font-family: cursive;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 99vh;
   width: 100vw;
+  top:1%;
   text-align: center;
   transition: transform 1s, opacity 1s;
   opacity: ${(props) => (props.hideContent ? 0 : 1)};
@@ -39,6 +41,11 @@ const Indexcontainer = styled.div`
 const Text = styled.h1`
   margin: 0;
   font-size: 4rem;
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color:white;
+  width:65vw;
 `;
 
 const Button = styled.button`
@@ -49,6 +56,9 @@ const Button = styled.button`
   font-size: 2rem;
   padding: 1rem;
   color: white;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   transition: opacity 0.3s;
 
   &:hover {
@@ -68,7 +78,7 @@ function Index() {
     setTimeout(() => {
       setShowAboutMe(true);
       setHideContent(true); // Masquer le contenu actuel
-    }, 200); // 2000 ms = 2 secondes
+    }, 200); // 200 ms = 0.2 secondes
   };
 
   // Réinitialiser l'animation après son exécution
