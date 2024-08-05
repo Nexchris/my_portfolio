@@ -2,6 +2,18 @@
   text-align: center;
 }
 
+
+::-webkit-scrollbar-thumb:hover {
+opacity: 0.7;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Couleur de la piste de défilement */
+  border-radius: 10px; /* Arrondir les coins de la piste */
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

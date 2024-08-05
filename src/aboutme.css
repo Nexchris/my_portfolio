@@ -1,0 +1,15 @@
+/* Masquer les barres de défilement pour les navigateurs Webkit (Chrome, Safari) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Masquer les barres de défilement pour tous les autres navigateurs */
+html, body {
+  overflow: hidden; /* Si vous voulez cacher les barres de défilement de manière générale */
+}
+
+@media (max-width: 500px) {
+.Title {
+  font-size: 2rem;
+}
+}

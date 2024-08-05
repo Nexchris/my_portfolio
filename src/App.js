@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'; // Importez useState depuis React
 import './App.css';
+import Index from './pages/index.js';
+import Circle from './pages/circle.js';
+import Menu from './pages/menu.js';
+import Aboutme from './pages/aboutme';
+import { Squash as Hamburger } from 'hamburger-react';
+import styled from 'styled-components';
 
 function App() {
+  const [isOpen, setOpen] = useState(false);
+
+  const Hamburgercontainer = styled.div`
+  margin-left:2vw;
+  margin-top:2vh;
+  `
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+<Hamburgercontainer>
+      <Hamburger
+        size={48}
+        toggled={isOpen}
+        toggle={setOpen}
+      />
+      </Hamburgercontainer>
+      {isOpen && <Menu />} {/* Affiche Menu uniquement si isOpen est vrai */}
+      <Index />
+    </>
   );
 }
 
