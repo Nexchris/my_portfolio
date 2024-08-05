@@ -10,16 +10,16 @@ import Background from './pages/background';
 import { Squash as Hamburger } from 'hamburger-react';
 import styled from 'styled-components';
 
+const HamburgerContainer = styled.div`
+  margin-left: 2vw;
+  margin-top: 2vh;
+  background-color: transparent;
+  position: relative;
+  z-index: 10;
+`;
+
 function App() {
   const [isOpen, setOpen] = useState(false);
-
-  const HamburgerContainer = styled.div`
-    margin-left: 2vw;
-    margin-top: 2vh;
-    background-color: transparent;
-    position: relative;
-    z-index: 10;
-  `;
 
   return (
     <Router>
@@ -30,12 +30,12 @@ function App() {
           toggle={setOpen}
         />
       </HamburgerContainer>
-      {isOpen && <Menu />}
+      {isOpen && <Menu onClose={() => setOpen(false)} />}
       <Background />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/skills" element={<Skills />} />
-        <Route path="/aboutme" element={<Aboutme/>} />
+        <Route path="/aboutme" element={<Aboutme />} />
         {/* Ajoutez d'autres routes ici */}
       </Routes>
     </Router>

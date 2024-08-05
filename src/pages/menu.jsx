@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+// Menu.js
+import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom'; // Importer useNavigate
+import { useNavigate } from 'react-router-dom';
 import 'animate.css';
 
-// Style pour le conteneur de menu
 const Indexcontainer = styled.div`
   display: flex;
   font-family: cursive;
@@ -15,7 +15,6 @@ const Indexcontainer = styled.div`
   text-align: center;
 `;
 
-// Style pour le texte des boutons du menu
 const Text = styled.h1`
   margin: 0;
   font-size: 4rem;
@@ -26,12 +25,12 @@ const Text = styled.h1`
   }
 `;
 
-// Composant Menu
-const Menu = () => {
-  const navigate = useNavigate(); // Hook pour la navigation
+const Menu = ({ onClose }) => {
+  const navigate = useNavigate();
 
   const handleNavigation = (path) => {
     navigate(path);
+    onClose(); // Fermer le menu après la navigation
   };
 
   return (
@@ -39,20 +38,10 @@ const Menu = () => {
       <Text onClick={() => handleNavigation('/')}>Accueil</Text>
       <Text onClick={() => handleNavigation('/aboutme')}>A Propos de moi</Text>
       <Text onClick={() => handleNavigation('/skills')}>Compétences</Text>
-      {/* Les autres liens que tu n'as pas encore définis */}
       <Text onClick={() => handleNavigation('/projects')}>Projets</Text>
       <Text onClick={() => handleNavigation('/contact')}>Me Contacter</Text>
     </Indexcontainer>
   );
 };
 
-// Composant principal de l'application
-const App = () => {
-  return (
-    <div>
-      <Menu />
-    </div>
-  );
-};
-
-export default App;
+export default Menu;

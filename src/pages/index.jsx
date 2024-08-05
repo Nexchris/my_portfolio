@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
+import { useNavigate } from 'react-router-dom';
 import 'animate.css';
 
 const zoomOut = keyframes`
@@ -17,7 +17,6 @@ const zoomOut = keyframes`
 const Indexcontainer = styled.div`
   animation: zoomIn 0.5s;
   position: absolute;
-  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,12 +39,10 @@ const Text = styled.h1`
   margin: 0;
   font-size: 4rem;
   font-family: "Unbounded", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
   color: white;
   width: 55vw;
-  
-  @media (min-width: 200px) and (max-width: 499px) {
+
+  @media (max-width: 499px) {
     font-size: 2rem;
     width: 90vw;
   }
@@ -54,7 +51,7 @@ const Text = styled.h1`
     font-size: 2.5rem;
     width: auto;
   }
-  
+
   @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 3rem;
     width: 90vw;
@@ -70,8 +67,6 @@ const Button = styled.button`
   padding: 1rem 2rem;
   color: white;
   font-family: "Bebas Neue", sans-serif;
-  font-weight: 400;
-  font-style: normal;
   transition: opacity 0.3s;
 
   &:hover {
@@ -82,29 +77,25 @@ const Button = styled.button`
 function Index() {
   const [animate, setAnimate] = useState(false);
   const [hideContent, setHideContent] = useState(false);
-  const navigate = useNavigate(); // Hook pour la navigation
+  const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     setAnimate(true);
-
-    // Attendre la fin de l'animation avant de naviguer
     setTimeout(() => {
       setHideContent(true);
-      navigate('/aboutme'); // Changer la route
-    }, 500); // Durée de l'animation
-  };
+      navigate('/aboutme');
+    }, 500); // Assurez-vous que cette durée est égale à la durée de l'animation
+  }, [navigate]);
 
-  // Réinitialiser l'animation après son exécution
   useEffect(() => {
     if (animate) {
       const timer = setTimeout(() => {
         setAnimate(false);
-      }, 500); // Durée de l'animation
+      }, 500); // Assurez-vous que cette durée est égale à la durée de l'animation
       return () => clearTimeout(timer);
     }
   }, [animate]);
 
-  // Gestionnaire d'événements de clavier
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === ' ' || event.key === 'Enter') {
@@ -114,18 +105,17 @@ function Index() {
 
     window.addEventListener('keydown', handleKeyDown);
 
-    // Nettoyer l'événement lorsque le composant est démonté
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []); // Le tableau vide signifie que cet effet s'exécute une seule fois après le montage
+  }, [handleClick]);
 
   return (
     <Indexcontainer className={animate ? 'animate' : ''} hideContent={hideContent}>
       <Text>Hey, Je suis Chris Ngabala</Text>
-      <br/>
+      <br />
       <Text>Je suis un développeur Web Fullstack</Text>
-      <br/>
+      <br />
       <Button onClick={handleClick}>START</Button>
     </Indexcontainer>
   );

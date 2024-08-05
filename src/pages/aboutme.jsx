@@ -2,17 +2,14 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
 import Index from './index';
-import Skills from './skills';
 import 'animate.css';
 
 // Animation fadeOutLeft
-const fadeOutLeft = keyframes`
-  from {
-    transform: translateX(0);
+const fadeOut = keyframes`
+from {
     opacity: 1;
   }
   to {
-    transform: translateX(-100%);
     opacity: 0;
   }
 `;
@@ -30,7 +27,7 @@ const zoomIn = keyframes`
 `;
 
 const MainContainer = styled.div`
-  animation: ${props => props.animate ? fadeOutLeft : zoomIn} 0.5s forwards;
+  animation: ${props => props.animate ? fadeOut : zoomIn} 0.5s forwards;
   color: black;
   position: relative;
   display: flex;
