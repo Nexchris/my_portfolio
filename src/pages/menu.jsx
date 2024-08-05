@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom'; // Importer useNavigate
 import 'animate.css';
 
+// Style pour le conteneur de menu
 const Indexcontainer = styled.div`
   display: flex;
   font-family: cursive;
@@ -13,6 +15,7 @@ const Indexcontainer = styled.div`
   text-align: center;
 `;
 
+// Style pour le texte des boutons du menu
 const Text = styled.h1`
   margin: 0;
   font-size: 4rem;
@@ -23,58 +26,31 @@ const Text = styled.h1`
   }
 `;
 
+// Composant Menu
+const Menu = () => {
+  const navigate = useNavigate(); // Hook pour la navigation
 
-const Section = styled.div`
-  display: ${({ visible }) => (visible ? 'block' : 'none')};
-  text-align: center;
-`;
-
-const Menu = ({ onSelectSection }) => (
-  <Indexcontainer>
-    <Text onClick={() => onSelectSection('home')}>Accueil</Text>
-    <Text onClick={() => onSelectSection('aboutMe')}>A Propos de moi</Text>
-    <Text onClick={() => onSelectSection('skills')}>Compétences</Text>
-    <Text onClick={() => onSelectSection('projects')}>Projets</Text>
-    <Text onClick={() => onSelectSection('contact')}>Me Contacter</Text>
-  </Indexcontainer>
-);
-
-const Home = () => (
-  <Section visible>
-    <h1>Bienvenue sur la page d'accueil!</h1>
-  </Section>
-);
-
-const AboutMe = () => (
-  <Section>
-    <h1>À propos de moi</h1>
-  </Section>
-);
-
-const App = () => {
-  const [section, setSection] = useState('home');
-
-  const renderSection = () => {
-    switch (section) {
-      case 'home':
-        return <Home />;
-      case 'aboutMe':
-        return <AboutMe />;
-      case 'skills':
-        return <Section><h1>Compétences</h1></Section>;
-      case 'projects':
-        return <Section><h1>Projets</h1></Section>;
-      case 'contact':
-        return <Section><h1>Me Contacter</h1></Section>;
-      default:
-        return <Home />;
-    }
+  const handleNavigation = (path) => {
+    navigate(path);
   };
 
   return (
+    <Indexcontainer>
+      <Text onClick={() => handleNavigation('/')}>Accueil</Text>
+      <Text onClick={() => handleNavigation('/aboutme')}>A Propos de moi</Text>
+      <Text onClick={() => handleNavigation('/skills')}>Compétences</Text>
+      {/* Les autres liens que tu n'as pas encore définis */}
+      <Text onClick={() => handleNavigation('/projects')}>Projets</Text>
+      <Text onClick={() => handleNavigation('/contact')}>Me Contacter</Text>
+    </Indexcontainer>
+  );
+};
+
+// Composant principal de l'application
+const App = () => {
+  return (
     <div>
-      <Menu onSelectSection={setSection} />
-      {renderSection()}
+      <Menu />
     </div>
   );
 };

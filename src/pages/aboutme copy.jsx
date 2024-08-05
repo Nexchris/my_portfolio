@@ -1,36 +1,23 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
 import Index from './index';
 import Skills from './skills';
 import 'animate.css';
 
-// Animation fadeOutLeft
-const fadeOutLeft = keyframes`
+const zoomOut = keyframes`
   from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-`;
-
-// Animation zoomIn
-const zoomIn = keyframes`
-  from {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  to {
     transform: scale(1);
     opacity: 1;
   }
+  to {
+    transform: scale(0.5);
+    opacity: 0;
+  }
 `;
 
+// Conteneur principal avec animation
 const MainContainer = styled.div`
-  animation: ${props => props.animate ? fadeOutLeft : zoomIn} 0.5s forwards;
+  animation: zoomIn 0.5s;
   color: black;
   position: relative;
   display: flex;
@@ -41,8 +28,13 @@ const MainContainer = styled.div`
   text-align: center;
   opacity: ${(props) => (props.hideContent ? 0 : 1)};
   visibility: ${(props) => (props.hideContent ? 'hidden' : 'visible')};
+
+  &.animate {
+    animation: ${zoomOut} 0.5s forwards;
+  }
 `;
 
+// Conteneur défilant avec une largeur définie
 const ScrollableContainer = styled.div`
   width: 60vw;
   height: 80vh;
@@ -51,11 +43,12 @@ const ScrollableContainer = styled.div`
   margin-bottom: 2rem;
   cursor: pointer;
   touch-action: pan-y;
-  @media (min-width: 501px) and (max-width: 1650px) {
-    width: 70vw;
+    @media (min-width: 501px) and (max-width: 1650px) {
+   width: 70vw;
   }
 `;
 
+// Conteneur de contenu individuel
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -63,12 +56,14 @@ const ContentContainer = styled.div`
   margin-bottom: 5rem;
 `;
 
+// Styles pour le bouton de navigation gauche et droite
 const Navflex = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 2rem;
 `;
 
+// Bouton de navigation
 const NavButton = styled.button`
   cursor: pointer;
   border-radius: 50%;
@@ -84,6 +79,7 @@ const NavButton = styled.button`
   }
 `;
 
+// Conteneur pour les boutons de défilement
 const ScrollContainer = styled.div`
   position: fixed;
   right: 1rem;
@@ -93,6 +89,7 @@ const ScrollContainer = styled.div`
   align-items: center;
 `;
 
+// Styles pour les boutons de défilement
 const ScrollButton = styled.button`
   background: black;
   color: white;
@@ -112,6 +109,7 @@ const ScrollButton = styled.button`
   }
 `;
 
+// Styles pour le texte
 const Storytelling = styled.div`
   font-family: "Unbounded", sans-serif;
   font-optical-sizing: auto;
@@ -126,7 +124,7 @@ const Content = styled.div`
     font-size: 1.7rem;
     font-weight: 500;
   }
-  @media (min-width: 501px) and (max-width: 1650px) {
+     @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 3rem;
   }
 `;
@@ -137,7 +135,7 @@ const Content2 = styled.div`
     font-size: 1rem;
     font-weight: 500;
   }
-  @media (min-width: 501px) and (max-width: 1650px) {
+    @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 1.7rem;
   }
 `;
@@ -168,9 +166,9 @@ const Title = styled.h1`
     margin-top: 5vh;
     margin-bottom: 2vh;
   }
-  @media (min-width: 501px) and (max-width: 1650px) {
+      @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 5rem;
-    margin-bottom: 5vh;
+     margin-bottom: 5vh;
   }
 `;
 
@@ -181,11 +179,12 @@ const Title2 = styled(Title)`
     font-size: 3.5rem;
     margin-bottom: 2vh;
   }
-  @media (min-width: 501px) and (max-width: 1650px) {
+        @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 5rem;
   }
 `;
 
+// Fonction de défilement vers une section
 const scrollToSection = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
@@ -193,10 +192,10 @@ const scrollToSection = (id) => {
 function Aboutme() {
   const [animate, setAnimate] = useState(false);
   const [showIndex, setShowIndex] = useState(false);
+ 
   const [hideContent, setHideContent] = useState(false);
   const [currentSection, setCurrentSection] = useState('section1'); // Section actuelle
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const navigate = useNavigate(); // Hook pour la navigation
 
   // Utilisez useMemo pour mémoriser les sections
   const sections = useMemo(() => ['section1', 'section2', 'section3', 'section4'], []);
@@ -217,25 +216,6 @@ function Aboutme() {
     scrollToSection(previousSection);
   }, [currentSection, sections]);
 
-  const handleLeft = useCallback(() => {
-    setAnimate(true);
-
-    setTimeout(() => {
-      setShowIndex(true);
-      setHideContent(true);
-      navigate('/'); // Naviguer vers la route d'accueil
-    }, 200);
-  }, [navigate]);
-
-  const handleRight = useCallback(() => {
-    setAnimate(true);
-
-    setTimeout(() => {
-      setHideContent(true); // Masquer le contenu actuel
-      navigate('/skills'); // Naviguer vers la route /skills
-    }, 200);
-  }, [navigate]);
-
   const handleKeyDown = useCallback((event) => {
     if (event.key === 'ArrowUp') {
       event.preventDefault();
@@ -243,14 +223,8 @@ function Aboutme() {
     } else if (event.key === 'ArrowDown') {
       event.preventDefault();
       scrollToNextSection();
-    } else if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      handleLeft();
-    } else if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      handleRight();
     }
-  }, [scrollToPreviousSection, scrollToNextSection, handleLeft, handleRight]);
+  }, [scrollToPreviousSection, scrollToNextSection]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -262,7 +236,14 @@ function Aboutme() {
     };
   }, [handleKeyDown]);
 
- 
+  const handleLeft = () => {
+    setAnimate(true);
+
+    setTimeout(() => {
+      setShowIndex(true);
+      setHideContent(true);
+    }, 200);
+  };
 
   useEffect(() => {
     if (animate) {
@@ -276,7 +257,7 @@ function Aboutme() {
   return (
     <>
       {!showIndex && (
-        <MainContainer animate={animate} hideContent={hideContent}>
+        <MainContainer className={animate ? 'animate' : ''} hideContent={hideContent}>
           <ScrollableContainer isMobile={isMobile}>
             <ContentContainer id="section1">
               <Storytelling>
@@ -324,7 +305,7 @@ function Aboutme() {
 
           <Navflex>
             <NavButton onClick={handleLeft}>&larr;</NavButton> {/* Flèche gauche */}
-            <NavButton onClick={handleRight}>&rarr;</NavButton> {/* Flèche droite */}
+            <NavButton>&rarr;</NavButton> {/* Flèche droite */}
           </Navflex>
 
           <ScrollContainer>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import Aboutme from './aboutme';
+import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
 import 'animate.css';
 
 const zoomOut = keyframes`
@@ -13,8 +13,6 @@ const zoomOut = keyframes`
     opacity: 0;
   }
 `;
-
-
 
 const Indexcontainer = styled.div`
   animation: zoomIn 0.5s;
@@ -49,10 +47,10 @@ const Text = styled.h1`
   
   @media (min-width: 200px) and (max-width: 499px) {
     font-size: 2rem;
-        width: 90vw;
+    width: 90vw;
   }
 
-  @media min-width: 400px) and (max-width: 500px){
+  @media (min-width: 400px) and (max-width: 500px){
     font-size: 2.5rem;
     width: auto;
   }
@@ -81,20 +79,19 @@ const Button = styled.button`
   }
 `;
 
-
 function Index() {
   const [animate, setAnimate] = useState(false);
-  const [showAboutMe, setShowAboutMe] = useState(false);
   const [hideContent, setHideContent] = useState(false);
+  const navigate = useNavigate(); // Hook pour la navigation
 
   const handleClick = () => {
     setAnimate(true);
 
-    // Afficher Aboutme après 2 secondes
+    // Attendre la fin de l'animation avant de naviguer
     setTimeout(() => {
-      setShowAboutMe(true);
-      setHideContent(true); // Masquer le contenu actuel
-    }, 200); // 200 ms = 0.2 secondes
+      setHideContent(true);
+      navigate('/aboutme'); // Changer la route
+    }, 500); // Durée de l'animation
   };
 
   // Réinitialiser l'animation après son exécution
@@ -102,25 +99,35 @@ function Index() {
     if (animate) {
       const timer = setTimeout(() => {
         setAnimate(false);
-      }, 1000); // Durée de l'animation
+      }, 500); // Durée de l'animation
       return () => clearTimeout(timer);
     }
   }, [animate]);
 
-  return (
-    <>
-      {!showAboutMe && (
-        <Indexcontainer className={animate ? 'animate' : ''} hideContent={hideContent}>
-          <Text>Hey, Je suis Chris Ngabala</Text>
-          <br/>
-          <Text>Je suis un développeur Web Fullstack</Text>
-          <br/>
-          <Button onClick={handleClick}>START</Button>
-        </Indexcontainer>
-      )}
+  // Gestionnaire d'événements de clavier
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === ' ' || event.key === 'Enter') {
+        handleClick();
+      }
+    };
 
-      {showAboutMe && <Aboutme />}
-    </>
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Nettoyer l'événement lorsque le composant est démonté
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []); // Le tableau vide signifie que cet effet s'exécute une seule fois après le montage
+
+  return (
+    <Indexcontainer className={animate ? 'animate' : ''} hideContent={hideContent}>
+      <Text>Hey, Je suis Chris Ngabala</Text>
+      <br/>
+      <Text>Je suis un développeur Web Fullstack</Text>
+      <br/>
+      <Button onClick={handleClick}>START</Button>
+    </Indexcontainer>
   );
 }
 
