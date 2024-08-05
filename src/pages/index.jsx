@@ -81,21 +81,6 @@ const Button = styled.button`
   }
 `;
 
-const Animation = styled.div`
-  margin: 0;
-  font-size: 4rem;
-  font-family: "Unbounded", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-weight: bold;
-  color: white;
-  width: 55vw;
-  position: absolute;
-`;
-
-const Image = styled.img`
-  width: 20%;
-`;
 
 function Index() {
   const [animate, setAnimate] = useState(false);

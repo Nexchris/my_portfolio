@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Index from './index'; // Assurez-vous que le chemin est correct
 import 'animate.css';
@@ -195,7 +195,8 @@ function Aboutme() {
   const [currentSection, setCurrentSection] = useState('section1'); // Section actuelle
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const sections = ['section1', 'section2', 'section3', 'section4'];
+  // Utilisez useMemo pour mémoriser les sections
+  const sections = useMemo(() => ['section1', 'section2', 'section3', 'section4'], []);
 
   const scrollToNextSection = useCallback(() => {
     const currentIndex = sections.indexOf(currentSection);
@@ -236,19 +237,17 @@ function Aboutme() {
   const handleLeft = () => {
     setAnimate(true);
 
-    // Afficher Index après 200 millisecondes
     setTimeout(() => {
       setShowIndex(true);
-      setHideContent(true); // Masquer le contenu actuel
-    }, 200); // 200 ms = 0.2 secondes
+      setHideContent(true);
+    }, 200);
   };
 
-  // Réinitialiser l'animation après son exécution
   useEffect(() => {
     if (animate) {
       const timer = setTimeout(() => {
         setAnimate(false);
-      }, 1000); // Durée de l'animation
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [animate]);
@@ -307,7 +306,6 @@ function Aboutme() {
             <NavButton>&rarr;</NavButton> {/* Flèche droite */}
           </Navflex>
 
-          {/* Mini-boutons de navigation */}
           <ScrollContainer>
             <ScrollButton onClick={() => scrollToSection('section1')}>1</ScrollButton>
             <ScrollButton onClick={() => scrollToSection('section2')}>2</ScrollButton>
