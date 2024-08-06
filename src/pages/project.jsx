@@ -22,7 +22,7 @@ const animationStyles = css`
 `;
 
 const Container = styled.div`
-  animation: fadeIn 2s;
+animation: backInRight 0.5s;
   ${props => props.isFadingOut && animationStyles};
   color: white;
   display: flex;
@@ -53,7 +53,6 @@ const Case = styled.div`
 
   @media (max-width: 500px) {
     width: 70vw;
-    margin: 10px 0; // Ajouter de l'espace entre les éléments en mode mobile
   }
 `;
 
@@ -101,8 +100,7 @@ const Navflex = styled.div`
 
 const Allcasecontainer = styled.div`
   @media (max-width: 500px) {
-    overflow-y: scroll; // Permettre le défilement vertical
-    height: 60vh; // Hauteur de la zone de défilement
+    height: 1vh;
   }
 `;
 
@@ -135,18 +133,18 @@ function Skills() {
   const [animationName, setAnimationName] = useState('fadeIn');
 
   const handleLeft = () => {
-    setAnimationName('fadeOut');
+    setAnimationName('backOutRight');
     setIsFadingOut(true);
     setTimeout(() => {
-      navigate('/aboutme');
+      navigate('/skills');
     }, 1000); // Attendre la fin de l'animation (1s)
   };
 
   const handleRight = () => {
-    setAnimationName('backOutLeft');
+    setAnimationName('fadeOutRightBig');
     setIsFadingOut(true);
     setTimeout(() => {
-      navigate('/project');
+      navigate('/contact');
     }, 1000); // Attendre la fin de l'animation (1s)
   };
 
@@ -169,90 +167,8 @@ function Skills() {
 
   return (
     <Container isFadingOut={isFadingOut} animationName={animationName}>
-      <Title>Compétences</Title>
-      <Allcasecontainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={HTML}></Icon>
-            <Casetitle>HTML5</Casetitle>
-          </Case>
-
-          <Case>
-            <Icon src={CSS}></Icon>
-            <Casetitle>CSS</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={JS}></Icon>
-            <Casetitle>JavaScript</Casetitle>
-          </Case>
-
-          <Case>
-            <Icon src={NodeJS}></Icon>
-            <Casetitle>NodeJS</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={Typescript}></Icon>
-            <Casetitle>TypeScript</Casetitle>
-          </Case>
-
-          <Case>
-            <Icon src={Jquery}></Icon>
-            <Casetitle>Jquery</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={Wordpress}></Icon>
-            <Casetitle>WordPress</Casetitle>
-          </Case>
-
-          <Case>
-            <Icon src={Figma}></Icon>
-            <Casetitle>Figma</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={ReactIcon}></Icon>
-            <Casetitle>React</Casetitle>
-          </Case>
-
-          <Case>
-            <Icon src={ReactIcon}></Icon>
-            <Casetitle>React Native</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={PHP}></Icon>
-            <Casetitle>PHP</Casetitle>
-          </Case>
-
-          <Case>
-            <Icon src={MYSQL}></Icon>
-            <Casetitle>MySQL</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={Symfony}></Icon>
-            <Casetitle>Symfony</Casetitle>
-          </Case>
-
-          <Case>
-            <Icon src={Firebase}></Icon>
-            <Casetitle>Firebase</Casetitle>
-          </Case>
-        </CaseContainer>
-      </Allcasecontainer>
-      <Navflex>
-        <NavButton onClick={handleLeft}>&larr;</NavButton>
-        <NavButton onClick={handleRight}>&rarr;</NavButton>
-      </Navflex>
+      <Title>Mes Projets</Title>
+     
     </Container>
   );
 }

@@ -7,6 +7,7 @@ import Background from './pages/background';
 import Index from './pages/index';
 import Aboutme from './pages/aboutme';
 import Skills from './pages/skills';
+import Project from './pages/project'
 import Contact from './pages/contact';
 
 import { Squash as Hamburger } from 'hamburger-react';
@@ -98,6 +99,7 @@ function App() {
             <Route path="/aboutme" element={<Aboutme />} />
             <Route path="/skills" element={<Skills />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/project" element={<Project />} />
             {/* Ajoutez d'autres routes ici */}
           </Routes>
         </MainContent>
