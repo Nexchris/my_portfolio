@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la 
 import Index from './index';
 import 'animate.css';
 import { useTranslation } from 'react-i18next'; // Importer le hook useTranslation
-import { IoArrowForwardCircleOutline, IoArrowBackCircleOutline } from 'react-icons/io5';
 
 // Animation fadeOutLeft
 const fadeOut = keyframes`
@@ -50,30 +49,42 @@ const ScrollableContainer = styled.div`
   margin-bottom: 2rem;
   touch-action: pan-y;
  
-      @media (max-width: 1199px) {
-  width:90vw;
-   height: 70vh;
+       @media (max-width: 1199px) {
+   width:90vw;
+  }
+`;
 
- }
+const Button = styled.button`
+  animation: fadeIn 2s;
+  border-radius: 5vh;
+  border: none;
+  margin-top: 4vh;
+  background-color: black;
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  color: white;
+  font-family: "Bebas Neue", sans-serif;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
 `;
 
 const Navflex = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 2rem;
-      @media (max-width: 1199px) {
-  width:90vw;
-  position:absolute;
-  Top: 80%;
-
- }
+       @media (max-width: 1199px) {
+display: none;
+  }
 `;
 
 const NavButton = styled.button`
@@ -98,8 +109,8 @@ const ScrollContainer = styled.div`
   flex-direction: column;
   align-items: center;
     @media (max-width: 1199px) {
-  display:none;
- }
+   display:none;
+  }
 `;
 
 const ScrollButton = styled.button`
@@ -126,6 +137,7 @@ const Storytelling = styled.div`
   font-optical-sizing: auto;
   font-style: normal;
   font-weight: bold;
+  margin-bottom: 5rem;
 `;
 
 const Content = styled.div`
@@ -151,12 +163,14 @@ const Content2 = styled.div`
   }
 `;
 
+
+
 const StorytellingList = styled(Storytelling)`
-  margin-bottom: 15vh;
+  margin-bottom: 30vh;
 `;
 
 const StorytellingList2 = styled(Storytelling)`
-  margin-bottom: 15vh;
+  margin-bottom: 30vh;
   font-size: 3rem;
 `;
 
@@ -205,6 +219,7 @@ const scrollToSection = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
 
+
 // Fonction pour remplacer les sauts de ligne par <br />
 const formatContent = (text) => {
   return text.split('\n').map((str, index) => (
@@ -214,6 +229,9 @@ const formatContent = (text) => {
     </React.Fragment>
   ));
 };
+
+
+
 
 function Aboutme() {
   const { t } = useTranslation();
@@ -331,14 +349,15 @@ function Aboutme() {
                 <Title2>{t('aboutme.section4.title')}</Title2>
                 <Content2>
                   {formatContent(t('aboutme.section4.content'))}
+                  <Button onClick={handleLeft}>{t('aboutme.section4.button')}</Button>
                 </Content2>
               </StorytellingList>
             </ContentContainer>
           </ScrollableContainer>
 
           <Navflex>
-            <NavButton onClick={handleLeft}><IoArrowBackCircleOutline /></NavButton>
-            <NavButton onClick={handleRight}><IoArrowForwardCircleOutline /></NavButton>
+            <NavButton onClick={handleLeft}>&larr;</NavButton>
+            <NavButton onClick={handleRight}>&rarr;</NavButton>
           </Navflex>
 
           <ScrollContainer>

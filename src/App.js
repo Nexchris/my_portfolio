@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Index from './pages/index';
 import Menu from './pages/menu';
-import Skills from './pages/skills';
-import Aboutme from './pages/aboutme';
 import Background from './pages/background';
+
+import Index from './pages/index';
+import Aboutme from './pages/aboutme';
+import Skills from './pages/skills';
+import Contact from './pages/contact';
+
 import { Squash as Hamburger } from 'hamburger-react';
 import styled from 'styled-components';
 import './i18n'; // Importer la configuration i18next
@@ -92,8 +95,9 @@ function App() {
         <MainContent isOpen={isOpen}>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/skills" element={<Skills />} />
             <Route path="/aboutme" element={<Aboutme />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/contact" element={<Contact />} />
             {/* Ajoutez d'autres routes ici */}
           </Routes>
         </MainContent>

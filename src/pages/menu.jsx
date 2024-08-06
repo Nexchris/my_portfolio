@@ -19,6 +19,7 @@ const Indexcontainer = styled.div`
   overflow: hidden;  // Assure que la vidéo ne déborde pas du conteneur
 `;
 
+
 const BackgroundVideo = styled.video`
   position: absolute;
   top: 0;

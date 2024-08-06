@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
 import 'animate.css';
@@ -14,11 +14,11 @@ import Figma from '../images/figma.png';
 import PHP from '../images/php.png';
 import MYSQL from '../images/mysql.svg';
 import ReactIcon from '../images/react.png';
+import ReactNative from '../images/reactnative.png';
 import Symfony from '../images/symfony.png';
-import Firebase from '../images/firebase.png';
-
+import Firebase from '../images/firebase.svg';
 const Container = styled.div`
-  animation: ${props => (props.isFadingOut ? 'zoomOut 1s' : 'fadeIn 1s')};
+animation: fadeIn 1s;
   color: white;
   display: flex;
   font-family: cursive;
@@ -31,6 +31,9 @@ const Container = styled.div`
   position: relative;
 `;
 
+const Flexcontainer = styled.div`
+display: flex;
+`
 
 const LeftContainer = styled.div`
 width:40vw;
@@ -38,13 +41,17 @@ height:60vh;
 background-color:blue;
 `
 
+const RightContainer = styled.div`
+width:40vw;
+height:60vh;
+background-color:red;
+`
 const Case = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: black;
   width: 20vw;
-  height:8vh;
   border: 1px solid white;
 `;
 
@@ -64,15 +71,34 @@ const Title = styled.div`
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: normal;
-     @media (max-width: 500px) {
-    font-size: 4rem;
-  }
 `;
 
+const Section = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80vw;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+`;
 
+const SectionTitle = styled.h2`
+  margin: 1rem 0;
+  font-size: 2rem;
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: bold;
+`;
+
+const IconContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
 
 const Icon = styled.img`
-  width: 15%;
+  width: 20%;
   margin: 10px;
   cursor: pointer;
   transition: transform 0.3s;
@@ -89,10 +115,6 @@ const Navflex = styled.div`
 
 const CaseContainer = styled.div`
   display: flex;
-     @media (max-width: 500px) {
-    display:block;
-  }
-
 `;
 
 
@@ -111,38 +133,45 @@ const NavButton = styled.button`
   }
 `;
 
+const icons = [
+  { src: HTML, alt: "HTML" },
+  { src: CSS, alt: "CSS" },
+  { src: JS, alt: "JavaScript" },
+  { src: Figma, alt: "Figma" },
+  { src: ReactIcon, alt: "React" },
+  { src: ReactNative, alt: "React Native" },
+  { src: NodeJS, alt: "Node.js" },
+  { src: Symfony, alt: "Symfony" },
+  { src: MYSQL, alt: "MySQL" },
+  { src: Firebase, alt: "Firebase" }
+];
 
 function Skills() {
-
+  const [currentIconIndex, setCurrentIconIndex] = useState(0);
   const navigate = useNavigate();
-  const [isFadingOut, setIsFadingOut] = useState(false);
- 
-  const handleLeft = () => {
-    setIsFadingOut(true);
-    setTimeout(() => {
-      navigate('/aboutme');
-    }, 300); // Attendre la fin de l'animation (1s)
-  };
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'ArrowLeft') {
-        handleLeft();
-      }
-    };
+    const interval = setInterval(() => {
+      setCurrentIconIndex((prevIndex) => {
+        if (prevIndex < icons.length - 1) {
+          return prevIndex + 1;
+        }
+        clearInterval(interval);
+        return prevIndex;
+      });
+    }, 300); // Changer d'icône toutes les 500ms
 
-    window.addEventListener('keydown', handleKeyDown);
-
-    // Nettoyage de l'écouteur d'événements
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => clearInterval(interval);
   }, []);
-  
-  return (
-<Container isFadingOut={isFadingOut}>
-      <Title>Compétences</Title>
 
+  const handleLeft = () => {
+    navigate('/aboutme'); // Utilisation de navigate pour la navigation
+  };
+
+  return (
+    <Container>
+      <Title>Compétences</Title>
+      <Flexcontainer>
       <LeftContainer>
         <CaseContainer>
 
@@ -248,7 +277,8 @@ function Skills() {
         </CaseContainer>
 
         </LeftContainer>
-    
+      <RightContainer />
+      </Flexcontainer>
       <Navflex>
         <NavButton onClick={handleLeft}>&larr;</NavButton>
       </Navflex>
