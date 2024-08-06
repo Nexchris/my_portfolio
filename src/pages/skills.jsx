@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import 'animate.css';
@@ -130,21 +130,21 @@ function Skills() {
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [animationName, setAnimationName] = useState('fadeIn');
 
-  const handleLeft = () => {
+  const handleLeft = useCallback(() => {
     setAnimationName('fadeOut');
     setIsFadingOut(true);
     setTimeout(() => {
       navigate('/aboutme');
     }, 1000); // Attendre la fin de l'animation (1s)
-  };
+  }, [navigate]);
 
-  const handleRight = () => {
+  const handleRight = useCallback(() => {
     setAnimationName('backOutLeft');
     setIsFadingOut(true);
     setTimeout(() => {
       navigate('/project');
     }, 1000); // Attendre la fin de l'animation (1s)
-  };
+  }, [navigate]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -161,7 +161,7 @@ function Skills() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handleLeft, handleRight]);
 
   return (
     <Container isFadingOut={isFadingOut} animationName={animationName}>

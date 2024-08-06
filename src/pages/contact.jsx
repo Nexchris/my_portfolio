@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
 import 'animate.css';
 import Gmail from '../images/gmail.webp';
 import Linkedin from '../images/linkedin.png';
@@ -34,14 +33,6 @@ const Text = styled.div`
   font-size:2vw;
 `;
 
-const GmailBar = styled.div`
-background-color: white;
- font-family: "Unbounded", sans-serif;
-color: black;
-width:10vw;
-height:10vh;
-border-radius:3vw;
-`
 
 const LinkedinBar = styled.div`
 background-color: #007BB5;

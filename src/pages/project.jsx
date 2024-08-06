@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -40,48 +40,6 @@ const Title = styled.div`
   }
 `;
 
-const MainWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-
-  @media (max-width: 400px) {
-    width: 35rem;
-  }
-
-  @media (min-width: 400px) and (max-width: 1200px) {
-    width: 40rem;
-  }
-`;
-
-const WrapperDiv = styled.div`
-  flex: 0 0 200px;
-  height: 200px;
-  border-radius: 0.5rem;
-  transition: flex 0.5s ease-in-out, height 0.5s ease-in-out, transform 0.5s ease-in-out;
-  cursor: pointer;
-  box-shadow: 1px 5px 15px #3f3f3f;
-  position: relative;
-  overflow: hidden;
-  background: ${props => `url(${props.background}) no-repeat 50% / cover`};
-
-  &:hover {
-    flex: 0 0 350px;
-    height: 500px;
-    box-shadow: 1px 3px 15px #ffffff;
-    transform: translateY(-30px);
-
-    @media (max-width: 1200px) {
-      flex: 0 0 170px;
-      height: 250px;
-      margin-top: 5vh;
-      margin-bottom: 5vh;
-    }
-  }
-`;
-
 const Projectitle = styled.div`
   font-family: "Unbounded", sans-serif;
   font-optical-sizing: auto;
@@ -89,38 +47,6 @@ const Projectitle = styled.div`
   color:white;
   font-weight:bold;
   cursor: pointer;
-`;
-
-const InfoBox = styled.div`
-  font-size: 1.5rem;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  opacity: 0;
-  flex-direction: column;
-  height: 100%;
-  justify-content: flex-end;
-  background: linear-gradient(0deg, rgba(10, 10, 10, 0.676) 0%, rgba(107, 107, 107, 0) 100%);
-  transform: translateY(100%);
-  transition: opacity 0.5s ease-in-out, transform 0.5s 0.2s;
-  visibility: hidden;
-
-  ${WrapperDiv}:hover & {
-    opacity: 1;
-    transform: translateY(0%);
-    visibility: visible;
-  }
-`;
-
-const InfoBoxTitle = styled.h2`
-  margin-bottom: 0;
-`;
-
-const InfoBoxSpan = styled.span`
-  display: block;
-  margin-bottom: 2vh;
-  font-size: 1.2rem;
 `;
 
 const Projectcontainer = styled.div`
@@ -157,10 +83,6 @@ const Projectcontent = styled.div`
   text-align: center;
 `;
 
-const Projecticon = styled.img`
-  width: 5%;
-`;
-
 const IndexButton = styled.button`
   animation: fadeIn 2s;
   border-radius: 5vh;
@@ -178,28 +100,28 @@ const IndexButton = styled.button`
   }
 `;
 
-function Skills() {
+function Project() {
   const navigate = useNavigate();
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [animationName, setAnimationName] = useState('fadeIn');
   const [selectedProject, setSelectedProject] = useState(null);
   const { t } = useTranslation();
 
-  const handleLeft = () => {
+  const handleLeft = useCallback(() => {
     setAnimationName('backOutRight');
     setIsFadingOut(true);
     setTimeout(() => {
       navigate('/skills');
     }, 1000);
-  };
+  }, [navigate]);
 
-  const handleRight = () => {
+  const handleRight = useCallback(() => {
     setAnimationName('fadeOutRightBig');
     setIsFadingOut(true);
     setTimeout(() => {
       navigate('/contact');
     }, 1000);
-  };
+  }, [navigate]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -215,7 +137,7 @@ function Skills() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handleLeft, handleRight]);
 
   return (
     <>
@@ -263,4 +185,4 @@ function Skills() {
   );
 }
 
-export default Skills;
+export default Project;
