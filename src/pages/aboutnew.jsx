@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
-import Index from './index';
-import 'animate.css';
-import { useTranslation } from 'react-i18next'; // Importer le hook useTranslation
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useInView } from 'react-intersection-observer';
 
-
-
-
-// Animation fadeOutLeft
+// Animation fadeOut
 const fadeOut = keyframes`
-from {
+  from {
     opacity: 1;
   }
   to {
@@ -40,20 +36,18 @@ const MainContainer = styled.div`
   height: 90vh;
   width: 100vw;
   text-align: center;
-  opacity: ${(props) => (props.hideContent ? 0 : 1)};
-  visibility: ${(props) => (props.hideContent ? 'hidden' : 'visible')};
 `;
 
 const ScrollableContainer = styled.div`
   width: 60vw;
   height: 80vh;
-  overflow-y: ${(props) => (props.isMobile ? 'auto' : 'hidden')}; /* Défilement libre pour mobile */
+  overflow-y: ${(props) => (props.isMobile ? 'auto' : 'hidden')};
   padding: 1rem;
   margin-bottom: 2rem;
   touch-action: pan-y;
- 
-       @media (max-width: 1199px) {
-   width:90vw;
+
+  @media (max-width: 1199px) {
+    width: 90vw;
   }
 `;
 
@@ -62,6 +56,7 @@ const ContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 5rem;
+  transition: opacity 0.5s ease;
 `;
 
 const Navflex = styled.div`
@@ -91,8 +86,9 @@ const ScrollContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-    @media (max-width: 1199px) {
-   display:none;
+
+  @media (max-width: 1199px) {
+    display: none;
   }
 `;
 
@@ -106,7 +102,6 @@ const ScrollButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 1.5rem;
   margin: 0.5rem 0;
 
@@ -126,9 +121,9 @@ const Storytelling = styled.div`
 const Content = styled.div`
   font-size: 4rem;
   font-weight: 300;
+
   @media (max-width: 500px) {
     font-size: 1.7rem;
-    
   }
   @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 3rem;
@@ -138,6 +133,7 @@ const Content = styled.div`
 const Content2 = styled.div`
   font-size: 2.1rem;
   font-weight: 300;
+
   @media (max-width: 500px) {
     font-size: 1.3rem;
   }
@@ -145,8 +141,6 @@ const Content2 = styled.div`
     font-size: 1.7rem;
   }
 `;
-
-
 
 const StorytellingList = styled(Storytelling)`
   margin-bottom: 30vh;
@@ -161,11 +155,10 @@ const Title = styled.h1`
   margin: 0;
   font-size: 8rem;
   margin-top: 5vh;
-   margin-bottom: 10vh;
+  margin-bottom: 10vh;
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: normal;
-
 
   @media (max-width: 399px) {
     font-size: 5rem;
@@ -188,20 +181,17 @@ const Title = styled.h1`
 const Title2 = styled(Title)`
   margin: 0;
   font-size: 6rem;
-    margin-bottom: 5vh;
+  margin-bottom: 5vh;
+
   @media (max-width: 500px) {
     font-size: 4rem;
     margin-bottom: 2vh;
   }
+
   @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 5rem;
   }
 `;
-
-const scrollToSection = (id) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-};
-
 
 // Fonction pour remplacer les sauts de ligne par <br />
 const formatContent = (text) => {
@@ -213,19 +203,16 @@ const formatContent = (text) => {
   ));
 };
 
-
-
-
 function Aboutme() {
   const { t } = useTranslation();
   const [animate, setAnimate] = useState(false);
   const [showIndex, setShowIndex] = useState(false);
   const [hideContent, setHideContent] = useState(false);
-  const [currentSection, setCurrentSection] = useState('section1');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
 
   const sections = useMemo(() => ['section1', 'section2', 'section3', 'section4'], []);
+  const [currentSection, setCurrentSection] = useState('section1');
 
   const scrollToNextSection = useCallback(() => {
     const currentIndex = sections.indexOf(currentSection);
@@ -300,41 +287,30 @@ function Aboutme() {
       {!showIndex && (
         <MainContainer animate={animate} hideContent={hideContent}>
           <ScrollableContainer isMobile={isMobile}>
-            <ContentContainer id="section1">
-              <Storytelling>
-                <Title>{t('aboutme.title')}</Title>
-                <Content>
-                  {formatContent(t('aboutme.section1.intro'))}
-                </Content>
-              </Storytelling>
-            </ContentContainer>
+            {sections.map((sectionId) => {
+              const [ref, inView] = useInView({
+                triggerOnce: true,
+                threshold: 0.1,
+              });
 
-            <ContentContainer id="section2">
-              <StorytellingList2>
-                <Title2>{t('aboutme.section2.title')}</Title2>
-                <Content2>
-                  {formatContent(t('aboutme.section2.content'))}
-                </Content2>
-              </StorytellingList2>
-            </ContentContainer>
-
-            <ContentContainer id="section3">
-              <StorytellingList>
-                <Title2>{t('aboutme.section3.title')}</Title2>
-                <Content2>
-                  {formatContent(t('aboutme.section3.content'))}
-                </Content2>
-              </StorytellingList>
-            </ContentContainer>
-
-            <ContentContainer id="section4">
-              <StorytellingList>
-                <Title2>{t('aboutme.section4.title')}</Title2>
-                <Content2>
-                  {formatContent(t('aboutme.section4.content'))}
-                </Content2>
-              </StorytellingList>
-            </ContentContainer>
+              return (
+                <ContentContainer
+                  id={sectionId}
+                  key={sectionId}
+                  ref={ref}
+                  style={{
+                    opacity: inView ? 1 : 0,
+                  }}
+                >
+                  <Storytelling>
+                    <Title>{t(`aboutme.${sectionId}.title`)}</Title>
+                    <Content>
+                      {formatContent(t(`aboutme.${sectionId}.intro`))}
+                    </Content>
+                  </Storytelling>
+                </ContentContainer>
+              );
+            })}
           </ScrollableContainer>
 
           <Navflex>
@@ -343,10 +319,11 @@ function Aboutme() {
           </Navflex>
 
           <ScrollContainer>
-            <ScrollButton onClick={() => scrollToSection('section1')}>1</ScrollButton>
-            <ScrollButton onClick={() => scrollToSection('section2')}>2</ScrollButton>
-            <ScrollButton onClick={() => scrollToSection('section3')}>3</ScrollButton>
-            <ScrollButton onClick={() => scrollToSection('section4')}>4</ScrollButton>
+            {sections.map((sectionId, index) => (
+              <ScrollButton key={sectionId} onClick={() => scrollToSection(sectionId)}>
+                {index + 1}
+              </ScrollButton>
+            ))}
           </ScrollContainer>
         </MainContainer>
       )}

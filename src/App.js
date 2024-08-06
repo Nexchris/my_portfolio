@@ -17,8 +17,8 @@ const HamburgerContainer = styled.div`
   background-color: transparent;
   position: relative;
   z-index: 1000; // Assurez-vous que le menu est au-dessus de tout
-    @media (max-width: 1199px) {
-   margin-top: 1vh;
+  @media (max-width: 1199px) {
+    margin-top: 1vh;
   }
 `;
 
@@ -32,7 +32,7 @@ const LanguageButton = styled.button`
   font-size: 2em;
   cursor: pointer;
   z-index: 9999; // Assurez-vous que le bouton est également au-dessus
-    @media (max-width: 1199px) {
+  @media (max-width: 1199px) {
     top: 1%;
   }
 `;
@@ -40,7 +40,7 @@ const LanguageButton = styled.button`
 const MainContent = styled.div`
   opacity: ${props => (props.isOpen ? 0 : 1)};
   visibility: ${props => (props.isOpen ? 'hidden' : 'visible')};
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity ${props => (props.isOpen ? '0.3s' : '0s')} ease, visibility ${props => (props.isOpen ? '0.3s' : '0s')} ease;
   position: relative; // Assure que le contenu principal est positionné correctement
 `;
 
@@ -51,7 +51,7 @@ const BackgroundWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: -1; // Place le fond derrière tout le contenu
-  transition: opacity 0.3s ease;
+  transition: opacity ${props => (props.isOpen ? '0.3s' : '0s')} ease;
   opacity: ${props => (props.isOpen ? 0 : 1)};
 `;
 
