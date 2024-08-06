@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la 
 import Index from './index';
 import 'animate.css';
 import { useTranslation } from 'react-i18next'; // Importer le hook useTranslation
-
-
-
+import { IoArrowForwardCircleOutline, IoArrowBackCircleOutline } from 'react-icons/io5';
 
 // Animation fadeOutLeft
 const fadeOut = keyframes`
@@ -52,22 +50,30 @@ const ScrollableContainer = styled.div`
   margin-bottom: 2rem;
   touch-action: pan-y;
  
-       @media (max-width: 1199px) {
-   width:90vw;
-  }
+      @media (max-width: 1199px) {
+  width:90vw;
+   height: 70vh;
+
+ }
 `;
 
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
 `;
 
 const Navflex = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 2rem;
+      @media (max-width: 1199px) {
+  width:90vw;
+  position:absolute;
+  Top: 80%;
+
+ }
 `;
 
 const NavButton = styled.button`
@@ -92,8 +98,8 @@ const ScrollContainer = styled.div`
   flex-direction: column;
   align-items: center;
     @media (max-width: 1199px) {
-   display:none;
-  }
+  display:none;
+ }
 `;
 
 const ScrollButton = styled.button`
@@ -120,7 +126,6 @@ const Storytelling = styled.div`
   font-optical-sizing: auto;
   font-style: normal;
   font-weight: bold;
-  margin-bottom: 5rem;
 `;
 
 const Content = styled.div`
@@ -146,14 +151,12 @@ const Content2 = styled.div`
   }
 `;
 
-
-
 const StorytellingList = styled(Storytelling)`
-  margin-bottom: 30vh;
+  margin-bottom: 15vh;
 `;
 
 const StorytellingList2 = styled(Storytelling)`
-  margin-bottom: 30vh;
+  margin-bottom: 15vh;
   font-size: 3rem;
 `;
 
@@ -202,7 +205,6 @@ const scrollToSection = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
 
-
 // Fonction pour remplacer les sauts de ligne par <br />
 const formatContent = (text) => {
   return text.split('\n').map((str, index) => (
@@ -212,9 +214,6 @@ const formatContent = (text) => {
     </React.Fragment>
   ));
 };
-
-
-
 
 function Aboutme() {
   const { t } = useTranslation();
@@ -338,8 +337,8 @@ function Aboutme() {
           </ScrollableContainer>
 
           <Navflex>
-            <NavButton onClick={handleLeft}>&larr;</NavButton>
-            <NavButton onClick={handleRight}>&rarr;</NavButton>
+            <NavButton onClick={handleLeft}><IoArrowBackCircleOutline /></NavButton>
+            <NavButton onClick={handleRight}><IoArrowForwardCircleOutline /></NavButton>
           </Navflex>
 
           <ScrollContainer>
