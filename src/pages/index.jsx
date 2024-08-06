@@ -16,7 +16,6 @@ const zoomOut = keyframes`
 `;
 
 const Indexcontainer = styled.div`
-  animation: zoomIn 0.5s;
   position: absolute;
   display: flex;
   flex-direction: column;

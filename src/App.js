@@ -16,7 +16,10 @@ const HamburgerContainer = styled.div`
   margin-top: 2vh;
   background-color: transparent;
   position: relative;
-  z-index: 10;
+  z-index: 1000; // Assurez-vous que le menu est au-dessus de tout
+    @media (max-width: 1199px) {
+   margin-top: 1vh;
+  }
 `;
 
 const LanguageButton = styled.button`
@@ -28,7 +31,35 @@ const LanguageButton = styled.button`
   color: white;
   font-size: 2em;
   cursor: pointer;
-  z-index: 9999; // Augmenter le z-index
+  z-index: 9999; // Assurez-vous que le bouton est également au-dessus
+    @media (max-width: 1199px) {
+    top: 1%;
+  }
+`;
+
+const MainContent = styled.div`
+  opacity: ${props => (props.isOpen ? 0 : 1)};
+  visibility: ${props => (props.isOpen ? 'hidden' : 'visible')};
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  position: relative; // Assure que le contenu principal est positionné correctement
+`;
+
+const BackgroundWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; // Place le fond derrière tout le contenu
+  transition: opacity 0.3s ease;
+  opacity: ${props => (props.isOpen ? 0 : 1)};
+`;
+
+const GlobalContainer = styled.div`
+  position: relative;
+  overflow: hidden; // Masquer le débordement
+  height: 100vh;
+  width: 100vw;
 `;
 
 function App() {
@@ -42,26 +73,31 @@ function App() {
 
   return (
     <Router>
-      <div className="particle-container"></div>
-      <HamburgerContainer>
-        <Hamburger
-          size={48}
-          toggled={isOpen}
-          toggle={setOpen}
-          color="white"
-        />
-      </HamburgerContainer>
-      <LanguageButton onClick={changeLanguage}>
-        {t('button')}
-      </LanguageButton>
-      {isOpen && <Menu onClose={() => setOpen(false)} />}
-      <Background />
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/skills" element={<Skills />} />
-        <Route path="/aboutme" element={<Aboutme />} />
-        {/* Ajoutez d'autres routes ici */}
-      </Routes>
+      <GlobalContainer>
+        <HamburgerContainer>
+          <Hamburger
+            size={48}
+            toggled={isOpen}
+            toggle={setOpen}
+            color="white"
+          />
+        </HamburgerContainer>
+        <LanguageButton onClick={changeLanguage}>
+          {t('button')}
+        </LanguageButton>
+        <BackgroundWrapper isOpen={isOpen}>
+          <Background />
+        </BackgroundWrapper>
+        {isOpen && <Menu onClose={() => setOpen(false)} />}
+        <MainContent isOpen={isOpen}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/aboutme" element={<Aboutme />} />
+            {/* Ajoutez d'autres routes ici */}
+          </Routes>
+        </MainContent>
+      </GlobalContainer>
     </Router>
   );
 }

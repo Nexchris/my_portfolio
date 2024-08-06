@@ -1,7 +1,7 @@
 // Background.js
 import React from 'react';
 import styled from 'styled-components';
-import Video from '../video/indexvideo.mp4';  // Assurez-vous que le chemin est correct
+import Video from '../video/index.mp4';  // Assurez-vous que le chemin est correct
 import 'animate.css';
 
 const Container = styled.div`
@@ -10,7 +10,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;  // Empêche les barres de défilement si la vidéo dépasse
-  animation: fadeIn 1s;
 `;
 
 const BackgroundVideo = styled.video`

@@ -51,8 +51,9 @@ const ScrollableContainer = styled.div`
   padding: 1rem;
   margin-bottom: 2rem;
   touch-action: pan-y;
-  @media (min-width: 501px) and (max-width: 1650px) {
-    width: 70vw;
+ 
+       @media (max-width: 1199px) {
+   width:90vw;
   }
 `;
 
@@ -90,6 +91,9 @@ const ScrollContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+    @media (max-width: 1199px) {
+   display:none;
+  }
 `;
 
 const ScrollButton = styled.button`
@@ -135,7 +139,7 @@ const Content2 = styled.div`
   font-size: 2.1rem;
   font-weight: 300;
   @media (max-width: 500px) {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
   @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 1.7rem;
@@ -162,11 +166,19 @@ const Title = styled.h1`
   font-weight: 400;
   font-style: normal;
 
-  @media (max-width: 500px) {
+
+  @media (max-width: 399px) {
     font-size: 5rem;
     margin-top: 5vh;
     margin-bottom: 2vh;
   }
+
+  @media (min-width: 401px) and (max-width: 500px) {
+    font-size: 5rem;
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+  }
+
   @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 5rem;
     margin-bottom: 5vh;
@@ -178,7 +190,7 @@ const Title2 = styled(Title)`
   font-size: 6rem;
     margin-bottom: 5vh;
   @media (max-width: 500px) {
-    font-size: 3.5rem;
+    font-size: 4rem;
     margin-bottom: 2vh;
   }
   @media (min-width: 501px) and (max-width: 1650px) {
