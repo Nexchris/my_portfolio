@@ -1,76 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import 'animate.css';
-
-import HTML from '../images/html.webp';
-import CSS from '../images/css.png';
-import JS from '../images/javascript.webp';
-import NodeJS from '../images/nodejs.svg';
-import Typescript from "../images/typescript.png";
-import Jquery from "../images/jquery.webp";
-import Wordpress from '../images/wordpress.png';
-import Figma from '../images/figma.png';
-import PHP from '../images/php.png';
-import MYSQL from '../images/mysql.svg';
-import ReactIcon from '../images/react.png';
-import Symfony from '../images/symfony.png';
-import Firebase from '../images/firebase.png';
+import BAM from "../images/bam.png";
+import Webdoc from "../images/webdoc.png";
+import Records from "../images/records.png";
 
 const animationStyles = css`
   animation: ${props => props.animationName} 1s;
 `;
 
-const Container = styled.div`
-animation: backInRight 0.5s;
+const Body = styled.div`
   ${props => props.isFadingOut && animationStyles};
+  animation: backInRight 0.5s;
+`
+const Container = styled.div`
   color: white;
   display: flex;
   font-family: cursive;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
   width: 100vw;
-  text-align: center;
+  text-align: left;
   position: relative;
-`;
-
-const LeftContainer = styled.div`
-  width: 40vw;
-  height: 60vh;
-  background-color: blue;
-`;
-
-const Case = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
-  width: 20vw;
-  height: 8vh;
-  border: 1px solid white;
-
-  @media (max-width: 500px) {
-    width: 70vw;
-  }
-`;
-
-const Casetitle = styled.h1`
-  margin: 0;
-  font-family: "Unbounded", sans-serif;
-  font-optical-sizing: auto;
-  font-size: 3vh;
-
-  @media (max-width: 500px) {
-    font-size: 3vh;
-  }
 `;
 
 const Title = styled.div`
   color: white;
   margin: 0;
   font-size: 8rem;
+  margin-left: 5vw;
   margin-top: 5vh;
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
@@ -81,47 +40,139 @@ const Title = styled.div`
   }
 `;
 
-const Icon = styled.img`
-  width: 15%;
-  margin: 10px;
-  cursor: pointer;
-  transition: transform 0.3s;
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
-const Navflex = styled.div`
+const MainWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
-`;
+  gap: 20px;
+  flex-wrap: wrap;
 
-const Allcasecontainer = styled.div`
-  @media (max-width: 500px) {
-    height: 1vh;
+  @media (max-width: 400px) {
+    width: 35rem;
+  }
+
+  @media (min-width: 400px) and (max-width: 1200px) {
+    width: 40rem;
   }
 `;
 
-const CaseContainer = styled.div`
-  display: flex;
-
-  @media (max-width: 500px) {
-    display: block;
-  }
-`;
-
-const NavButton = styled.button`
+const WrapperDiv = styled.div`
+  flex: 0 0 200px;
+  height: 200px;
+  border-radius: 0.5rem;
+  transition: flex 0.5s ease-in-out, height 0.5s ease-in-out, transform 0.5s ease-in-out;
   cursor: pointer;
-  border-radius: 50%;
+  box-shadow: 1px 5px 15px #3f3f3f;
+  position: relative;
+  overflow: hidden;
+  background: ${props => `url(${props.background}) no-repeat 50% / cover`};
+
+  &:hover {
+    flex: 0 0 350px;
+    height: 500px;
+    box-shadow: 1px 3px 15px #ffffff;
+    transform: translateY(-30px);
+
+    @media (max-width: 1200px) {
+      flex: 0 0 170px;
+      height: 250px;
+      margin-top: 5vh;
+      margin-bottom: 5vh;
+    }
+  }
+`;
+
+const Projectitle = styled.div`
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 4vh;
+  color:white;
+  font-weight:bold;
+  cursor: pointer;
+`;
+
+const InfoBox = styled.div`
+  font-size: 1.5rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
+  background: linear-gradient(0deg, rgba(10, 10, 10, 0.676) 0%, rgba(107, 107, 107, 0) 100%);
+  transform: translateY(100%);
+  transition: opacity 0.5s ease-in-out, transform 0.5s 0.2s;
+  visibility: hidden;
+
+  ${WrapperDiv}:hover & {
+    opacity: 1;
+    transform: translateY(0%);
+    visibility: visible;
+  }
+`;
+
+const InfoBoxTitle = styled.h2`
+  margin-bottom: 0;
+`;
+
+const InfoBoxSpan = styled.span`
+  display: block;
+  margin-bottom: 2vh;
+  font-size: 1.2rem;
+`;
+
+const Projectcontainer = styled.div`
+animation: fadeIn 3s;
+  background-color: white;
+  width: 50vw;
+  height: 25vh;
+  position: absolute;
+  top: 21%;
+  left: 40%;
+`;
+
+const Projectflex = styled.div`
+  display: flex;
+`;
+
+const Projecttitlecontainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 15vh;
+`;
+
+const Projectimage = styled.img`
+  width: -webkit-fill-available;
+  height: 45vh;
+`;
+
+const Projectcontent = styled.div`
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 2vh;
+  color: white;
+  margin-top: 2vh;
+  text-align: center;
+`;
+
+const Projecticon = styled.img`
+  width: 5%;
+`;
+
+const IndexButton = styled.button`
+  animation: fadeIn 2s;
+  border-radius: 5vh;
   border: none;
   background-color: black;
   font-size: 2rem;
-  padding: 1rem;
+  padding: 1rem 2rem;
   color: white;
-  margin: 0 1rem;
-
+  font-family: "Bebas Neue", sans-serif;
+  transition: opacity 0.3s;
+  margin-left: 20vw;
+  margin-top: 2vh;
   &:hover {
     opacity: 0.8;
   }
@@ -131,13 +182,15 @@ function Skills() {
   const navigate = useNavigate();
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [animationName, setAnimationName] = useState('fadeIn');
+  const [selectedProject, setSelectedProject] = useState(null);
+  const { t } = useTranslation();
 
   const handleLeft = () => {
     setAnimationName('backOutRight');
     setIsFadingOut(true);
     setTimeout(() => {
       navigate('/skills');
-    }, 1000); // Attendre la fin de l'animation (1s)
+    }, 1000);
   };
 
   const handleRight = () => {
@@ -145,7 +198,7 @@ function Skills() {
     setIsFadingOut(true);
     setTimeout(() => {
       navigate('/contact');
-    }, 1000); // Attendre la fin de l'animation (1s)
+    }, 1000);
   };
 
   useEffect(() => {
@@ -159,17 +212,54 @@ function Skills() {
 
     window.addEventListener('keydown', handleKeyDown);
 
-    // Nettoyage de l'écouteur d'événements
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
   return (
-    <Container isFadingOut={isFadingOut} animationName={animationName}>
-      <Title>Mes Projets</Title>
-     
-    </Container>
+    <>
+    <Body>
+      <Container isFadingOut={isFadingOut} animationName={animationName}>
+        <Title>{t('project.title')}</Title>
+      </Container>
+
+      <Projectflex>
+        <Projecttitlecontainer>
+          <Projectitle onClick={() => setSelectedProject('BAM')}>La Boite à Momes</Projectitle>
+          <Projectitle onClick={() => setSelectedProject('Webdoc')}>Webdoc Interactif</Projectitle>
+          <Projectitle onClick={() => setSelectedProject('Records')}>Records On Shelf</Projectitle>
+        </Projecttitlecontainer>
+        {selectedProject === 'BAM' && (
+          <Projectcontainer>
+            <Projectimage src={BAM} alt="" />
+            <Projectcontent>Langages utilisés : Jimdo(CMS), HTML, CSS, Javascript</Projectcontent>
+            <br />
+            <Projectcontent>J'ai eu la fonction de developpeur web Front-End pour but de la refonte du site, j'ai pris en charge la nouvelle conception du site via le CMS Jimdo et personnaliser via des widgets Javascripts interactifs.</Projectcontent>
+            <IndexButton>Voir le Site</IndexButton>
+          </Projectcontainer>
+        )}
+        {selectedProject === 'Webdoc' && (
+          <Projectcontainer>
+            <Projectimage src={Webdoc} alt="" />
+            <Projectcontent>Langages utilisés : HTML, CSS, Javascript, Firebase, React, TypeScript</Projectcontent>
+            <br />
+            <Projectcontent>Pour ce projet de groupe, l'objectif était de réaliser un webdocumentaire interactif basé sur une maquette dédiée à l'événement des Jeux Olympiques. Le site intègre des animations créées avec React et utilise Firebase pour la gestion de la base de données.</Projectcontent>
+            <IndexButton>Lien Github</IndexButton>
+          </Projectcontainer>
+        )}
+        {selectedProject === 'Records' && (
+          <Projectcontainer>
+            <Projectimage src={Records} alt="" />
+            <Projectcontent>Langages utilisés : CSS, Javascript, React, Syfmony, SQLite</Projectcontent>
+            <br />
+            <Projectcontent>Pour ce projet scolaire individuel, l'objectif était de développer un site permettant à l'utilisateur de définir son nom et de créer des vinyles, en modifer, les supprimer et les catégoriser. Le projet est divisé en deux parties : une interface utilisateur en React et un back-end en Symfony, reliés par des API RESTful, avec SQLite comme base de données.</Projectcontent>
+            <IndexButton>Lien Github</IndexButton>
+          </Projectcontainer>
+        )}
+      </Projectflex>
+      </Body>
+    </>
   );
 }
 

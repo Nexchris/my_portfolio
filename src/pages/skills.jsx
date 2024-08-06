@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
+import { useNavigate } from 'react-router-dom';
 import 'animate.css';
+import { useTranslation } from 'react-i18next'; 
 
 import HTML from '../images/html.webp';
 import CSS from '../images/css.png';
@@ -34,12 +35,6 @@ const Container = styled.div`
   width: 100vw;
   text-align: center;
   position: relative;
-`;
-
-const LeftContainer = styled.div`
-  width: 40vw;
-  height: 60vh;
-  background-color: blue;
 `;
 
 const Case = styled.div`
@@ -130,6 +125,7 @@ const NavButton = styled.button`
 `;
 
 function Skills() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [animationName, setAnimationName] = useState('fadeIn');
@@ -169,7 +165,7 @@ function Skills() {
 
   return (
     <Container isFadingOut={isFadingOut} animationName={animationName}>
-      <Title>Compétences</Title>
+      <Title>{t('skills.title')}</Title>
       <Allcasecontainer>
         <CaseContainer>
           <Case>

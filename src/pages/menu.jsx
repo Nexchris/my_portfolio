@@ -80,7 +80,7 @@ const Menu = ({ onClose }) => {
       <br />
       <Text onClick={() => handleNavigation('/skills')}>{t('menu.skills')}</Text>
       <br />
-      <Text onClick={() => handleNavigation('/projects')}>{t('menu.projects')}</Text>
+      <Text onClick={() => handleNavigation('/project')}>{t('menu.projects')}</Text>
       <br />
       <Text onClick={() => handleNavigation('/contact')}>{t('menu.contact')}</Text>
     </Indexcontainer>

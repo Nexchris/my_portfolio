@@ -31,6 +31,12 @@
     "skills": "Skills",
     "projects": "Projects",
     "contact": "Contact Me"
-  }
+  },
+  "skills": {
+          "title": "Skills"
+        },
+        "project": {
+          "title": "My Projects"
+        }
 
 }
