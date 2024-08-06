@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Video from '../video/indexvideo.mp4';  // Assurez-vous que le chemin est correct
+import 'animate.css';
 
 const Container = styled.div`
   position: static;  // Assure que le conteneur est correctement positionné
@@ -9,6 +10,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;  // Empêche les barres de défilement si la vidéo dépasse
+  animation: fadeIn 1s;
 `;
 
 const BackgroundVideo = styled.video`
@@ -19,12 +21,22 @@ const BackgroundVideo = styled.video`
   height: 100%;
   object-fit: cover;  // Assure que la vidéo couvre tout le conteneur sans déformation
   z-index: -1;  // Place la vidéo derrière le contenu
-  filter: blur(5px);  // Applique un flou à la vidéo
+  filter: blur(2px);  // Applique un flou à la vidéo
 `;
+
+const Overlay = styled.div`
+background-color: black;
+position: absolute;
+top:0%;
+width: 100vw;
+height:100vh;
+opacity: 0.8;
+`
 
 function Background() {
   return (
     <Container>
+       <Overlay />
       <BackgroundVideo autoPlay loop muted>
         <source src={Video} type="video/mp4" />
         Votre navigateur ne prend pas en charge la balise vidéo.

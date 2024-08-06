@@ -1,0 +1,29 @@
+{
+    "welcome": "Bienvenue",
+    "button": "EN",
+    "index": {
+      "name": "Ngabala Chris",
+      "title": "Développeur Web Fullstack",
+      "button": "Voir le Portfolio",
+      "tip": "Utilisez la touche 'Espace' et les flèches directionnelles pour naviguer facilement sur le site."
+    },
+    "aboutme": {
+      "title": "A propos de moi",
+      "section1": {
+        "intro": "Bonjour, je m'appelle Chris Ngabala et je suis développeur Fullstack passionné par le développement web."
+      },
+      "section2": {
+        "title": "Mon Parcours",
+        "content": "Mon parcours a débuté à l'école Multimédia, où j'ai acquis une solide formation en programmation et en développement web.\n\n Durant ma première année, j'ai appris les bases fondamentales du code, ce qui m'a permis de construire une fondation solide en HTML, CSS et JavaScript.\n\n Cette base m'a ensuite préparé à aborder des sujets plus complexes et avancés au cours de ma deuxième année."
+      },
+      "section3": {
+        "title": "Ma Formation",
+        "content": "En deuxième année, j'ai considérablement élargi mes compétences en explorant une variété de technologies et de frameworks, me permettant de développer des projets plus complexes :\n\n- Back-End : PHP, MySQL, Symfony et SQLite pour le développement backend, y compris des solutions sans serveur comme Firebase. \n\n - Front-End : React/Native, TypeScript, Node.js pour le développement frontend."
+      },
+      "section4": {
+        "title": "Objectifs et aspirations",
+        "content": "Actuellement, je suis en quête d'une alternance pour le mois de septembre 2024 (1 semaine à l’école / 3 semaines en entreprise) en vue de ma troisième année scolaire à Yutopia.\n\nJe suis particulièrement intéressé par les opportunités qui me permettront de travailler sur des projets innovants et stimulants tout en continuant à développer mes compétences en tant que développeur Fullstack."
+      }
+    }
+  }
+  

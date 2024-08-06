@@ -19,7 +19,7 @@ const Text = styled.h1`
   margin: 0;
   font-size: 4rem;
   animation: zoomIn 1s;
-  cursor: pointer;
+
   &:hover {
     opacity: 0.8;
   }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import 'animate.css';
+import { useTranslation } from 'react-i18next'; // Importer le hook useTranslation
 
 const zoomOut = keyframes`
   from {
@@ -35,12 +36,13 @@ const Indexcontainer = styled.div`
   }
 `;
 
-const Text = styled.h1`
+const IndexTitle = styled.h1`
   margin: 0;
   font-size: 4rem;
   font-family: "Unbounded", sans-serif;
   color: white;
   width: 55vw;
+  animation: bounceIn 1s;
 
   @media (max-width: 499px) {
     font-size: 2rem;
@@ -58,8 +60,8 @@ const Text = styled.h1`
   }
 `;
 
-const Button = styled.button`
-  cursor: pointer;
+const IndexButton = styled.button`
+  animation: fadeIn 2s;
   border-radius: 5vh;
   border: none;
   background-color: black;
@@ -74,7 +76,23 @@ const Button = styled.button`
   }
 `;
 
+const Tip = styled.div`
+animation: fadeIn 4s;
+  margin: 0;
+  position: absolute;
+  top: 80%;
+  font-size: 2rem;
+  font-family: "Unbounded", sans-serif;
+  color: white;
+  width: 100vw;
+
+   @media (max-width: 1919px) {
+    display: none;
+  }
+`;
+
 function Index() {
+  const { t } = useTranslation(); // Utiliser le hook useTranslation
   const [animate, setAnimate] = useState(false);
   const [hideContent, setHideContent] = useState(false);
   const navigate = useNavigate();
@@ -112,11 +130,12 @@ function Index() {
 
   return (
     <Indexcontainer className={animate ? 'animate' : ''} hideContent={hideContent}>
-      <Text>Hey, Je suis Chris Ngabala</Text>
+      <IndexTitle>{t('index.name')}</IndexTitle>
       <br />
-      <Text>Je suis un développeur Web Fullstack</Text>
+      <IndexTitle>{t('index.title')}</IndexTitle>
       <br />
-      <Button onClick={handleClick}>START</Button>
+      <IndexButton onClick={handleClick}>{t('index.button')}</IndexButton>
+      <Tip>{t('index.tip')}</Tip>
     </Indexcontainer>
   );
 }

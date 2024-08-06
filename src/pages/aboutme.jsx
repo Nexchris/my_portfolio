@@ -3,6 +3,10 @@ import styled, { keyframes } from 'styled-components';
 import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
 import Index from './index';
 import 'animate.css';
+import { useTranslation } from 'react-i18next'; // Importer le hook useTranslation
+
+
+
 
 // Animation fadeOutLeft
 const fadeOut = keyframes`
@@ -28,7 +32,7 @@ const zoomIn = keyframes`
 
 const MainContainer = styled.div`
   animation: ${props => props.animate ? fadeOut : zoomIn} 0.5s forwards;
-  color: black;
+  color: white;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -46,7 +50,6 @@ const ScrollableContainer = styled.div`
   overflow-y: ${(props) => (props.isMobile ? 'auto' : 'hidden')}; /* Défilement libre pour mobile */
   padding: 1rem;
   margin-bottom: 2rem;
-  cursor: pointer;
   touch-action: pan-y;
   @media (min-width: 501px) and (max-width: 1650px) {
     width: 70vw;
@@ -67,7 +70,6 @@ const Navflex = styled.div`
 `;
 
 const NavButton = styled.button`
-  cursor: pointer;
   border-radius: 50%;
   border: none;
   background-color: black;
@@ -100,7 +102,7 @@ const ScrollButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+
   font-size: 1.5rem;
   margin: 0.5rem 0;
 
@@ -119,9 +121,10 @@ const Storytelling = styled.div`
 
 const Content = styled.div`
   font-size: 4rem;
+  font-weight: 300;
   @media (max-width: 500px) {
     font-size: 1.7rem;
-    font-weight: 500;
+    
   }
   @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 3rem;
@@ -130,18 +133,16 @@ const Content = styled.div`
 
 const Content2 = styled.div`
   font-size: 2.1rem;
+  font-weight: 300;
   @media (max-width: 500px) {
     font-size: 1rem;
-    font-weight: 500;
   }
   @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 1.7rem;
   }
 `;
 
-const Li = styled.li`
-  text-decoration: none;
-`;
+
 
 const StorytellingList = styled(Storytelling)`
   margin-bottom: 30vh;
@@ -156,6 +157,7 @@ const Title = styled.h1`
   margin: 0;
   font-size: 8rem;
   margin-top: 5vh;
+   margin-bottom: 10vh;
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -174,6 +176,7 @@ const Title = styled.h1`
 const Title2 = styled(Title)`
   margin: 0;
   font-size: 6rem;
+    margin-bottom: 5vh;
   @media (max-width: 500px) {
     font-size: 3.5rem;
     margin-bottom: 2vh;
@@ -187,15 +190,29 @@ const scrollToSection = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
 
+
+// Fonction pour remplacer les sauts de ligne par <br />
+const formatContent = (text) => {
+  return text.split('\n').map((str, index) => (
+    <React.Fragment key={index}>
+      {str}
+      <br />
+    </React.Fragment>
+  ));
+};
+
+
+
+
 function Aboutme() {
+  const { t } = useTranslation();
   const [animate, setAnimate] = useState(false);
   const [showIndex, setShowIndex] = useState(false);
   const [hideContent, setHideContent] = useState(false);
-  const [currentSection, setCurrentSection] = useState('section1'); // Section actuelle
+  const [currentSection, setCurrentSection] = useState('section1');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const navigate = useNavigate(); // Hook pour la navigation
+  const navigate = useNavigate();
 
-  // Utilisez useMemo pour mémoriser les sections
   const sections = useMemo(() => ['section1', 'section2', 'section3', 'section4'], []);
 
   const scrollToNextSection = useCallback(() => {
@@ -216,20 +233,18 @@ function Aboutme() {
 
   const handleLeft = useCallback(() => {
     setAnimate(true);
-
     setTimeout(() => {
       setShowIndex(true);
       setHideContent(true);
-      navigate('/'); // Naviguer vers la route d'accueil
+      navigate('/');
     }, 200);
   }, [navigate]);
 
   const handleRight = useCallback(() => {
     setAnimate(true);
-
     setTimeout(() => {
-      setHideContent(true); // Masquer le contenu actuel
-      navigate('/skills'); // Naviguer vers la route /skills
+      setHideContent(true);
+      navigate('/skills');
     }, 200);
   }, [navigate]);
 
@@ -259,8 +274,6 @@ function Aboutme() {
     };
   }, [handleKeyDown]);
 
- 
-
   useEffect(() => {
     if (animate) {
       const timer = setTimeout(() => {
@@ -277,51 +290,44 @@ function Aboutme() {
           <ScrollableContainer isMobile={isMobile}>
             <ContentContainer id="section1">
               <Storytelling>
-                <Title>A propos de moi</Title>
+                <Title>{t('aboutme.title')}</Title>
                 <Content>
-                  Bonjour, je m'appelle Chris Ngabala et je suis développeur Fullstack passionné par le développement web.
+                  {formatContent(t('aboutme.section1.intro'))}
                 </Content>
               </Storytelling>
             </ContentContainer>
 
             <ContentContainer id="section2">
               <StorytellingList2>
-                <Title2>Mon Parcours</Title2> <br />
+                <Title2>{t('aboutme.section2.title')}</Title2>
                 <Content2>
-                  Mon parcours a débuté à l'école Multimédia, où j'ai acquis une solide formation en programmation et en développement web. <br /> <br />
-                  Durant ma première année, j'ai appris les bases fondamentales du code, ce qui m'a permis de construire une fondation solide en HTML, CSS et JavaScript. <br /> <br />
-                  Cette base m'a ensuite préparé à aborder des sujets plus complexes et avancés au cours de ma deuxième année.
+                  {formatContent(t('aboutme.section2.content'))}
                 </Content2>
               </StorytellingList2>
             </ContentContainer>
 
             <ContentContainer id="section3">
               <StorytellingList>
-                <Title2>Ma Formation</Title2> <br />
+                <Title2>{t('aboutme.section3.title')}</Title2>
                 <Content2>
-                  En deuxième année, j'ai considérablement élargi mes compétences en explorant une variété de technologies et de frameworks, me permettant de développer des projets plus complexes :<br />
-                  <ul>
-                    <Li>Back-End : PHP, MySQL, Symfony et SQLite pour le développement backend et avec aussi sans serveur comme Firebase.</Li> <br />
-                    <Li>Front-End : React/Native, TypeScript, Node.js pour le développement frontend.</Li>
-                  </ul>
+                  {formatContent(t('aboutme.section3.content'))}
                 </Content2>
               </StorytellingList>
             </ContentContainer>
 
             <ContentContainer id="section4">
               <StorytellingList>
-                <Title2>Objectifs et aspirations</Title2>
+                <Title2>{t('aboutme.section4.title')}</Title2>
                 <Content2>
-                  Actuellement, je suis en quête d'une alternance pour le mois de septembre 2024, (1 semaine à l’école/ 3 semaine en entreprise ) en vue de ma troisième année scolaire à Yutopia. <br /> <br />
-                  Je suis particulièrement intéressé par les opportunités qui me permettront de travailler sur des projets innovants et stimulants <br /> tout en continuant à développer mes compétences en tant que développeur Fullstack.
+                  {formatContent(t('aboutme.section4.content'))}
                 </Content2>
               </StorytellingList>
             </ContentContainer>
           </ScrollableContainer>
 
           <Navflex>
-            <NavButton onClick={handleLeft}>&larr;</NavButton> {/* Flèche gauche */}
-            <NavButton onClick={handleRight}>&rarr;</NavButton> {/* Flèche droite */}
+            <NavButton onClick={handleLeft}>&larr;</NavButton>
+            <NavButton onClick={handleRight}>&rarr;</NavButton>
           </Navflex>
 
           <ScrollContainer>

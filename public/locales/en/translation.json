@@ -1,0 +1,28 @@
+{
+  "welcome": "Welcome",
+  "button": "FR",
+  "index": {
+    "name": "Ngabala Chris",
+    "title": "Fullstack Web Developer",
+    "button": "View Portfolio",
+    "tip": "Use the 'Space' key and arrow keys to easily navigate the site."
+  },
+  "aboutme": {
+    "title": "About Me",
+    "section1": {
+      "intro": "Hello, my name is Chris Ngabala, and I am a Fullstack developer passionate about web development."
+    },
+    "section2": {
+      "title": "My Journey",
+      "content": "My journey began at the Multimedia School, where I gained solid training in programming and web development. \n\n In my first year, I learned the fundamental basics of coding, which allowed me to build a solid foundation in HTML, CSS, and JavaScript. \n\n  This foundation then prepared me to tackle more complex and advanced topics during my second year."
+    },
+    "section3": {
+      "title": "My Education",
+      "content": "In my second year, I significantly expanded my skills by exploring a variety of technologies and frameworks, allowing me to develop more complex projects:\n\n - Back-End: PHP, MySQL, Symfony, and SQLite for backend development, including serverless solutions like Firebase.\n\n - Front-End: React/Native, TypeScript, Node.js for frontend development."
+    },
+    "section4": {
+      "title": "Goals and Aspirations",
+      "content": "Currently, I am looking for an internship starting in September 2024 (1 week at school / 3 weeks in the company) in view of my third academic year at Yutopia. \n\n  I am particularly interested in opportunities that will allow me to work on innovative and challenging projects while continuing to develop my skills as a Fullstack developer."
+    }
+  }
+}

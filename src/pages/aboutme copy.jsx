@@ -41,7 +41,6 @@ const ScrollableContainer = styled.div`
   overflow-y: ${(props) => (props.isMobile ? 'auto' : 'hidden')}; /* Défilement libre pour mobile */
   padding: 1rem;
   margin-bottom: 2rem;
-  cursor: pointer;
   touch-action: pan-y;
     @media (min-width: 501px) and (max-width: 1650px) {
    width: 70vw;
@@ -65,7 +64,6 @@ const Navflex = styled.div`
 
 // Bouton de navigation
 const NavButton = styled.button`
-  cursor: pointer;
   border-radius: 50%;
   border: none;
   background-color: black;
@@ -100,7 +98,6 @@ const ScrollButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   font-size: 1.5rem;
   margin: 0.5rem 0;
 

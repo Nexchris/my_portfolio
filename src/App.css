@@ -3,6 +3,7 @@
 }
 
 
+
 ::-webkit-scrollbar-thumb:hover {
 opacity: 0.7;
 }
@@ -47,4 +48,43 @@ opacity: 0.7;
   to {
     transform: rotate(360deg);
   }
+}
+
+/* App.css */
+
+
+
+
+.cursor-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgb(255, 255, 255, 0.2); /* Couleur néon pour les particules */
+  width: 15px; /* Taille des particules d'animation */
+  height: 15px; /* Taille des particules d'animation */
+  transform: scale(0.1);
+  pointer-events: none;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Effet néon avec ombre portée */
+  transition: transform 0.2s ease-out, opacity 0.6s ease-out; /* Transition pour une disparition fluide */
+}
+
+.cursor-particle.fade-out {
+  opacity: 0; /* Devenir invisible */
+  transform: scale(1); /* Optionnel: agrandir légèrement avant de disparaître */
+}
+
+/* Curseur en forme de particule, plus grand que les particules d'animation */
+.cursor-main {
+  position: absolute;
+  border-radius: 50%;
+  background: rgb(255, 255, 255); /* Couleur néon pour le curseur principal */
+  width: 30px; /* Taille du curseur principal */
+  height: 30px; /* Taille du curseur principal */
+  transform: scale(0.5);
+  pointer-events: none;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 1); /* Effet néon avec ombre portée */
+  transition: opacity 0.5s ease; /* Transition pour l'apparition/disparition */
+}
+
+.cursor-main.hidden {
+  opacity: 0; /* Devenir invisible */
 }
