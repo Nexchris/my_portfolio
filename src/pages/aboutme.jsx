@@ -69,7 +69,7 @@ const Button = styled.button`
   position: relative; // Utiliser position absolue pour le centrage
   top: 50%; // Positionner verticalement au centre
   left: 50%; // Positionner horizontalement au centre
-  transform: translate(-50%, -35%); // Ajuster pour centrer exactement
+  transform: translate(-50%, 35%); // Ajuster pour centrer exactement
   display: none;
 
   &:hover {
