@@ -267,7 +267,7 @@ function Contact() {
           <Textarea placeholder={t('contact.message')} name="message" required rows="5" />
           <SubmitButton type="submit">{t('contact.submit')}</SubmitButton>
           <Text>{t('contact.text')}</Text>
-          <Button href="https://www.linkedin.com/in/benjamin-hinfray-272278208" target="_blank" rel="noopener noreferrer">
+          <Button href="https://www.linkedin.com/in/chris-ngabala-347b48252/" target="_blank" rel="noopener noreferrer">
             <Image src={Linkedinlogo} alt="LinkedIn" />
           </Button>
         </Form>

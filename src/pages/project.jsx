@@ -10,14 +10,16 @@ import Records from "../images/records.png";
 const animationStyles = css`
 
   animation: ${props => props.animationName} 1s;
+  
 `;
 
 const Body = styled.div`
   animation: fadeIn 5s;
   ${props => props.isFadingOut && animationStyles};
   /* Vous pouvez également ajouter d'autres animations ici si nécessaire */
-    min-height: 100vh; /* Assurez-vous que le Body occupe toute la hauteur de la fenêtre */
-        overflow-y: auto;
+    height: 110vh; /* Assurez-vous que le Body occupe toute la hauteur de la fenêtre */
+
+
 `;
 
 const Container = styled.div`
@@ -28,8 +30,9 @@ const Container = styled.div`
   width: 100vw;
   text-align: left;
   position: relative;
-  @media (max-width: 500px) {
+  @media (max-width: 1000px) {
     text-align: center;
+    
   }
 `;
 
@@ -45,6 +48,15 @@ const Title = styled.div`
 
   @media (max-width: 500px) {
     font-size: 4rem;
+      margin: 0;
+  }
+
+  @media (min-width: 501) and (max-width:1199) {
+       font-size: 6rem;
+  }
+
+     @media (min-width: 1200px) and (max-width:1400px) {
+       font-size: 6rem;
   }
 `;
 
@@ -60,8 +72,10 @@ const ProjectTitle = styled.div`
   &:hover {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   }
-  @media (max-width: 500px) {
+  @media (max-width: 1199px) {
     display: none;
+  }
+    @media (min-width: 1200px) and (max-width:1600px) {
   }
 `;
 
@@ -73,14 +87,18 @@ const ProjectContainer = styled.div`
   top: 5%;
   left: 40%;
   text-align: center;
-  @media (max-width: 500px) {
-    position: static;
+  @media (max-width: 1199px) {
+    transform: translate(-40%, 70%);
     width: 100vw;
+  }
+      @media (min-width: 1200px) and (max-width:1600px) {
+       left:45%;
   }
 `;
 
 const ProjectFlex = styled.div`
-  display: flex;
+display: flex;
+height: auto;
 `;
 
 const ProjectTitleContainer = styled.div`
@@ -90,15 +108,24 @@ const ProjectTitleContainer = styled.div`
   @media (max-width: 500px) {
     margin: 0;
   }
+    @media (min-width: 501px) and (max-width:1199px) {
+    margin:0;
+  }
+     @media (min-width: 1200px) and (max-width:1400px) {
+     margin-left:5vh;
+  }
 `;
 
 const ProjectImage = styled.img`
   width: -webkit-fill-available;
   height: 45vh;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     width: -webkit-fill-available;
     height: 30vh;
+  }
+      @media (min-width: 1200px) and (max-width:1400px) {
+       height:40vh;
   }
 `;
 
@@ -109,6 +136,10 @@ const ProjectContent = styled.div`
   color: white;
   margin-top: 2vh;
   text-align: center;
+    @media (max-width: 500px) {
+        transform: translate(27%, 0%);
+        width:65vw;
+  }
 `;
 
 const IndexButton = styled.button`
@@ -129,7 +160,10 @@ const IndexButton = styled.button`
   }
      @media (max-width: 500px) {
    font-size: 1.5rem;    
-        margin: 2vw;
+        margin-bottom: 3vh;
+  }
+        @media (min-width: 501px) and (max-width:1200px) {
+     margin-bottom: 10vh;
   }
         
 `;

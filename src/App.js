@@ -86,6 +86,11 @@ const GlobalContainer = styled.div`
   overflow: hidden; // Masquer le débordement
   height: 100vh;
   width: 100vw;
+   @media (max-width: 1000px) {
+   height:auto;
+   overflow:scroll;
+    
+  }
 `;
 
 function App() {
