@@ -8,12 +8,14 @@ import Webdoc from "../images/webdoc.png";
 import Records from "../images/records.png";
 
 const animationStyles = css`
+
   animation: ${props => props.animationName} 1s;
 `;
 
 const Body = styled.div`
+  animation: fadeIn 5s;
   ${props => props.isFadingOut && animationStyles};
-  animation: backInRight 0.5s;
+  /* Vous pouvez également ajouter d'autres animations ici si nécessaire */
 `;
 
 const Container = styled.div`
@@ -62,7 +64,6 @@ const ProjectTitle = styled.div`
 `;
 
 const ProjectContainer = styled.div`
-  animation: fadeIn 3s;
   background-color: white;
   width: 50vw;
   height: 25vh;
@@ -95,7 +96,7 @@ const ProjectImage = styled.img`
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   @media (max-width: 500px) {
     width: -webkit-fill-available;
-     height: 30vh;
+    height: 30vh;
   }
 `;
 
@@ -126,11 +127,11 @@ const IndexButton = styled.button`
 `;
 
 const A = styled.a`
-  color: inherit;  /* Utilise la couleur du texte parent */
-  text-decoration: none;  /* Enlève le soulignement */
+  color: inherit;
+  text-decoration: none;
   &:hover {
-    color: inherit;  /* Assure que la couleur reste la même lors du survol */
-    text-decoration: none;  /* Assure que le soulignement reste enlevé lors du survol */
+    color: inherit;
+    text-decoration: none;
   }
 `;
 
@@ -155,15 +156,42 @@ const ArrowButton = styled.button`
 const ProjectNumber = styled.div`
   font-size: 2rem;
   color: white;
-    font-family: "Unbounded", sans-serif;
+  font-family: "Unbounded", sans-serif;
   margin: 0 1rem;
-      margin-bottom: 2vh;
+  margin-bottom: 2vh;
+`;
+
+const Navflex = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  position: absolute;
+  top: 45rem;
+  left: 55rem;
+  @media (max-width: 1199px) {
+    display: none;
+  }
+`;
+
+const NavButton = styled.button`
+  border-radius: 50%;
+  border: none;
+  background-color: white;
+  font-size: 2rem;
+  padding: 1rem;
+  color: black;
+  margin: 0 1rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 function Project() {
   const navigate = useNavigate();
   const [isFadingOut, setIsFadingOut] = useState(false);
-  const [animationName, setAnimationName] = useState('fadeIn');
+  const [animationName, setAnimationName] = useState('');
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
   const { t } = useTranslation();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
@@ -175,7 +203,7 @@ function Project() {
   ];
 
   const handleLeft = useCallback(() => {
-    setAnimationName('backOutRight');
+    setAnimationName('backOutRight'); // Assurez-vous que cette animation est définie dans animate.css ou votre CSS
     setIsFadingOut(true);
     setTimeout(() => {
       navigate('/skills');
@@ -183,7 +211,7 @@ function Project() {
   }, [navigate]);
 
   const handleRight = useCallback(() => {
-    setAnimationName('fadeOutRightBig');
+    setAnimationName('fadeOut'); // Assurez-vous que cette animation est définie dans animate.css ou votre CSS
     setIsFadingOut(true);
     setTimeout(() => {
       navigate('/contact');
@@ -260,6 +288,10 @@ function Project() {
             </ProjectContainer>
           ) : null
         ))}
+        <Navflex>
+          <NavButton onClick={handleLeft}>&larr;</NavButton>
+          <NavButton onClick={handleRight}>&rarr;</NavButton>
+        </Navflex>
       </ProjectFlex>
     </Body>
   );

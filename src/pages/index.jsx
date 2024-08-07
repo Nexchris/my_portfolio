@@ -98,6 +98,7 @@ function Index() {
   const [hideContent, setHideContent] = useState(false);
   const navigate = useNavigate();
 
+
   const handleClick = useCallback(() => {
     setAnimate(true);
     setTimeout(() => {

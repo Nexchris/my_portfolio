@@ -34,7 +34,8 @@
     "contact": "Contact Me"
   },
   "skills": {
-    "title": "Skills"
+    "title": "Skills",
+     "project":"My Projects"
   },
   "project": {
     "title": "My Projects",
@@ -47,5 +48,13 @@
     "section3.content1": "Languages used: CSS, JavaScript, React, Symfony, SQLite",
     "section3.content2": "For this individual school project, the goal was to develop a site allowing the user to define their name and create, modify, delete, and categorize vinyl records. The project is divided into two parts: a user interface in React and a back-end in Symfony, connected via RESTful APIs, with SQLite as the database.",
     "button3": "View on GitHub"
+  },
+  "contact": {
+          "title":"Contact Me",
+          "text":"Or",
+          "name":"Name",
+          "email":"Mail",
+          "message":"Message",
+          "submit":"Send"
   }
 }

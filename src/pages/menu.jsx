@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import 'animate.css';
-import Video from '../video/menu.mp4';  // Assurez-vous que le chemin est correct
+import Video from '../video/indexvideo.mp4';  // Assurez-vous que le chemin est correct
 import { useTranslation } from 'react-i18next'; // Importer le hook useTranslation
 
 const Indexcontainer = styled.div`

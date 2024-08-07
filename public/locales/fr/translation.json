@@ -49,6 +49,13 @@
             "section3.content2":"Pour ce projet scolaire individuel, l'objectif était de développer un site permettant à l'utilisateur de définir son nom et de créer des vinyles, en modifer, les supprimer et les catégoriser. Le projet est divisé en deux parties : une interface utilisateur en React et un back-end en Symfony, reliés par des API RESTful, avec SQLite comme base de données.",
             "button3" : "Voir le Github"
          
-        }
-  }
+        },
+        "contact": {
+          "title":"Me Contacter",
+          "text":"Ou",
+          "name":"Nom",
+          "email":"Email",
+          "message":"Message",
+          "submit":"Envoyer"
+  }}
   

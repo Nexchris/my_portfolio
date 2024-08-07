@@ -88,6 +88,21 @@ const Icon = styled.img`
   }
 `;
 
+
+const NavButton = styled.button`
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  background-color: black;
+  font-size: 2rem;
+  padding: 1rem;
+  color: white;
+  margin: 0 1rem;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
 const Navflex = styled.div`
   display: flex;
   justify-content: center;
@@ -112,20 +127,7 @@ const CaseContainer = styled.div`
   }
 `;
 
-const NavButton = styled.button`
-  cursor: pointer;
-  border-radius: 50%;
-  border: none;
-  background-color: black;
-  font-size: 2rem;
-  padding: 1rem;
-  color: white;
-  margin: 0 1rem;
 
-  &:hover {
-    opacity: 0.8;
-  }
-`;
 const Button = styled.button`
   animation: fadeIn 2s;
   border-radius: 5vh;
@@ -170,7 +172,7 @@ function Skills() {
     setIsFadingOut(true);
     setTimeout(() => {
       navigate('/project');
-    }, 1000); // Attendre la fin de l'animation (1s)
+    }, 500); // Attendre la fin de l'animation (1s)
   }, [navigate]);
 
   useEffect(() => {
