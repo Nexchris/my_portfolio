@@ -16,6 +16,8 @@ const Body = styled.div`
   animation: fadeIn 5s;
   ${props => props.isFadingOut && animationStyles};
   /* Vous pouvez également ajouter d'autres animations ici si nécessaire */
+    min-height: 100vh; /* Assurez-vous que le Body occupe toute la hauteur de la fenêtre */
+        overflow-y: auto;
 `;
 
 const Container = styled.div`
@@ -124,6 +126,11 @@ const IndexButton = styled.button`
   &:hover {
     opacity: 0.8;
   }
+     @media (max-width: 500px) {
+   font-size: 1.5rem;    
+        margin: 2vw;
+  }
+        
 `;
 
 const A = styled.a`
@@ -197,9 +204,9 @@ function Project() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
 
   const projects = [
-    { id: 'BAM', title: 'La Boite à Momes', image: BAM, content1: t('project.section1.content1'), content2: t('project.section1.content2'), button: t('project.button1'), link: 'https://www.boitamomes.fr/' },
-    { id: 'Webdoc', title: 'Webdoc Interactif', image: Webdoc, content1: t('project.section2.content1'), content2: t('project.section2.content2'), button: t('project.button2'), link: 'https://github.com/Nexchris/projetfinaljudo' },
-    { id: 'Records', title: 'Records On Shelf', image: Records, content1: t('project.section3.content1'), content2: t('project.section3.content2'), button: t('project.button3'), link: 'https://github.com/Nexchris/records' }
+    { id: 'BAM', title: 'La Boite à Momes', image: BAM, content1: t('project.section1.content1'), content2: t('project.section1.content2'), button: t('project.button1'), button0: t('project.button0'), link: 'https://www.boitamomes.fr/' },
+    { id: 'Webdoc', title: 'Webdoc Interactif', image: Webdoc, content1: t('project.section2.content1'), content2: t('project.section2.content2'), button: t('project.button2'), button0: t('project.button0'), link: 'https://github.com/Nexchris/projetfinaljudo' },
+    { id: 'Records', title: 'Records On Shelf', image: Records, content1: t('project.section3.content1'), content2: t('project.section3.content2'), button: t('project.button3'), button0: t('project.button0'), link: 'https://github.com/Nexchris/records' }
   ];
 
   const handleLeft = useCallback(() => {
@@ -284,6 +291,9 @@ function Project() {
               <ProjectContent>{project.content2}</ProjectContent>
               <IndexButton>
                 <A href={project.link}>{project.button}</A>
+              </IndexButton>
+              <IndexButton>
+                <A onClick={handleRight}>{project.button0}</A>
               </IndexButton>
             </ProjectContainer>
           ) : null

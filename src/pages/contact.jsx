@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import 'animate.css';
 import { useTranslation } from 'react-i18next'; 
 import emailjs from 'emailjs-com';
 import Linkedinlogo from '../images/linkedin.png';
+import BeatLoader from 'react-spinners/BeatLoader';
 
 const animationStyles = css`
   animation: ${props => props.animationName} 1s;
@@ -53,7 +54,6 @@ const Button = styled.a`
   background-color: #0073b1;
   padding: 10px 20px;
   margin: 5px;
-  padding: 3px 20px;
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s;
@@ -115,6 +115,8 @@ const SubmitButton = styled.button`
 
   @media (max-width: 500px) {
     font-size: 1.5rem;
+    background-color: white;
+    color: black;
   }
 `;
 
@@ -142,8 +144,29 @@ const Navflex = styled.div`
   justify-content: center;
   margin-top: 2rem;
   @media (max-width: 1024px) {
-    display:none;
+    display: none;
   }
+`;
+
+const Sendmessage = styled.div`
+  position: absolute;
+  animation: fadeIn 1s;
+  top: 25%;
+  font-family: "Unbounded", sans-serif;
+  font-size: 4rem;
+`;
+
+const SuccessMessage = styled.div`
+  position: absolute;
+  top: 25%;
+  font-family: "Unbounded", sans-serif;
+  font-size: 4rem;
+`;
+
+const SuccessButton = styled(SubmitButton)`
+  background-color: white;
+  color: black;
+  margin-top: 20px;
 `;
 
 function Contact() {
@@ -151,6 +174,8 @@ function Contact() {
   const navigate = useNavigate();
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [animationName, setAnimationName] = useState('fadeIn');
+  const [isSending, setIsSending] = useState(false);
+  const [isSent, setIsSent] = useState(false);
 
   const handleLeft = useCallback(() => {
     setAnimationName('fadeOut');
@@ -187,40 +212,68 @@ function Contact() {
 
   const sendEmail = (e) => {
     e.preventDefault();
+    setIsSending(true);
+    setIsSent(false);
 
     emailjs.sendForm(
-      'YOUR_SERVICE_ID', 
-      'YOUR_TEMPLATE_ID',
+      'service_3jb5bxd', 
+      'template_9pqmfdc',
       e.target,
-      'YOUR_USER_ID'
+      '-GY0uB4wYt1pgYCrm'
     ).then(
       (result) => {
         console.log(result.text);
+        setIsSending(false);
+        setIsSent(true);
       },
       (error) => {
         console.log(error.text);
+        setIsSending(false);
       }
     );
-    e.target.reset();
+  };
+
+  const handleReturnToForm = () => {
+    setIsSent(false);
   };
 
   return (
     <Container isFadingOut={isFadingOut} animationName={animationName}>
       <Title>{t('contact.title')}</Title>
-      <Form onSubmit={sendEmail}>
-        <Input type="text" placeholder={t('contact.name')} name="name" required />
-        <Input type="email" placeholder={t('contact.email')} name="email" required />
-        <Textarea placeholder={t('contact.message')} name="message" required rows="5" />
-        <SubmitButton type="submit">{t('contact.submit')}</SubmitButton>
-        <Text>{t('contact.text')}</Text>
-      <Button href="https://www.linkedin.com/in/benjamin-hinfray-272278208" target="_blank" rel="noopener noreferrer">
-        <Image src={Linkedinlogo} alt="LinkedIn" />
-      </Button>
-      </Form>
-      <Navflex>
-        <NavButton onClick={handleLeft}>&larr;</NavButton>
-        <NavButton onClick={handleRight}>&rarr;</NavButton>
-      </Navflex>
+      
+      {!isSending && !isSent && (
+        <Form onSubmit={sendEmail}>
+          <Input type="text" placeholder={t('contact.name')} name="from_name" required />
+          <Input type="email" placeholder={t('contact.email')} name="from_email" required />
+          <Textarea placeholder={t('contact.message')} name="message" required rows="5" />
+          <SubmitButton type="submit">{t('contact.submit')}</SubmitButton>
+          <Text>{t('contact.text')}</Text>
+          <Button href="https://www.linkedin.com/in/benjamin-hinfray-272278208" target="_blank" rel="noopener noreferrer">
+            <Image src={Linkedinlogo} alt="LinkedIn" />
+          </Button>
+        </Form>
+      )}
+  
+      {isSending && (
+        <Sendmessage>
+          <BeatLoader color="#ffffff" size={85} />
+          <p>Message en cours d'envoi...</p>
+        </Sendmessage>
+      )}
+  
+      {isSent && (
+        <SuccessMessage>
+          <p>Le message a été bien envoyé.</p>
+          <SuccessButton onClick={handleReturnToForm}>Retour</SuccessButton>
+        </SuccessMessage>
+      )}
+  
+      {!isSending && !isSent && (
+        <Navflex>
+          <NavButton onClick={handleLeft}>&larr;</NavButton>
+          <NavButton onClick={handleRight}>&rarr;</NavButton>
+        </Navflex>
+      )}
     </Container>
   );
 }
