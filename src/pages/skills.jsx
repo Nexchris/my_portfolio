@@ -92,6 +92,9 @@ const Navflex = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 2rem;
+   @media (max-width: 1024px) {
+    display:none;
+  }
 `;
 
 const Allcasecontainer = styled.div`

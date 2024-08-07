@@ -76,6 +76,7 @@ const Button = styled.button`
   
     @media (max-width: 1024px) {
     display:block;
+     margin-left: 15vw;
   }
 `;
 

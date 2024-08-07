@@ -14,7 +14,8 @@ const animationStyles = css`
 const Body = styled.div`
   ${props => props.isFadingOut && animationStyles};
   animation: backInRight 0.5s;
-`
+`;
+
 const Container = styled.div`
   color: white;
   display: flex;
@@ -23,6 +24,9 @@ const Container = styled.div`
   width: 100vw;
   text-align: left;
   position: relative;
+  @media (max-width: 500px) {
+    text-align: center;
+  }
 `;
 
 const Title = styled.div`
@@ -40,41 +44,62 @@ const Title = styled.div`
   }
 `;
 
-const Projectitle = styled.div`
+const ProjectTitle = styled.div`
   font-family: "Unbounded", sans-serif;
   font-optical-sizing: auto;
   font-size: 4vh;
-  color:white;
-  font-weight:bold;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
+  transition: box-shadow 0.3s ease-in-out;
+  margin-bottom: 2vh;
+  &:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
-const Projectcontainer = styled.div`
-animation: fadeIn 3s;
+const ProjectContainer = styled.div`
+  animation: fadeIn 3s;
   background-color: white;
   width: 50vw;
   height: 25vh;
   position: absolute;
   top: 21%;
   left: 40%;
+  text-align: center;
+  @media (max-width: 500px) {
+    position: static;
+    width: 100vw;
+  }
 `;
 
-const Projectflex = styled.div`
+const ProjectFlex = styled.div`
   display: flex;
 `;
 
-const Projecttitlecontainer = styled.div`
+const ProjectTitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 15vh;
+  @media (max-width: 500px) {
+    margin: 0;
+  }
 `;
 
-const Projectimage = styled.img`
+const ProjectImage = styled.img`
   width: -webkit-fill-available;
   height: 45vh;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  @media (max-width: 500px) {
+    width: -webkit-fill-available;
+     height: 30vh;
+  }
 `;
 
-const Projectcontent = styled.div`
+const ProjectContent = styled.div`
   font-family: "Unbounded", sans-serif;
   font-optical-sizing: auto;
   font-size: 2vh;
@@ -87,25 +112,67 @@ const IndexButton = styled.button`
   animation: fadeIn 2s;
   border-radius: 5vh;
   border: none;
-  background-color: black;
+  background-color: white;
   font-size: 2rem;
   padding: 1rem 2rem;
-  color: white;
+  color: black;
   font-family: "Bebas Neue", sans-serif;
   transition: opacity 0.3s;
-  margin-left: 20vw;
+  cursor: pointer;
   margin-top: 2vh;
   &:hover {
     opacity: 0.8;
   }
 `;
 
+const A = styled.a`
+  color: inherit;  /* Utilise la couleur du texte parent */
+  text-decoration: none;  /* Enlève le soulignement */
+  &:hover {
+    color: inherit;  /* Assure que la couleur reste la même lors du survol */
+    text-decoration: none;  /* Assure que le soulignement reste enlevé lors du survol */
+  }
+`;
+
+const NavigationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
+`;
+
+const ArrowButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  &:hover {
+    color: gray;
+  }
+`;
+
+const ProjectNumber = styled.div`
+  font-size: 2rem;
+  color: white;
+    font-family: "Unbounded", sans-serif;
+  margin: 0 1rem;
+      margin-bottom: 2vh;
+`;
+
 function Project() {
   const navigate = useNavigate();
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [animationName, setAnimationName] = useState('fadeIn');
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
   const { t } = useTranslation();
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
+
+  const projects = [
+    { id: 'BAM', title: 'La Boite à Momes', image: BAM, content1: t('project.section1.content1'), content2: t('project.section1.content2'), button: t('project.button1'), link: 'https://www.boitamomes.fr/' },
+    { id: 'Webdoc', title: 'Webdoc Interactif', image: Webdoc, content1: t('project.section2.content1'), content2: t('project.section2.content2'), button: t('project.button2'), link: 'https://github.com/Nexchris/projetfinaljudo' },
+    { id: 'Records', title: 'Records On Shelf', image: Records, content1: t('project.section3.content1'), content2: t('project.section3.content2'), button: t('project.button3'), link: 'https://github.com/Nexchris/records' }
+  ];
 
   const handleLeft = useCallback(() => {
     setAnimationName('backOutRight');
@@ -122,6 +189,26 @@ function Project() {
       navigate('/contact');
     }, 1000);
   }, [navigate]);
+
+  const handleNextProject = () => {
+    setSelectedProjectIndex((prevIndex) => (prevIndex + 1) % projects.length);
+  };
+
+  const handlePreviousProject = () => {
+    setSelectedProjectIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 500);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -140,48 +227,41 @@ function Project() {
   }, [handleLeft, handleRight]);
 
   return (
-    <>
-    <Body>
-      <Container isFadingOut={isFadingOut} animationName={animationName}>
+    <Body isFadingOut={isFadingOut} animationName={animationName}>
+      <Container>
         <Title>{t('project.title')}</Title>
+        {isMobile && (
+          <NavigationContainer>
+            <ArrowButton onClick={handlePreviousProject}>&lt;</ArrowButton>
+            <ProjectNumber>{`Projet ${selectedProjectIndex + 1}`}</ProjectNumber>
+            <ArrowButton onClick={handleNextProject}>&gt;</ArrowButton>
+          </NavigationContainer>
+        )}
       </Container>
 
-      <Projectflex>
-        <Projecttitlecontainer>
-          <Projectitle onClick={() => setSelectedProject('BAM')}>La Boite à Momes</Projectitle>
-          <Projectitle onClick={() => setSelectedProject('Webdoc')}>Webdoc Interactif</Projectitle>
-          <Projectitle onClick={() => setSelectedProject('Records')}>Records On Shelf</Projectitle>
-        </Projecttitlecontainer>
-        {selectedProject === 'BAM' && (
-          <Projectcontainer>
-            <Projectimage src={BAM} alt="" />
-            <Projectcontent>Langages utilisés : Jimdo(CMS), HTML, CSS, Javascript</Projectcontent>
-            <br />
-            <Projectcontent>J'ai eu la fonction de developpeur web Front-End pour but de la refonte du site, j'ai pris en charge la nouvelle conception du site via le CMS Jimdo et personnaliser via des widgets Javascripts interactifs.</Projectcontent>
-            <IndexButton>Voir le Site</IndexButton>
-          </Projectcontainer>
-        )}
-        {selectedProject === 'Webdoc' && (
-          <Projectcontainer>
-            <Projectimage src={Webdoc} alt="" />
-            <Projectcontent>Langages utilisés : HTML, CSS, Javascript, Firebase, React, TypeScript</Projectcontent>
-            <br />
-            <Projectcontent>Pour ce projet de groupe, l'objectif était de réaliser un webdocumentaire interactif basé sur une maquette dédiée à l'événement des Jeux Olympiques. Le site intègre des animations créées avec React et utilise Firebase pour la gestion de la base de données.</Projectcontent>
-            <IndexButton>Lien Github</IndexButton>
-          </Projectcontainer>
-        )}
-        {selectedProject === 'Records' && (
-          <Projectcontainer>
-            <Projectimage src={Records} alt="" />
-            <Projectcontent>Langages utilisés : CSS, Javascript, React, Syfmony, SQLite</Projectcontent>
-            <br />
-            <Projectcontent>Pour ce projet scolaire individuel, l'objectif était de développer un site permettant à l'utilisateur de définir son nom et de créer des vinyles, en modifer, les supprimer et les catégoriser. Le projet est divisé en deux parties : une interface utilisateur en React et un back-end en Symfony, reliés par des API RESTful, avec SQLite comme base de données.</Projectcontent>
-            <IndexButton>Lien Github</IndexButton>
-          </Projectcontainer>
-        )}
-      </Projectflex>
-      </Body>
-    </>
+      <ProjectFlex>
+        <ProjectTitleContainer>
+          {projects.map((project, index) => (
+            <ProjectTitle key={project.id} onClick={() => setSelectedProjectIndex(index)}>
+              {project.title}
+            </ProjectTitle>
+          ))}
+        </ProjectTitleContainer>
+        {projects.map((project, index) => (
+          (isMobile && selectedProjectIndex === index) || (!isMobile && selectedProjectIndex === index) ? (
+            <ProjectContainer key={project.id}>
+              <ProjectImage src={project.image} alt={project.title} />
+              <ProjectContent>{project.content1}</ProjectContent>
+              <br />
+              <ProjectContent>{project.content2}</ProjectContent>
+              <IndexButton>
+                <A href={project.link}>{project.button}</A>
+              </IndexButton>
+            </ProjectContainer>
+          ) : null
+        ))}
+      </ProjectFlex>
+    </Body>
   );
 }
 

@@ -38,8 +38,17 @@
           "project":"Mes Projets"
         },
         "project": {
-          "title": "Mes Projets"
-          
+          "title": "Mes Projets",
+          "section1.content1":"Langages utilisés : Jimdo(CMS), HTML, CSS, Javascript",
+            "section1.content2":" J'ai eu la fonction de developpeur web Front-End pour but de la refonte du site, j'ai pris en charge la nouvelle conception du site via le CMS Jimdo et personnaliser via des widgets Javascripts interactifs.",
+            "button1" : "Voir la page",
+            "section2.content1":"Langages utilisés : HTML, CSS, Javascript, Firebase, React, TypeScript",
+            "section2.content2":"J'ai eu la fonction de developpeur web Front-End pour but de la refonte du site, j'ai pris en charge la nouvelle conception du site via le CMS Jimdo et personnaliser via des widgets Javascripts interactifs.",
+            "button2" : "Voir le Github",
+            "section3.content1":"Langages utilisés : CSS, Javascript, React, Syfmony, SQLite",
+            "section3.content2":"Pour ce projet scolaire individuel, l'objectif était de développer un site permettant à l'utilisateur de définir son nom et de créer des vinyles, en modifer, les supprimer et les catégoriser. Le projet est divisé en deux parties : une interface utilisateur en React et un back-end en Symfony, reliés par des API RESTful, avec SQLite comme base de données.",
+            "button3" : "Voir le Github"
+         
         }
   }
   
