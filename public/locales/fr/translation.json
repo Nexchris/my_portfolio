@@ -34,10 +34,12 @@
           "contact": "Me Contacter"
         },
         "skills": {
-          "title": "Compétences"
+          "title": "Compétences",
+          "project":"Mes Projets"
         },
         "project": {
           "title": "Mes Projets"
+          
         }
   }
   

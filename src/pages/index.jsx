@@ -63,10 +63,12 @@ const IndexButton = styled.button`
   animation: fadeIn 2s;
   border-radius: 5vh;
   border: none;
-  background-color: black;
+  background-color: white;
   font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
   padding: 1rem 2rem;
-  color: white;
+  color: black;
   font-family: "Bebas Neue", sans-serif;
   transition: opacity 0.3s;
 

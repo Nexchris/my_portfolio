@@ -59,15 +59,23 @@ const Button = styled.button`
   border-radius: 5vh;
   border: none;
   margin-top: 4vh;
-  background-color: black;
+  background-color: white;
   font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
   padding: 1rem 2rem;
-  color: white;
+  color: black;
   font-family: "Bebas Neue", sans-serif;
   transition: opacity 0.3s;
+  display: none;
 
   &:hover {
     opacity: 0.8;
+  }
+
+  
+    @media (max-width: 1024px) {
+    display:block;
   }
 `;
 
@@ -349,7 +357,7 @@ function Aboutme() {
                 <Title2>{t('aboutme.section4.title')}</Title2>
                 <Content2>
                   {formatContent(t('aboutme.section4.content'))}
-                  <Button onClick={handleLeft}>{t('aboutme.section4.button')}</Button>
+                  <Button onClick={handleRight}>{t('aboutme.section4.button')}</Button>
                 </Content2>
               </StorytellingList>
             </ContentContainer>

@@ -33,7 +33,8 @@
     "contact": "Contact Me"
   },
   "skills": {
-          "title": "Skills"
+          "title": "Skills",
+          "project":"My Projets"
         },
         "project": {
           "title": "My Projects"
