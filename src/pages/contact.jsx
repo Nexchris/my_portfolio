@@ -19,16 +19,18 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   width: 100vw;
   text-align: center;
   padding: 20px;
   box-sizing: border-box;
-    @media (max-width: 500px) {
-    height: auto;
-    overflow:scroll;
+  overflow: auto; /* Assurer que le conteneur peut défiler */
+  
+  @media (max-width: 1200px) {
+  height: 93vh;
+        overflow-x: auto;
   }
 `;
+
 
 const Title = styled.div`
   color: white;
@@ -48,6 +50,9 @@ const Text = styled.div`
   font-size: 2vw;
   @media (max-width: 500px) {
     font-size: 2rem;
+  }
+       @media (min-width: 501px) and (max-width:1200px) {
+    font-size:4vh;
   }
 `;
 
@@ -97,6 +102,9 @@ const Textarea = styled.textarea`
   font-size: 1rem;
   box-sizing: border-box;
   resize: none;
+    @media (min-width: 501px) and (max-width:1200px) {
+    height:30vh;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -117,7 +125,7 @@ const SubmitButton = styled.button`
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 1600px) {
     font-size: 1.5rem;
     background-color: white;
     color: black;
@@ -128,11 +136,10 @@ const Image = styled.img`
   width: 50%;
 `;
 
-const NavButton = styled.button`
+const NavButton = styled.div`
   cursor: pointer;
   border-radius: 50%;
   border: none;
-  background-color: black;
   font-size: 2rem;
   padding: 1rem;
   color: white;
@@ -282,8 +289,8 @@ function Contact() {
   
       {!isSending && !isSent && (
         <Navflex>
-          <NavButton onClick={handleLeft}>&larr;</NavButton>
-          <NavButton onClick={handleRight}>&rarr;</NavButton>
+        <NavButton onClick={handleLeft}>◀︎</NavButton>
+        <NavButton onClick={handleRight}>▶︎</NavButton>
         </Navflex>
       )}
     </Container>
