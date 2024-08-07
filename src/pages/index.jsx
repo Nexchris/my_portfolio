@@ -41,7 +41,7 @@ const IndexTitle = styled.h1`
   font-family: "Unbounded", sans-serif;
   color: white;
   width: 55vw;
-  animation: bounceIn 1s;
+  animation: bounceIn 2s;
 
   @media (max-width: 499px) {
     font-size: 2rem;
@@ -78,7 +78,7 @@ const IndexButton = styled.button`
 `;
 
 const Tip = styled.div`
-animation: fadeIn 4s;
+animation: fadeIn 5s;
   margin: 0;
   position: absolute;
   top: 80%;

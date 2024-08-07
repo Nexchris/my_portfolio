@@ -58,7 +58,6 @@ const Button = styled.button`
   animation: fadeIn 2s;
   border-radius: 5vh;
   border: none;
-  margin-top: 4vh;
   background-color: white;
   font-size: 2rem;
   font-weight: bold;
@@ -67,16 +66,18 @@ const Button = styled.button`
   color: black;
   font-family: "Bebas Neue", sans-serif;
   transition: opacity 0.3s;
+  position: relative; // Utiliser position absolue pour le centrage
+  top: 50%; // Positionner verticalement au centre
+  left: 50%; // Positionner horizontalement au centre
+  transform: translate(-50%, -35%); // Ajuster pour centrer exactement
   display: none;
 
   &:hover {
     opacity: 0.8;
   }
 
-  
-    @media (max-width: 1024px) {
-    display:block;
-     margin-left: 15vw;
+  @media (max-width: 1024px) {
+    display: block;
   }
 `;
 

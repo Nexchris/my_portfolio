@@ -1,19 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Menu from './pages/menu';
 import Background from './pages/background';
-
 import Index from './pages/index';
 import Aboutme from './pages/aboutme';
 import Skills from './pages/skills';
-import Project from './pages/project'
+import Project from './pages/project';
 import Contact from './pages/contact';
-
 import { Squash as Hamburger } from 'hamburger-react';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import './i18n'; // Importer la configuration i18next
 import { useTranslation } from 'react-i18next'; // Importer le hook useTranslation
+
+// Animation pour le fondu de l'écran noir
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+// Style du conteneur noir
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: ${props => (props.visible ? 1 : 0)};
+  transition: opacity 1s ease;
+  animation: ${props => !props.visible && css`${fadeOut} 1s ease forwards`};
+  z-index: 10000; // Assurez-vous que l'overlay est au-dessus de tout
+  display: ${props => (props.hidden ? 'none' : 'block')};
+`;
 
 const HamburgerContainer = styled.div`
   margin-left: 2vw;
@@ -68,6 +91,8 @@ const GlobalContainer = styled.div`
 
 function App() {
   const [isOpen, setOpen] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(true);
+  const [overlayHidden, setOverlayHidden] = useState(false);
   const { t, i18n } = useTranslation(); // Utiliser le hook useTranslation
 
   const changeLanguage = () => {
@@ -75,9 +100,25 @@ function App() {
     i18n.changeLanguage(newLang);
   };
 
+  useEffect(() => {
+    // Cacher l'overlay après 1 seconde pour l'animation
+    const timer = setTimeout(() => {
+      setOverlayVisible(false);
+      // Cacher le overlay après l'animation
+      setTimeout(() => {
+        setOverlayHidden(true);
+      }, 1000); // Doit correspondre à la durée de l'animation
+    }, 500); // Ajustez le délai si nécessaire
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Router>
       <GlobalContainer>
+        {/* Overlay Noir */}
+        <Overlay visible={overlayVisible} hidden={overlayHidden} />
+
         <HamburgerContainer>
           <Hamburger
             size={48}
@@ -100,7 +141,6 @@ function App() {
             <Route path="/skills" element={<Skills />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/project" element={<Project />} />
-            {/* Ajoutez d'autres routes ici */}
           </Routes>
         </MainContent>
       </GlobalContainer>
