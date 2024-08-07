@@ -36,7 +36,6 @@ const Container = styled.div`
   text-align: center;
   position: relative;
 `;
-
 const Case = styled.div`
   display: flex;
   justify-content: center;
@@ -46,11 +45,16 @@ const Case = styled.div`
   height: 8vh;
   border: 1px solid white;
 
-  @media (max-width: 500px) {
+  @media (max-width: 599px) {
     width: 70vw;
     margin: 10px 0; // Ajouter de l'espace entre les éléments en mode mobile
   }
+
+  @media (min-width: 600px) and (max-width: 1199px) {
+    width: 40vw;
+  }
 `;
+
 
 const Casetitle = styled.h1`
   margin: 0;
@@ -61,6 +65,8 @@ const Casetitle = styled.h1`
   @media (max-width: 500px) {
     font-size: 3vh;
   }
+
+  
 `;
 
 const Title = styled.div`
@@ -74,6 +80,10 @@ const Title = styled.div`
 
   @media (max-width: 500px) {
     font-size: 4rem;
+  }
+
+    @media (min-width: 501px) and (max-width: 1199px) {
+     font-size: 5vh;
   }
 `;
 
@@ -113,7 +123,7 @@ const Navflex = styled.div`
 `;
 
 const Allcasecontainer = styled.div`
-  @media (max-width: 500px) {
+  @media (max-width: 599px) {
     overflow-y: scroll; // Permettre le défilement vertical
     height: 60vh; // Hauteur de la zone de défilement
   }
@@ -122,7 +132,7 @@ const Allcasecontainer = styled.div`
 const CaseContainer = styled.div`
   display: flex;
 
-  @media (max-width: 500px) {
+  @media (max-width: 599px) {
     display: block;
   }
 `;
@@ -151,8 +161,13 @@ const Button = styled.button`
   }
 
   @media (max-width: 1024px) {
+transform: translate(0%, 20%);
+  top:0;
+  left:0;
     display: block;
+     position: relative;
   }
+
 `;
 
 function Skills() {
@@ -178,7 +193,13 @@ function Skills() {
   }, [navigate]);
 
 
- 
+  const handleSpace = useCallback((event) => {
+    if (event.key === ' ' || event.key === 'Enter') {
+      handleRight();
+    }
+  }, [handleRight]);
+
+  window.addEventListener('keydown', handleSpace);
 
   useEffect(() => {
     const handleKeyDown = (event) => {

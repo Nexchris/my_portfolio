@@ -13,6 +13,7 @@ import styled, { keyframes, css } from 'styled-components';
 import './i18n'; // Importer la configuration i18next
 import { useTranslation } from 'react-i18next'; // Importer le hook useTranslation
 
+
 // Animation pour le fondu de l'écran noir
 const fadeOut = keyframes`
   from {
@@ -78,8 +79,6 @@ const BackgroundWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: -1; // Place le fond derrière tout le contenu
-  transition: opacity ${props => (props.isOpen ? '0.3s' : '0s')} ease;
-  opacity: ${props => (props.isOpen ? 0 : 1)};
 `;
 
 const GlobalContainer = styled.div`

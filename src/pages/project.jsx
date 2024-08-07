@@ -226,11 +226,11 @@ function Project() {
   }, [navigate]);
 
   const handleSpace = useCallback((event) => {
-    if (event.key === ' ' || event.key === 'Space') {
+    if (event.key === ' ' || event.key === 'Enter') {
       handleRight();
     }
   }, [handleRight]);
-  
+
   window.addEventListener('keydown', handleSpace);
 
   const handleNextProject = () => {

@@ -78,6 +78,11 @@ const Button = styled.button`
 
   @media (max-width: 1024px) {
     display: block;
+     position: relative;
+  }
+    @media (min-width: 750px) and (max-width: 1024px) {
+    font-size: 3rem;
+        padding: 1rem 5rem;
   }
 `;
 
@@ -86,6 +91,7 @@ const ContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 5rem;
+
 `;
 
 const Navflex = styled.div`
@@ -122,6 +128,11 @@ const ScrollContainer = styled.div`
 
   @media (max-width: 1199px) {
     display: none;
+  }
+
+   @media (min-width: 1200px) and (max-width: 1600px)  {
+    right: 3em;
+    top: 27%;
   }
 `;
 
@@ -178,11 +189,17 @@ const Content2 = styled.div`
 
 const StorytellingList = styled(Storytelling)`
   margin-bottom: 30vh;
+    @media (max-width: 1200px) {
+     margin-bottom: 15vh;
+  }
 `;
 
 const StorytellingList2 = styled(Storytelling)`
   margin-bottom: 30vh;
   font-size: 3rem;
+    @media (max-width: 1200px) {
+     margin-bottom: 15vh;
+  }
 `;
 
 const Title = styled.h1`
@@ -301,7 +318,7 @@ function Aboutme() {
   }, [scrollToPreviousSection, scrollToNextSection, handleLeft, handleRight]);
 
   const handleSpace = useCallback((event) => {
-    if ( event.key === 'Space') {
+    if ( event.key === 'Enter') {
       handleRight();
     }
   }, [handleRight]);
@@ -376,10 +393,10 @@ function Aboutme() {
           </Navflex>
 
           <ScrollContainer>
-            <ScrollButton onClick={() => scrollToSection('section1')}>■ About me</ScrollButton>
-            <ScrollButton onClick={() => scrollToSection('section2')}>■ Journey</ScrollButton>
-            <ScrollButton onClick={() => scrollToSection('section3')}>■ My Education</ScrollButton>
-            <ScrollButton onClick={() => scrollToSection('section4')}>■ Goals</ScrollButton>
+            <ScrollButton onClick={() => scrollToSection('section1')}>■ {t('aboutme.scroll1')}</ScrollButton>
+            <ScrollButton onClick={() => scrollToSection('section2')}>■ {t('aboutme.scroll2')}</ScrollButton>
+            <ScrollButton onClick={() => scrollToSection('section3')}>■ {t('aboutme.scroll3')}</ScrollButton>
+            <ScrollButton onClick={() => scrollToSection('section4')}>■ {t('aboutme.scroll4')}</ScrollButton>
           </ScrollContainer>
         </MainContainer>
       )}

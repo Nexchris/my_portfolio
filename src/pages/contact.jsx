@@ -24,6 +24,10 @@ const Container = styled.div`
   text-align: center;
   padding: 20px;
   box-sizing: border-box;
+    @media (max-width: 500px) {
+    height: auto;
+    overflow:scroll;
+  }
 `;
 
 const Title = styled.div`
@@ -194,7 +198,7 @@ function Contact() {
   }, [navigate]);
 
   const handleSpace = useCallback((event) => {
-    if (event.key === ' ' || event.key === 'Space') {
+    if (event.key === ' ' || event.key === 'Enter') {
       handleRight();
     }
   }, [handleRight]);

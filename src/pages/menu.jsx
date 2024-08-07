@@ -28,6 +28,7 @@ const BackgroundVideo = styled.video`
   height: 100%;
   object-fit: cover;  // Assure que la vidéo couvre tout le conteneur sans déformation
   z-index: -1;  // Place la vidéo derrière le contenu
+    filter: blur(12px);  // Applique un flou à la vidéo
 `;
 
 const Text = styled.h1`
@@ -41,7 +42,7 @@ const Text = styled.h1`
   cursor: pointer;
 
   &:hover {
-    opacity: 0.8;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   }
 
   @media (max-width: 500px) {
@@ -55,7 +56,7 @@ const Overlay = styled.div`
   top: 0%;
   width: 100vw;
   height: 100vh;
-  opacity: 0.8;
+  opacity: 0.9;
 `;
 
 const Menu = ({ onClose }) => {

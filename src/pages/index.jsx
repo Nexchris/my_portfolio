@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import 'animate.css';
-import { useTranslation } from 'react-i18next'; // Importer le hook useTranslation
+import 'animate.css'; // Assurez-vous que cette ligne est bien incluse
+import { useTranslation } from 'react-i18next';
 
 const zoomOut = keyframes`
   from {
@@ -41,7 +41,7 @@ const IndexTitle = styled.h1`
   font-family: "Unbounded", sans-serif;
   color: white;
   width: 55vw;
-  animation: bounceIn 2s;
+  animation: animate__bounceIn 2s; // Assurez-vous que les animations sont bien importées et définies
 
   @media (max-width: 499px) {
     font-size: 2rem;
@@ -60,7 +60,7 @@ const IndexTitle = styled.h1`
 `;
 
 const IndexButton = styled.button`
-  animation: fadeIn 2s;
+  animation: animate__fadeIn 2s; // Assurez-vous que les animations sont bien importées et définies
   border-radius: 5vh;
   border: none;
   background-color: white;
@@ -78,7 +78,7 @@ const IndexButton = styled.button`
 `;
 
 const Tip = styled.div`
-animation: fadeIn 5s;
+  animation: animate__fadeIn 5s; // Assurez-vous que les animations sont bien importées et définies
   margin: 0;
   position: absolute;
   top: 80%;
@@ -87,23 +87,30 @@ animation: fadeIn 5s;
   color: white;
   width: 100vw;
 
-   @media (max-width: 1919px) {
+  @media (max-width: 1919px) {
     display: none;
   }
 `;
 
 function Index() {
-  const { t } = useTranslation(); // Utiliser le hook useTranslation
+  const { t } = useTranslation();
   const [animate, setAnimate] = useState(false);
   const [hideContent, setHideContent] = useState(false);
   const navigate = useNavigate();
 
-
-  const handleClick = useCallback(() => {
+  const handleRight = useCallback(() => {
     setAnimate(true);
     setTimeout(() => {
       setHideContent(true);
       navigate('/aboutme');
+    }, 500); // Assurez-vous que cette durée est égale à la durée de l'animation
+  }, [navigate]);
+
+  const handleLeft = useCallback(() => {
+    setAnimate(true);
+    setTimeout(() => {
+      setHideContent(true);
+      navigate('/contact');
     }, 500); // Assurez-vous que cette durée est égale à la durée de l'animation
   }, [navigate]);
 
@@ -118,8 +125,10 @@ function Index() {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === ' ' || event.key === 'Enter') {
-        handleClick();
+      if (event.key === 'ArrowLeft') {
+        handleLeft();
+      } else if (event.key === 'ArrowRight') {
+        handleRight();
       }
     };
 
@@ -128,7 +137,7 @@ function Index() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleClick]);
+  }, [handleLeft, handleRight]);
 
   return (
     <Indexcontainer className={animate ? 'animate' : ''} hideContent={hideContent}>
@@ -136,7 +145,7 @@ function Index() {
       <br />
       <IndexTitle>{t('index.title')}</IndexTitle>
       <br />
-      <IndexButton onClick={handleClick}>{t('index.button')}</IndexButton>
+      <IndexButton onClick={handleRight}>{t('index.button')}</IndexButton>
       <Tip>{t('index.tip')}</Tip>
     </Indexcontainer>
   );
