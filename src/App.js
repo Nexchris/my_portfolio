@@ -107,7 +107,7 @@ function App() {
       // Cacher le overlay après l'animation
       setTimeout(() => {
         setOverlayHidden(true);
-      }, 1000); // Doit correspondre à la durée de l'animation
+      }, 1500); // Doit correspondre à la durée de l'animation
     }, 500); // Ajustez le délai si nécessaire
 
     return () => clearTimeout(timer);

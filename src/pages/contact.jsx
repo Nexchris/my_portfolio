@@ -193,6 +193,14 @@ function Contact() {
     }, 1000); // Attendre la fin de l'animation (1s)
   }, [navigate]);
 
+  const handleSpace = useCallback((event) => {
+    if (event.key === ' ' || event.key === 'Space') {
+      handleRight();
+    }
+  }, [handleRight]);
+  
+  window.addEventListener('keydown', handleSpace);
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'ArrowLeft') {

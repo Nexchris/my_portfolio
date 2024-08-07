@@ -89,11 +89,11 @@ const Icon = styled.img`
 `;
 
 
-const NavButton = styled.button`
+const NavButton = styled.div`
   cursor: pointer;
   border-radius: 50%;
   border: none;
-  background-color: black;
+
   font-size: 2rem;
   padding: 1rem;
   color: white;
@@ -132,7 +132,6 @@ const Button = styled.button`
   animation: fadeIn 2s;
   border-radius: 5vh;
   border: none;
-  margin-top: 4vh;
   background-color: white;
   font-size: 2rem;
   font-weight: bold;
@@ -141,17 +140,20 @@ const Button = styled.button`
   color: black;
   font-family: "Bebas Neue", sans-serif;
   transition: opacity 0.3s;
-  display:none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 35%);
+  display: none;
 
   &:hover {
     opacity: 0.8;
   }
 
-    @media (max-width: 1024px) {
-    display:block;
+  @media (max-width: 1024px) {
+    display: block;
   }
 `;
-
 
 function Skills() {
   const { t } = useTranslation();
@@ -175,6 +177,9 @@ function Skills() {
     }, 500); // Attendre la fin de l'animation (1s)
   }, [navigate]);
 
+
+ 
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'ArrowLeft') {
@@ -184,11 +189,17 @@ function Skills() {
       }
     };
 
+   
+  
+
+
+    
     window.addEventListener('keydown', handleKeyDown);
 
     // Nettoyage de l'écouteur d'événements
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+
     };
   }, [handleLeft, handleRight]);
 
@@ -276,8 +287,8 @@ function Skills() {
       </Allcasecontainer>
       <Button onClick={handleRight}>{t('skills.project')}</Button>
       <Navflex>
-        <NavButton onClick={handleLeft}>&larr;</NavButton>
-        <NavButton onClick={handleRight}>&rarr;</NavButton>
+      <NavButton onClick={handleLeft}>◀︎</NavButton>
+      <NavButton onClick={handleRight}>▶︎</NavButton>
       </Navflex>
     </Container>
   );

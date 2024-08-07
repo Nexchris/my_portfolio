@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
+import { useNavigate } from 'react-router-dom';
 import Index from './index';
 import 'animate.css';
-import { useTranslation } from 'react-i18next'; // Importer le hook useTranslation
+import { useTranslation } from 'react-i18next';
 
 // Animation fadeOutLeft
 const fadeOut = keyframes`
-from {
+  from {
     opacity: 1;
   }
   to {
@@ -44,13 +44,13 @@ const MainContainer = styled.div`
 const ScrollableContainer = styled.div`
   width: 60vw;
   height: 80vh;
-  overflow-y: ${(props) => (props.isMobile ? 'auto' : 'hidden')}; /* Défilement libre pour mobile */
+  overflow-y: ${(props) => (props.isMobile ? 'auto' : 'hidden')};
   padding: 1rem;
   margin-bottom: 2rem;
   touch-action: pan-y;
- 
-       @media (max-width: 1199px) {
-   width:90vw;
+
+  @media (max-width: 1199px) {
+    width: 90vw;
   }
 `;
 
@@ -66,10 +66,10 @@ const Button = styled.button`
   color: black;
   font-family: "Bebas Neue", sans-serif;
   transition: opacity 0.3s;
-  position: relative; // Utiliser position absolue pour le centrage
-  top: 50%; // Positionner verticalement au centre
-  left: 50%; // Positionner horizontalement au centre
-  transform: translate(-50%, 35%); // Ajuster pour centrer exactement
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 35%);
   display: none;
 
   &:hover {
@@ -92,19 +92,20 @@ const Navflex = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 2rem;
-       @media (max-width: 1199px) {
-display: none;
+
+  @media (max-width: 1199px) {
+    display: none;
   }
 `;
 
-const NavButton = styled.button`
+const NavButton = styled.div`
   border-radius: 50%;
   border: none;
-  background-color: black;
   font-size: 2rem;
   padding: 1rem;
   color: white;
   margin: 0 1rem;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.8;
@@ -113,32 +114,31 @@ const NavButton = styled.button`
 
 const ScrollContainer = styled.div`
   position: fixed;
-  right: 1rem;
+  right: 10em;
   top: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
-    @media (max-width: 1199px) {
-   display:none;
+
+  @media (max-width: 1199px) {
+    display: none;
   }
 `;
 
-const ScrollButton = styled.button`
-  background: black;
+const ScrollButton = styled.div`
+  background: transparent;
   color: white;
-  border: none;
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  font-size: 1.5rem;
-  margin: 0.5rem 0;
+  cursor: pointer;
+  font-family: "Unbounded", sans-serif;
+  font-size: 1.2rem;
+  margin: 2.5rem 0;
+  opacity: 1;
 
   &:hover {
-    opacity: 0.8;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   }
 `;
 
@@ -153,10 +153,11 @@ const Storytelling = styled.div`
 const Content = styled.div`
   font-size: 4rem;
   font-weight: 300;
+
   @media (max-width: 500px) {
     font-size: 1.7rem;
-    
   }
+
   @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 3rem;
   }
@@ -165,15 +166,15 @@ const Content = styled.div`
 const Content2 = styled.div`
   font-size: 2.1rem;
   font-weight: 300;
+
   @media (max-width: 500px) {
     font-size: 1.3rem;
   }
+
   @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 1.7rem;
   }
 `;
-
-
 
 const StorytellingList = styled(Storytelling)`
   margin-bottom: 30vh;
@@ -188,11 +189,10 @@ const Title = styled.h1`
   margin: 0;
   font-size: 8rem;
   margin-top: 5vh;
-   margin-bottom: 10vh;
+  margin-bottom: 10vh;
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: normal;
-
 
   @media (max-width: 399px) {
     font-size: 5rem;
@@ -213,13 +213,14 @@ const Title = styled.h1`
 `;
 
 const Title2 = styled(Title)`
-  margin: 0;
   font-size: 6rem;
-    margin-bottom: 5vh;
+  margin-bottom: 5vh;
+
   @media (max-width: 500px) {
     font-size: 4rem;
     margin-bottom: 2vh;
   }
+
   @media (min-width: 501px) and (max-width: 1650px) {
     font-size: 5rem;
   }
@@ -228,7 +229,6 @@ const Title2 = styled(Title)`
 const scrollToSection = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
-
 
 // Fonction pour remplacer les sauts de ligne par <br />
 const formatContent = (text) => {
@@ -239,9 +239,6 @@ const formatContent = (text) => {
     </React.Fragment>
   ));
 };
-
-
-
 
 function Aboutme() {
   const { t } = useTranslation();
@@ -303,15 +300,23 @@ function Aboutme() {
     }
   }, [scrollToPreviousSection, scrollToNextSection, handleLeft, handleRight]);
 
+  const handleSpace = useCallback((event) => {
+    if ( event.key === 'Space') {
+      handleRight();
+    }
+  }, [handleRight]);
+
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleSpace);
     window.addEventListener('resize', () => setIsMobile(window.innerWidth <= 768));
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', handleSpace);
       window.removeEventListener('resize', () => setIsMobile(window.innerWidth <= 768));
     };
-  }, [handleKeyDown]);
+  }, [handleKeyDown, handleSpace]);
 
   useEffect(() => {
     if (animate) {
@@ -366,15 +371,15 @@ function Aboutme() {
           </ScrollableContainer>
 
           <Navflex>
-            <NavButton onClick={handleLeft}>&larr;</NavButton>
-            <NavButton onClick={handleRight}>&rarr;</NavButton>
+            <NavButton onClick={handleLeft}>◀︎</NavButton>
+            <NavButton onClick={handleRight}>▶︎</NavButton>
           </Navflex>
 
           <ScrollContainer>
-            <ScrollButton onClick={() => scrollToSection('section1')}>1</ScrollButton>
-            <ScrollButton onClick={() => scrollToSection('section2')}>2</ScrollButton>
-            <ScrollButton onClick={() => scrollToSection('section3')}>3</ScrollButton>
-            <ScrollButton onClick={() => scrollToSection('section4')}>4</ScrollButton>
+            <ScrollButton onClick={() => scrollToSection('section1')}>■ About me</ScrollButton>
+            <ScrollButton onClick={() => scrollToSection('section2')}>■ Journey</ScrollButton>
+            <ScrollButton onClick={() => scrollToSection('section3')}>■ My Education</ScrollButton>
+            <ScrollButton onClick={() => scrollToSection('section4')}>■ Goals</ScrollButton>
           </ScrollContainer>
         </MainContainer>
       )}

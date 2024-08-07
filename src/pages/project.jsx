@@ -70,7 +70,7 @@ const ProjectContainer = styled.div`
   width: 50vw;
   height: 25vh;
   position: absolute;
-  top: 21%;
+  top: 5%;
   left: 40%;
   text-align: center;
   @media (max-width: 500px) {
@@ -118,6 +118,7 @@ const IndexButton = styled.button`
   background-color: white;
   font-size: 2rem;
   padding: 1rem 2rem;
+      margin-right: 3vw;
   color: black;
   font-family: "Bebas Neue", sans-serif;
   transition: opacity 0.3s;
@@ -180,13 +181,12 @@ const Navflex = styled.div`
   }
 `;
 
-const NavButton = styled.button`
+const NavButton = styled.div`
   border-radius: 50%;
   border: none;
-  background-color: white;
   font-size: 2rem;
   padding: 1rem;
-  color: black;
+  color: white;
   margin: 0 1rem;
   cursor: pointer;
 
@@ -224,6 +224,14 @@ function Project() {
       navigate('/contact');
     }, 1000);
   }, [navigate]);
+
+  const handleSpace = useCallback((event) => {
+    if (event.key === ' ' || event.key === 'Space') {
+      handleRight();
+    }
+  }, [handleRight]);
+  
+  window.addEventListener('keydown', handleSpace);
 
   const handleNextProject = () => {
     setSelectedProjectIndex((prevIndex) => (prevIndex + 1) % projects.length);
@@ -299,8 +307,8 @@ function Project() {
           ) : null
         ))}
         <Navflex>
-          <NavButton onClick={handleLeft}>&larr;</NavButton>
-          <NavButton onClick={handleRight}>&rarr;</NavButton>
+        <NavButton onClick={handleLeft}>◀︎</NavButton>
+        <NavButton onClick={handleRight}>▶︎</NavButton>
         </Navflex>
       </ProjectFlex>
     </Body>
