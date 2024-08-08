@@ -30,7 +30,7 @@ const Container = styled.div`
   width: 100vw;
   text-align: left;
   position: relative;
-  @media (max-width: 1000px) {
+  @media (max-width: 1199px) {
     text-align: center;
     
   }
@@ -51,8 +51,9 @@ const Title = styled.div`
       margin: 0;
   }
 
-  @media (min-width: 501) and (max-width:1199) {
-       font-size: 6rem;
+  @media (min-width: 501px) and (max-width:1199px) {
+       font-size: 4rem;
+        margin-left: 5vw;
   }
 
      @media (min-width: 1200px) and (max-width:1400px) {
@@ -87,7 +88,11 @@ const ProjectContainer = styled.div`
   top: 5%;
   left: 40%;
   text-align: center;
-  @media (max-width: 1199px) {
+  @media (max-width: 539px) {
+    transform: translate(-40%, 70%);
+    width: 100vw;
+  }
+     @media (min-width: 500px) and (max-width:1199px) {
     transform: translate(-40%, 70%);
     width: 100vw;
   }
@@ -235,7 +240,7 @@ function Project() {
   const [animationName, setAnimationName] = useState('');
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
   const { t } = useTranslation();
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1200);
 
   const projects = [
     { id: 'BAM', title: 'La Boite à Momes', image: BAM, content1: t('project.section1.content1'), content2: t('project.section1.content2'), button: t('project.button1'), button0: t('project.button0'), link: 'https://www.boitamomes.fr/' },
@@ -277,7 +282,7 @@ function Project() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 500);
+      setIsMobile(window.innerWidth < 1200);
     };
 
     window.addEventListener('resize', handleResize);

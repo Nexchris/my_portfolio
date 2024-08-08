@@ -60,10 +60,14 @@ const Casetitle = styled.h1`
   margin: 0;
   font-family: "Unbounded", sans-serif;
   font-optical-sizing: auto;
-  font-size: 3vh;
+  font-size: 2.5vh;
 
   @media (max-width: 500px) {
     font-size: 3vh;
+  }
+
+    @media (min-width: 501px) and (max-width: 1199px) {
+     font-size: 2vh;
   }
 
   

@@ -49,8 +49,8 @@ const ScrollableContainer = styled.div`
   margin-bottom: 2rem;
   touch-action: pan-y;
 
-  @media (max-width: 1199px) {
-    width: 90vw;
+  @media (max-width: 1600px) {
+    overflow: auto;
   }
 `;
 
