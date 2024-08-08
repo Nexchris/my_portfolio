@@ -87,8 +87,7 @@ const GlobalContainer = styled.div`
   height: 100vh;
   width: 100vw;
    @media (max-width: 1000px) {
-   height:auto;
-   overflow:scroll;
+   overflow:scroll
     
   }
 `;
