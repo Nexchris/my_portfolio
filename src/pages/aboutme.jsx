@@ -102,6 +102,7 @@ const Navflex = styled.div`
 
   @media (max-width: 1199px) {
     display: flex;
+    position: block;
   }
 `;
 

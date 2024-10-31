@@ -196,6 +196,7 @@ const CVButtonflex = styled.div`
   }
 `
 
+
 function Skills() {
   const { t } = useTranslation();
   const navigate = useNavigate();
