@@ -70,7 +70,17 @@ const IndexButton = styled.button`
   padding: 1rem 2rem;
   color: black;
   font-family: "Bebas Neue", sans-serif;
-  transition: opacity 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: black; /* Bleu foncé au survol */
+    color: white;
+    transform: scale(1.2); /* Légère mise en relief au survol */
+  }
+
+  &:active {
+    transform: scale(0.95); /* Effet de clic */
+  }
 
   &:hover {
     opacity: 0.8;

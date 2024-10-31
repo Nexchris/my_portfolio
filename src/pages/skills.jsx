@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import 'animate.css';
-import { useTranslation } from 'react-i18next'; 
+import { useTranslation } from 'react-i18next';
 
 import HTML from '../images/html.webp';
 import CSS from '../images/css.png';
@@ -13,11 +13,18 @@ import Jquery from "../images/jquery.webp";
 import Wordpress from '../images/wordpress.png';
 import Figma from '../images/figma.png';
 import PHP from '../images/php.png';
-import MYSQL from '../images/mysql.svg';
+import Python from '../images/python.jpg';
+import MYSQL from '../images/mysql.png';
 import ReactIcon from '../images/react.png';
+import ReactNative from '../images/reactnative.png'
 import Symfony from '../images/symfony.png';
 import Firebase from '../images/firebase.png';
+import Git from '../images/git.png'
+import Github from '../images/github.png';
+import Jimdo from '../images/jimdo.png';
+import CV from '../images/CV.png';
 
+// Animation styles
 const animationStyles = css`
   animation: ${props => props.animationName} 1s;
 `;
@@ -26,121 +33,90 @@ const Container = styled.div`
   animation: fadeIn 2s;
   ${props => props.isFadingOut && animationStyles};
   color: white;
-  display: flex;
-  font-family: cursive;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 80vh;
   width: 100vw;
   text-align: center;
   position: relative;
-`;
-const Case = styled.div`
-  display: flex;
-  justify-content: center;
+   @media (min-width: 300px) and (max-width: 500px) {
+       font-size: 1.5rem;
+  }
+`
+;
+
+const CVContainer = styled.div`
+display: flex;
+flex-direction: column;
   align-items: center;
-  background-color: black;
-  width: 20vw;
-  height: 8vh;
-  border: 1px solid white;
-
-  @media (max-width: 599px) {
-    width: 70vw;
-    margin: 10px 0; // Ajouter de l'espace entre les éléments en mode mobile
+  width: 50%;
+  padding: 2rem;
+  padding-top: 0;
+  @media (max-width: 768px) {
+    width: 100%;
   }
-
-  @media (min-width: 600px) and (max-width: 1199px) {
-    width: 40vw;
+     @media (min-width: 300px) and (max-width: 500px) {
+       padding: 0;
   }
 `;
 
-
-const Casetitle = styled.h1`
-  margin: 0;
-  font-family: "Unbounded", sans-serif;
-  font-optical-sizing: auto;
-  font-size: 2.5vh;
-
-  @media (max-width: 500px) {
-    font-size: 3vh;
+const IconsContainer = styled.div`
+  flex-wrap: wrap;
+  justify-content: center;
+  width: auto;
+  @media (max-width: 768px) {
+    display: none;
   }
-
-    @media (min-width: 501px) and (max-width: 1199px) {
-     font-size: 2vh;
-  }
-
-  
 `;
 
 const Title = styled.div`
   color: white;
-  margin: 0;
-  font-size: 8rem;
-  margin-top: 5vh;
+  font-size: 4rem;
   font-family: "Bebas Neue", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-
   @media (max-width: 500px) {
-    font-size: 4rem;
+    font-size: 3rem;
   }
+`;
 
-    @media (min-width: 501px) and (max-width: 1199px) {
-     font-size: 5vh;
-  }
+const CVImage = styled.img`
+  width: 40%;
+  height: auto;
 `;
 
 const Icon = styled.img`
-  width: 15%;
-  margin: 10px;
-  cursor: pointer;
+  width: 5rem;
+  height: 5rem;
+  margin: 0.5rem;
   transition: transform 0.3s;
-
   &:hover {
+    transform: scale(1.1);
     opacity: 0.8;
   }
 `;
 
-
-const NavButton = styled.div`
-  cursor: pointer;
-  border-radius: 50%;
-  border: none;
-
-  font-size: 2rem;
-  padding: 1rem;
-  color: white;
-  margin: 0 1rem;
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
 const Navflex = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 2rem;
-   @media (max-width: 1024px) {
-    display:none;
+  position: absolute;
+  top:44rem;
+  left: 55rem;
+  @media (max-width: 1024px) {
+    display: none;
   }
 `;
 
-const Allcasecontainer = styled.div`
-  @media (max-width: 599px) {
-    overflow-y: scroll; // Permettre le défilement vertical
-    height: 60vh; // Hauteur de la zone de défilement
+const NavButton = styled.div`
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 2rem;
+  padding: 1rem;
+  color: white;
+  margin: 0 1rem;
+  &:hover {
+    opacity: 0.8;
   }
 `;
-
-const CaseContainer = styled.div`
-  display: flex;
-
-  @media (max-width: 599px) {
-    display: block;
-  }
-`;
-
 
 const Button = styled.button`
   animation: fadeIn 2s;
@@ -154,25 +130,71 @@ const Button = styled.button`
   color: black;
   font-family: "Bebas Neue", sans-serif;
   transition: opacity 0.3s;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 35%);
   display: none;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
   @media (max-width: 1024px) {
-transform: translate(0%, 20%);
-  top:0;
-  left:0;
-    display: block;
-     position: relative;
+  }
+`;
+
+const Pageflex = styled.div`
+  display: flex;
+   @media (min-width: 300px) and (max-width: 500px) {
+     display: block;
+  }
+`;
+
+
+const Skillflex = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Skilltext = styled.h1`
+  font-family: "Unbounded", sans-serif;
+  font-size:1.5rem;
+`
+const SkillInput = styled.input`
+border-radius: 1vw;
+    width: 20vw;
+    height: 3vh;
+    margin:1rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight:bold;
+      font-family: "Unbounded", sans-serif;
+`
+
+const CVButton = styled.button`
+  border-radius: 50px; /* Bouton arrondi */
+  padding: 0.5rem 1.5rem;
+  width:auto;
+  font-size: 1.5rem;
+  font-family: "Bebas Neue", sans-serif;
+  color: black;
+  background-color: white; /* Bleu modéré pour le fond */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  
+  &:hover {
+    background-color: black; /* Bleu foncé au survol */
+    color: white;
+    transform: scale(1.05); /* Légère mise en relief au survol */
   }
 
+  &:active {
+    transform: scale(0.95); /* Effet de clic */
+  }
+  margin: 1rem;
 `;
+
+const CVButtonflex = styled.div`
+ @media (min-width: 300px) and (max-width: 500px) {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+  }
+`
 
 function Skills() {
   const { t } = useTranslation();
@@ -180,12 +202,17 @@ function Skills() {
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [animationName, setAnimationName] = useState('fadeIn');
 
+  // State for the hovered icon name
+  const [hoveredIcon1, setHoveredIcon1] = useState('');
+  const [hoveredIcon2, setHoveredIcon2] = useState('');
+  const [hoveredIcon3, setHoveredIcon3] = useState('');
+
   const handleLeft = useCallback(() => {
     setAnimationName('fadeOut');
     setIsFadingOut(true);
     setTimeout(() => {
       navigate('/aboutme');
-    }, 1000); // Attendre la fin de l'animation (1s)
+    }, 1000);
   }, [navigate]);
 
   const handleRight = useCallback(() => {
@@ -193,17 +220,14 @@ function Skills() {
     setIsFadingOut(true);
     setTimeout(() => {
       navigate('/project');
-    }, 500); // Attendre la fin de l'animation (1s)
+    }, 500);
   }, [navigate]);
-
 
   const handleSpace = useCallback((event) => {
     if (event.key === ' ' || event.key === 'Enter') {
       handleRight();
     }
   }, [handleRight]);
-
-  window.addEventListener('keydown', handleSpace);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -214,106 +238,93 @@ function Skills() {
       }
     };
 
-   
-  
-
-
-    
     window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleSpace);
 
-    // Nettoyage de l'écouteur d'événements
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-
+      window.removeEventListener('keydown', handleSpace);
     };
-  }, [handleLeft, handleRight]);
+  }, [handleLeft, handleRight, handleSpace]);
+
+   // Fonction pour afficher le CV dans un nouvel onglet
+   const handleShowCV = () => {
+    window.open(CV, '_blank');
+  };
+
+  // Fonction pour télécharger le CV
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = CV;
+    link.download = 'Mon_CV.png'; // Nom du fichier téléchargé
+    link.click();
+  };
 
   return (
     <Container isFadingOut={isFadingOut} animationName={animationName}>
       <Title>{t('skills.title')}</Title>
-      <Allcasecontainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={HTML}></Icon>
-            <Casetitle>HTML5</Casetitle>
-          </Case>
 
-          <Case>
-            <Icon src={CSS}></Icon>
-            <Casetitle>CSS</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={JS}></Icon>
-            <Casetitle>JavaScript</Casetitle>
-          </Case>
+      <Pageflex>
+      <CVContainer>
+        <CVImage src={CV} alt="CV Image" />
+        <CVButtonflex>
+        <CVButton onClick={handleShowCV}>Afficher le CV</CVButton>
+        <CVButton onClick={handleDownloadCV}>Télécharger le fichier</CVButton>
+        <Button onClick={handleRight}>{t('skills.project')}</Button>
+        </CVButtonflex>
+      </CVContainer>
 
-          <Case>
-            <Icon src={NodeJS}></Icon>
-            <Casetitle>NodeJS</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={Typescript}></Icon>
-            <Casetitle>TypeScript</Casetitle>
-          </Case>
+        <Skillflex>
+          <Skilltext>Mes Compétences - Front-End</Skilltext>
+          <IconsContainer>
+            {[{src: HTML, name: 'HTML - Avancé'}, {src: CSS, name: 'CSS - Avancé'}, {src: JS, name: 'JavaScript - Intermédiaire'}, 
+              {src: Jquery, name: 'jQuery - Notions'}, {src: Typescript, name: 'TypeScript - Intermédiaire'}, {src: ReactIcon, name: 'React - Avancé'}, 
+              {src: ReactNative, name: 'React Native - Avancé'}].map((icon, index) => (
+              <Icon 
+                key={index} 
+                src={icon.src} 
+                alt="Skill Icon" 
+                onMouseEnter={() => setHoveredIcon1(icon.name)}
+                onMouseLeave={() => setHoveredIcon1('')}
+              />
+            ))}
+          </IconsContainer>
+          <SkillInput type="text" value={hoveredIcon1 ? `${hoveredIcon1}` : ''} readOnly />
 
-          <Case>
-            <Icon src={Jquery}></Icon>
-            <Casetitle>Jquery</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={Wordpress}></Icon>
-            <Casetitle>WordPress</Casetitle>
-          </Case>
+          <Skilltext>Mes Compétences - Back-End</Skilltext>
+          <IconsContainer>
+            {[{src: PHP, name: 'PHP - Intermédiaire'}, {src: NodeJS, name: 'NodeJS - Notions '}, {src: MYSQL, name: 'MySQL - Intermédiaire'}, 
+              {src: Python, name: 'Python - Notions'}, {src: Symfony, name: 'Symfony - Intermédiaire'}, {src: Firebase, name: 'Firebase - Avancé '}].map((icon, index) => (
+              <Icon 
+                key={index} 
+                src={icon.src} 
+                alt="Skill Icon" 
+                onMouseEnter={() => setHoveredIcon2(icon.name)}
+                onMouseLeave={() => setHoveredIcon2('')}
+              />
+            ))}
+          </IconsContainer>
+          <SkillInput type="text" value={hoveredIcon2 ? `${hoveredIcon2}` : ''} readOnly />
 
-          <Case>
-            <Icon src={Figma}></Icon>
-            <Casetitle>Figma</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={ReactIcon}></Icon>
-            <Casetitle>React</Casetitle>
-          </Case>
+          <Skilltext>Mes CMS et Outils</Skilltext>
+          <IconsContainer>
+            {[{src: Wordpress, name: 'Wordpress - Intermédiaire'}, {src: Git, name: 'Git - Intermédiaire'}, {src: Github, name: 'Github - Intermédiaire'}, {src: Figma, name: 'Figma - Avancé'}].map((icon, index) => (
+              <Icon 
+                key={index} 
+                src={icon.src} 
+                alt="Skill Icon" 
+                onMouseEnter={() => setHoveredIcon3(icon.name)}
+                onMouseLeave={() => setHoveredIcon3('')}
+              />
+            ))}
+          </IconsContainer>
+          <SkillInput type="text" value={hoveredIcon3? `${hoveredIcon3}` : ''} readOnly />
+        </Skillflex>
+      </Pageflex>
 
-          <Case>
-            <Icon src={ReactIcon}></Icon>
-            <Casetitle>React Native</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={PHP}></Icon>
-            <Casetitle>PHP</Casetitle>
-          </Case>
-
-          <Case>
-            <Icon src={MYSQL}></Icon>
-            <Casetitle>MySQL</Casetitle>
-          </Case>
-        </CaseContainer>
-        <CaseContainer>
-          <Case>
-            <Icon src={Symfony}></Icon>
-            <Casetitle>Symfony</Casetitle>
-          </Case>
-
-          <Case>
-            <Icon src={Firebase}></Icon>
-            <Casetitle>Firebase</Casetitle>
-          </Case>
-        </CaseContainer>
-      </Allcasecontainer>
-      <Button onClick={handleRight}>{t('skills.project')}</Button>
       <Navflex>
-      <NavButton onClick={handleLeft}>◀︎</NavButton>
-      <NavButton onClick={handleRight}>▶︎</NavButton>
+        <NavButton onClick={handleLeft}>◀︎</NavButton>
+        <NavButton onClick={handleRight}>▶︎</NavButton>
       </Navflex>
     </Container>
   );

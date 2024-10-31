@@ -39,6 +39,9 @@ const MainContainer = styled.div`
   text-align: center;
   opacity: ${(props) => (props.hideContent ? 0 : 1)};
   visibility: ${(props) => (props.hideContent ? 'hidden' : 'visible')};
+  @media (max-width: 1600px) {
+  margin-top: 1.5vh;
+  }
 `;
 
 const ScrollableContainer = styled.div`
@@ -49,8 +52,15 @@ const ScrollableContainer = styled.div`
   margin-bottom: 2rem;
   touch-action: pan-y;
 
+   @media (max-width: 1600px) {
+    overflow: auto;
+    height:30rem;
+    width: 
+  }
+
   @media (max-width: 1600px) {
     overflow: auto;
+    height:70vh;
   }
 `;
 
@@ -75,15 +85,6 @@ const Button = styled.button`
   &:hover {
     opacity: 0.8;
   }
-
-  @media (max-width: 1024px) {
-    display: block;
-     position: relative;
-  }
-    @media (min-width: 750px) and (max-width: 1024px) {
-    font-size: 3rem;
-        padding: 1rem 5rem;
-  }
 `;
 
 const ContentContainer = styled.div`
@@ -100,7 +101,7 @@ const Navflex = styled.div`
   margin-top: 2rem;
 
   @media (max-width: 1199px) {
-    display: none;
+    display: flex;
   }
 `;
 
@@ -165,8 +166,9 @@ const Content = styled.div`
   font-size: 4rem;
   font-weight: 300;
 
-  @media (max-width: 500px) {
-    font-size: 1.7rem;
+
+   @media (min-width: 300px) and (max-width: 500px) {
+       font-size: 1.5rem;
   }
 
   @media (min-width: 501px) and (max-width: 1650px) {
@@ -179,7 +181,7 @@ const Content2 = styled.div`
   font-weight: 300;
 
   @media (max-width: 500px) {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   @media (min-width: 501px) and (max-width: 1650px) {
@@ -212,13 +214,13 @@ const Title = styled.h1`
   font-style: normal;
 
   @media (max-width: 399px) {
-    font-size: 5rem;
+    font-size: 3rem;
     margin-top: 5vh;
     margin-bottom: 2vh;
   }
 
   @media (min-width: 401px) and (max-width: 500px) {
-    font-size: 5rem;
+    font-size: 3.5rem;
     margin-top: 5vh;
     margin-bottom: 2vh;
   }
@@ -234,7 +236,7 @@ const Title2 = styled(Title)`
   margin-bottom: 5vh;
 
   @media (max-width: 500px) {
-    font-size: 4rem;
+    font-size: 3rem;
     margin-bottom: 2vh;
   }
 
@@ -243,6 +245,11 @@ const Title2 = styled(Title)`
   }
 `;
 
+const Navupdown = styled.div`
+display: flex;
+flex-direction: column;
+d
+`
 const scrollToSection = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };

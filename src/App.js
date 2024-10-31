@@ -12,7 +12,8 @@ import { Squash as Hamburger } from 'hamburger-react';
 import styled, { keyframes, css } from 'styled-components';
 import './i18n'; // Importer la configuration i18next
 import { useTranslation } from 'react-i18next'; // Importer le hook useTranslation
-
+import Frenchflag from './images/frenchflag.png';
+import Usaflag from './images/usaflag.png';
 
 // Animation pour le fondu de l'écran noir
 const fadeOut = keyframes`
@@ -52,7 +53,7 @@ const HamburgerContainer = styled.div`
 
 const LanguageButton = styled.button`
   position: absolute;
-  top: 2vh;
+  top: 0.5rem;
   right: 2vw;
   background-color: transparent;
   border: none;
@@ -61,9 +62,13 @@ const LanguageButton = styled.button`
   cursor: pointer;
   z-index: 9999; // Assurez-vous que le bouton est également au-dessus
   @media (max-width: 1199px) {
-    top: 1%;
+    top: 0%;
   }
 `;
+
+const Flag = styled.img`
+width: 4.5rem;
+`
 
 const MainContent = styled.div`
   opacity: ${props => (props.isOpen ? 0 : 1)};
@@ -87,18 +92,23 @@ const GlobalContainer = styled.div`
   height: 100vh;
   width: 100vw;
    @media (max-width: 1000px) {
-   overflow:scroll
-    
+   overflow:hidden;
   }
 `;
+
 
 function App() {
   const [isOpen, setOpen] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(true);
   const [overlayHidden, setOverlayHidden] = useState(false);
-  const { t, i18n } = useTranslation(); // Utiliser le hook useTranslation
+  const { i18n } = useTranslation(); // Utiliser le hook useTranslation
+
+  // Tableau contenant les drapeaux
+  const [flags, setFlags] = useState([Usaflag, Frenchflag]);
 
   const changeLanguage = () => {
+    // Change l'ordre des drapeaux
+    setFlags(prevFlags => [prevFlags[1], prevFlags[0]]);
     const newLang = i18n.language === 'en' ? 'fr' : 'en';
     i18n.changeLanguage(newLang);
   };
@@ -131,7 +141,7 @@ function App() {
           />
         </HamburgerContainer>
         <LanguageButton onClick={changeLanguage}>
-          {t('button')}
+          <Flag src={flags[0]} alt="Language Flag" />
         </LanguageButton>
         <BackgroundWrapper isOpen={isOpen}>
           <Background />
