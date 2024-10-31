@@ -60,7 +60,7 @@ const ScrollableContainer = styled.div`
 
   @media (max-width: 1600px) {
     overflow: auto;
-    height:70vh;
+    height:50vh;
   }
 `;
 
