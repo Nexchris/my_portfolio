@@ -32,6 +32,7 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     padding: 15px;
+            padding-left: 0px;
   }
 `;
 
@@ -48,7 +49,7 @@ const Title = styled.h1`
   }
 
   @media (max-width: 480px) {
-    font-size: 1.8rem;
+    font-size: 3rem;
   }
 `;
 
@@ -85,6 +86,7 @@ const Input = styled.input`
   @media (max-width: 768px) {
     padding: 10px;
     font-size: 0.9rem;
+    width: fit-content;
   }
 `;
 
@@ -112,8 +114,10 @@ const Textarea = styled.textarea`
   }
 
   @media (max-width: 768px) {
-    padding: 10px;
     font-size: 0.9rem;
+    width: fit-content;
+    padding: 1rem;
+
   }
 `;
 
@@ -123,7 +127,7 @@ const SubmitButton = styled.button`
   margin-top: 20px;
    outline: none;
   background: transparent;
-    font-family: "Unbounded", sans-serif;
+  font-family: "Unbounded", sans-serif;
   color: white;
   font-size: 1.1rem;
   font-weight: bold;
