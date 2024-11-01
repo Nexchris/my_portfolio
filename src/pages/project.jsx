@@ -8,18 +8,13 @@ import Webdoc from "../images/webdoc.png";
 import Records from "../images/records.png";
 
 const animationStyles = css`
-
   animation: ${props => props.animationName} 1s;
-  
 `;
 
 const Body = styled.div`
   animation: fadeIn 5s;
   ${props => props.isFadingOut && animationStyles};
-  /* Vous pouvez également ajouter d'autres animations ici si nécessaire */
-    height: 110vh; /* Assurez-vous que le Body occupe toute la hauteur de la fenêtre */
-
-
+  height: 110vh; /* Assurez-vous que le Body occupe toute la hauteur de la fenêtre */
 `;
 
 const Container = styled.div`
@@ -32,7 +27,6 @@ const Container = styled.div`
   position: relative;
   @media (max-width: 1199px) {
     text-align: center;
-    
   }
 `;
 
@@ -48,16 +42,16 @@ const Title = styled.div`
 
   @media (max-width: 500px) {
     font-size: 4rem;
-      margin: 0;
+    margin: 0;
   }
 
   @media (min-width: 501px) and (max-width:1199px) {
-       font-size: 4rem;
-        margin-left: 5vw;
+    font-size: 4rem;
+    margin-left: 5vw;
   }
 
-     @media (min-width: 1200px) and (max-width:1400px) {
-       font-size: 6rem;
+  @media (min-width: 1200px) and (max-width:1400px) {
+    font-size: 6rem;
   }
 `;
 
@@ -76,8 +70,6 @@ const ProjectTitle = styled.div`
   @media (max-width: 1199px) {
     display: none;
   }
-    @media (min-width: 1200px) and (max-width:1600px) {
-  }
 `;
 
 const ProjectContainer = styled.div`
@@ -92,18 +84,18 @@ const ProjectContainer = styled.div`
     transform: translate(-40%, 70%);
     width: 100vw;
   }
-     @media (min-width: 500px) and (max-width:1199px) {
+  @media (min-width: 500px) and (max-width:1199px) {
     transform: translate(-40%, 70%);
     width: 100vw;
   }
-      @media (min-width: 1200px) and (max-width:1600px) {
-       left:45%;
+  @media (min-width: 1200px) and (max-width:1600px) {
+    left:45%;
   }
 `;
 
 const ProjectFlex = styled.div`
-display: flex;
-height: auto;
+  display: flex;
+  height: auto;
 `;
 
 const ProjectTitleContainer = styled.div`
@@ -113,11 +105,11 @@ const ProjectTitleContainer = styled.div`
   @media (max-width: 500px) {
     margin: 0;
   }
-    @media (min-width: 501px) and (max-width:1199px) {
+  @media (min-width: 501px) and (max-width:1199px) {
     margin:0;
   }
-     @media (min-width: 1200px) and (max-width:1400px) {
-     margin-left:5vh;
+  @media (min-width: 1200px) and (max-width:1400px) {
+    margin-left:5vh;
   }
 `;
 
@@ -129,8 +121,8 @@ const ProjectImage = styled.img`
     width: -webkit-fill-available;
     height: 30vh;
   }
-      @media (min-width: 1200px) and (max-width:1400px) {
-       height:40vh;
+  @media (min-width: 1200px) and (max-width:1400px) {
+    height:40vh;
   }
 `;
 
@@ -141,9 +133,9 @@ const ProjectContent = styled.div`
   color: white;
   margin-top: 2vh;
   text-align: center;
-    @media (max-width: 500px) {
-        transform: translate(27%, 0%);
-        width:65vw;
+  @media (max-width: 500px) {
+    transform: translate(27%, 0%);
+    width:65vw;
   }
 `;
 
@@ -154,7 +146,7 @@ const IndexButton = styled.button`
   background-color: white;
   font-size: 2rem;
   padding: 1rem 2rem;
-      margin-right: 3vw;
+  margin-right: 3vw;
   color: black;
   font-family: "Bebas Neue", sans-serif;
   transition: opacity 0.3s;
@@ -163,14 +155,13 @@ const IndexButton = styled.button`
   &:hover {
     opacity: 0.8;
   }
-     @media (max-width: 500px) {
-   font-size: 1.5rem;    
-        margin-bottom: 3vh;
+  @media (max-width: 500px) {
+    font-size: 1.5rem;    
+    margin-bottom: 3vh;
   }
-        @media (min-width: 501px) and (max-width:1200px) {
-     margin-bottom: 10vh;
+  @media (min-width: 501px) and (max-width:1200px) {
+    margin-bottom: 10vh;
   }
-        
 `;
 
 const A = styled.a`
@@ -241,6 +232,10 @@ function Project() {
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
   const { t } = useTranslation();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1200);
+  
+  // Touch variables
+  const [startX, setStartX] = useState(0);
+  const [endX, setEndX] = useState(0);
 
   const projects = [
     { id: 'BAM', title: 'La Boite à Momes', image: BAM, content1: t('project.section1.content1'), content2: t('project.section1.content2'), button: t('project.button1'), button0: t('project.button0'), link: 'https://www.boitamomes.fr/' },
@@ -249,28 +244,28 @@ function Project() {
   ];
 
   const handleLeft = useCallback(() => {
-    setAnimationName('backOutRight'); // Assurez-vous que cette animation est définie dans animate.css ou votre CSS
-    setIsFadingOut(true);
-    setTimeout(() => {
-      navigate('/skills');
-    }, 1000);
-  }, [navigate]);
+    if (selectedProjectIndex === 0) {
+      setAnimationName('backOutRight'); // Animation pour le retour à la page skills
+      setIsFadingOut(true);
+      setTimeout(() => {
+        navigate('/skills');
+      }, 1000);
+    } else {
+      handlePreviousProject(); // Navigation vers le projet précédent
+    }
+  }, [navigate, selectedProjectIndex]);
 
   const handleRight = useCallback(() => {
-    setAnimationName('fadeOut'); // Assurez-vous que cette animation est définie dans animate.css ou votre CSS
-    setIsFadingOut(true);
-    setTimeout(() => {
-      navigate('/contact');
-    }, 1000);
-  }, [navigate]);
-
-  const handleSpace = useCallback((event) => {
-    if (event.key === ' ' || event.key === 'Enter') {
-      handleRight();
+    if (selectedProjectIndex === projects.length - 1) {
+      setAnimationName('backOutLeft'); // Animation pour le retour à la page contact
+      setIsFadingOut(true);
+      setTimeout(() => {
+        navigate('/contact');
+      }, 1000);
+    } else {
+      handleNextProject(); // Navigation vers le projet suivant
     }
-  }, [handleRight]);
-
-  window.addEventListener('keydown', handleSpace);
+  }, [navigate, selectedProjectIndex]);
 
   const handleNextProject = () => {
     setSelectedProjectIndex((prevIndex) => (prevIndex + 1) % projects.length);
@@ -280,13 +275,28 @@ function Project() {
     setSelectedProjectIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
   };
 
+  const handleTouchStart = (event) => {
+    setStartX(event.touches[0].clientX);
+  };
+
+  const handleTouchMove = (event) => {
+    setEndX(event.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (startX - endX > 50) {
+      handleRight(); // Glissement à gauche
+    } else if (endX - startX > 50) {
+      handleLeft(); // Glissement à droite
+    }
+  };
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1200);
     };
 
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -302,14 +312,19 @@ function Project() {
     };
 
     window.addEventListener('keydown', handleKeyDown);
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [handleLeft, handleRight]);
 
   return (
-    <Body isFadingOut={isFadingOut} animationName={animationName}>
+    <Body 
+      isFadingOut={isFadingOut} 
+      animationName={animationName} 
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <Container>
         <Title>{t('project.title')}</Title>
         {isMobile && (
@@ -346,8 +361,8 @@ function Project() {
           ) : null
         ))}
         <Navflex>
-        <NavButton onClick={handleLeft}>◀︎</NavButton>
-        <NavButton onClick={handleRight}>▶︎</NavButton>
+          <NavButton onClick={handleLeft}>◀︎</NavButton>
+          <NavButton onClick={handleRight}>▶︎</NavButton>
         </Navflex>
       </ProjectFlex>
     </Body>
