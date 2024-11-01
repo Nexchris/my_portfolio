@@ -1,74 +1,54 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import 'animate.css';
-import { useTranslation } from 'react-i18next'; 
+import { useTranslation } from 'react-i18next';
 import emailjs from 'emailjs-com';
-import Linkedinlogo from '../images/linkedin.png';
 import BeatLoader from 'react-spinners/BeatLoader';
+import Linkedinlogo from '../images/linkedin.png';
+import Mail from '../images/mail.png';
+import Call from '../images/call.png';
 
-const animationStyles = css`
-  animation: ${props => props.animationName} 1s;
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
+
+const fadeOut = keyframes`
+  from { opacity: 1; }
+  to { opacity: 0; }
 `;
 
 const Container = styled.div`
-  animation: fadeIn 2s;
-  ${props => props.isFadingOut && animationStyles};
-  color: white;
-  position: relative;
+  animation: ${props => (props.isFadingOut ? fadeOut : fadeIn)} 1s;
+  color: #333;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  text-align: center;
+  height: 100vh;
   padding: 20px;
-  box-sizing: border-box;
-  overflow: auto; /* Assurer que le conteneur peut défiler */
-  
-  @media (max-width: 1200px) {
-  height: 93vh;
-        overflow-x: auto;
+  text-align: center;
+  overflow: auto;
+
+  @media (max-width: 768px) {
+    padding: 15px;
   }
 `;
 
-
-const Title = styled.div`
-  color: white;
-  margin: 0;
+const Title = styled.h1`
   font-size: 5rem;
   margin-top: 5vh;
+  margin-bottom: 0;
   font-family: "Bebas Neue", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-`;
+  color: white;
+  font-weight:400;
 
-const Text = styled.div`
-  font-family: "Bebas Neue", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  padding-top: 1vh;
-  font-size: 2vw;
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     font-size: 2rem;
   }
-       @media (min-width: 501px) and (max-width:1200px) {
-    font-size:4vh;
-  }
-`;
 
-const Button = styled.a`
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 1.5vw;
-  color: white;
-  background-color: #0073b1;
-  padding: 10px 20px;
-  margin: 5px;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-
-  &:hover {
-    box-shadow: 0 0 10px rgba(0, 155, 171, 0.8);
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
   }
 `;
 
@@ -76,223 +56,225 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 90%;
   max-width: 500px;
   margin-top: 2rem;
 `;
 
 const Input = styled.input`
-  font-family: "Unbounded", sans-serif;
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 10px 0;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
-  box-sizing: border-box;
+  font-family: "Unbounded", sans-serif;
+  outline: none;
+  background: transparent;
+  color: white;
+  transition: border-color 0.3s;
+
+  &:focus {
+    border-color: #0073b1;
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
 `;
 
 const Textarea = styled.textarea`
-  font-family: "Unbounded", sans-serif;
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 10px 0;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
-  box-sizing: border-box;
   resize: none;
-    @media (min-width: 501px) and (max-width:1200px) {
-    height:30vh;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-family: "Unbounded", sans-serif;
+  transition: border-color 0.3s;
+  
+
+  &:focus {
+    border-color: #0073b1;
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    font-size: 0.9rem;
   }
 `;
 
 const SubmitButton = styled.button`
-  font-family: "Unbounded", sans-serif;
-  font-weight: bold;
-  font-size: 1.5vw;
-  color: white;
-  background-color: black;
-  padding: 10px 100px;
-  margin-top: 20px;
-  text-decoration: none;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-  }
-
-  @media (max-width: 1600px) {
-    font-size: 1.5rem;
-    background-color: white;
-    color: black;
-  }
-`;
-
-const Image = styled.img`
   width: 50%;
+  padding: 12px;
+  margin-top: 20px;
+   outline: none;
+  background: transparent;
+    font-family: "Unbounded", sans-serif;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+    border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+transition: transform 0.3s ease;
+   &:hover {
+    color: white;
+    transform: scale(1.2);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    font-size: 1rem;
+  }
 `;
 
-const NavButton = styled.div`
-  cursor: pointer;
+const StatusMessage = styled.div`
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-family: "Unbounded", sans-serif;
+  color: ${props => (props.success ? 'white' : 'red')};
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+`;
+
+const ContactOptions = styled.div`
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+
+  @media (max-width: 480px) {
+    gap: 10px;
+  }
+`;
+
+const ContactButton = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  border: none;
-  font-size: 2rem;
-  padding: 1rem;
-  color: white;
-  margin: 0 1rem;
+  background-color: ${props => props.bgColor || '#0073b1'};
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+   transform: scale(1.2);
 
   &:hover {
-    opacity: 0.8;
+    transform: scale(1.8);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 768px) {
+    width: 45px;
+    height: 45px;
   }
 `;
 
-const Navflex = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  @media (max-width: 1024px) {
-    display: none;
-  }
-`;
-
-const Sendmessage = styled.div`
-  position: absolute;
-  animation: fadeIn 1s;
-  top: 25%;
-  font-family: "Unbounded", sans-serif;
-  font-size: 4rem;
-`;
-
-const SuccessMessage = styled.div`
-  position: absolute;
-  top: 25%;
-  font-family: "Unbounded", sans-serif;
-  font-size: 4rem;
-`;
-
-const SuccessButton = styled(SubmitButton)`
-  background-color: white;
-  color: black;
-  margin-top: 20px;
+const Icon = styled.img`
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
 `;
 
 function Contact() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [isFadingOut, setIsFadingOut] = useState(false);
-  const [animationName, setAnimationName] = useState('fadeIn');
   const [isSending, setIsSending] = useState(false);
-  const [isSent, setIsSent] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleLeft = useCallback(() => {
-    setAnimationName('fadeOut');
     setIsFadingOut(true);
-    setTimeout(() => {
-      navigate('/project');
-    }, 1000); // Attendre la fin de l'animation (1s)
+    setTimeout(() => navigate('/project'), 1000);
   }, [navigate]);
 
   const handleRight = useCallback(() => {
-    setAnimationName('backOutLeft');
     setIsFadingOut(true);
-    setTimeout(() => {
-      navigate('/');
-    }, 1000); // Attendre la fin de l'animation (1s)
+    setTimeout(() => navigate('/'), 1000);
   }, [navigate]);
-
-  const handleSpace = useCallback((event) => {
-    if (event.key === ' ' || event.key === 'Enter') {
-      handleRight();
-    }
-  }, [handleRight]);
-  
-  window.addEventListener('keydown', handleSpace);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === 'ArrowLeft') {
-        handleLeft();
-      } else if (event.key === 'ArrowRight') {
-        handleRight();
-      }
+      if (event.key === 'ArrowLeft') handleLeft();
+      else if (event.key === 'ArrowRight') handleRight();
     };
-
     window.addEventListener('keydown', handleKeyDown);
-
-    // Nettoyage de l'écouteur d'événements
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleLeft, handleRight]);
 
   const sendEmail = (e) => {
     e.preventDefault();
     setIsSending(true);
-    setIsSent(false);
+    setStatusMessage('');
+    setIsSuccess(false);
 
-    emailjs.sendForm(
-      'service_3jb5bxd', 
-      'template_9pqmfdc',
-      e.target,
-      '-GY0uB4wYt1pgYCrm'
-    ).then(
-      (result) => {
-        console.log(result.text);
-        setIsSending(false);
-        setIsSent(true);
-      },
-      (error) => {
-        console.log(error.text);
-        setIsSending(false);
-      }
-    );
-  };
-
-  const handleReturnToForm = () => {
-    setIsSent(false);
+    emailjs.sendForm('service_3jb5bxd', 'template_9pqmfdc', e.target, '-GY0uB4wYt1pgYCrm')
+      .then(
+        () => {
+          setIsSending(false);
+          setStatusMessage('Message envoyé avec succès !');
+          setIsSuccess(true);
+        },
+        () => {
+          setIsSending(false);
+          setStatusMessage('Erreur lors de l’envoi. Veuillez réessayer.');
+          setIsSuccess(false);
+        }
+      );
   };
 
   return (
-    <Container isFadingOut={isFadingOut} animationName={animationName}>
+    <Container isFadingOut={isFadingOut}>
       <Title>{t('contact.title')}</Title>
-      
-      {!isSending && !isSent && (
-        <Form onSubmit={sendEmail}>
-          <Input type="text" placeholder={t('contact.name')} name="from_name" required />
-          <Input type="email" placeholder={t('contact.email')} name="from_email" required />
-          <Textarea placeholder={t('contact.message')} name="message" required rows="5" />
-          <SubmitButton type="submit">{t('contact.submit')}</SubmitButton>
-          <Text>{t('contact.text')}</Text>
-          <Button href="https://www.linkedin.com/in/chris-ngabala-347b48252/" target="_blank" rel="noopener noreferrer">
-            <Image src={Linkedinlogo} alt="LinkedIn" />
-          </Button>
-        </Form>
-      )}
-  
-      {isSending && (
-        <Sendmessage>
-          <BeatLoader color="#ffffff" size={85} />
-          <p>Message en cours d'envoi...</p>
-        </Sendmessage>
-      )}
-  
-      {isSent && (
-        <SuccessMessage>
-          <p>Le message a été bien envoyé.</p>
-          <SuccessButton onClick={handleReturnToForm}>Retour</SuccessButton>
-        </SuccessMessage>
-      )}
-  
-      {!isSending && !isSent && (
-        <Navflex>
-        <NavButton onClick={handleLeft}>◀︎</NavButton>
-        <NavButton onClick={handleRight}>▶︎</NavButton>
-        </Navflex>
-      )}
+
+      <Form onSubmit={sendEmail}>
+        <Input type="text" placeholder={t('contact.name')} name="from_name" required />
+        <Input type="email" placeholder={t('contact.email')} name="from_email" required />
+        <Textarea placeholder={t('contact.message')} name="message" required rows="5" />
+        <SubmitButton type="submit" disabled={isSending}>
+          {isSending ? <BeatLoader color="#ffffff" size={10} /> : t('contact.submit')}
+        </SubmitButton>
+      </Form>
+
+      {statusMessage && <StatusMessage success={isSuccess}>{statusMessage}</StatusMessage>}
+
+      <ContactOptions>
+        <ContactButton href="tel:+1234567890" target="_blank" bgColor="0A66C2" title="Téléphone">
+          <Icon src={Call} alt="Téléphone" />
+        </ContactButton>
+        <ContactButton href="mailto:ngabalachris@gmail.com" bgColor="0A66C2" target="_blank" title="Mail">
+          <Icon src={Mail} alt="Email" />
+        </ContactButton>
+        <ContactButton href="https://www.linkedin.com/in/chris-ngabala-347b48252/" bgColor="0A66C2" target="_blank" title="LinkedIn">
+          <Icon src={Linkedinlogo} alt="LinkedIn" />
+        </ContactButton>
+      </ContactOptions>
     </Container>
   );
 }

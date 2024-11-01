@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import 'animate.css'; // Assurez-vous que cette ligne est bien incluse
+import 'animate.css';
 import { useTranslation } from 'react-i18next';
 
 const zoomOut = keyframes`
@@ -41,7 +41,7 @@ const IndexTitle = styled.h1`
   font-family: "Unbounded", sans-serif;
   color: white;
   width: 55vw;
-  animation: animate__bounceIn 2s; // Assurez-vous que les animations sont bien importées et définies
+  animation: animate__bounceIn 2s;
 
   @media (max-width: 499px) {
     font-size: 2rem;
@@ -60,35 +60,32 @@ const IndexTitle = styled.h1`
 `;
 
 const IndexButton = styled.button`
-  animation: animate__fadeIn 2s; // Assurez-vous que les animations sont bien importées et définies
+  animation: animate__fadeIn 2s;
   border-radius: 5vh;
   border: none;
-  background-color: white;
+  background-color: ${(props) => (props.isHovered ? 'black' : 'white')};
   font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
   padding: 1rem 2rem;
-  color: black;
+  color: ${(props) => (props.isHovered ? 'white' : 'black')};
   font-family: "Bebas Neue", sans-serif;
   transition: background-color 0.3s, transform 0.2s;
+  transform: ${(props) => (props.isHovered ? 'scale(1.2)' : 'scale(1)')};
 
   &:hover {
-    background-color: black; /* Bleu foncé au survol */
+    background-color: black;
     color: white;
-    transform: scale(1.2); /* Légère mise en relief au survol */
+    transform: scale(1.2);
   }
 
   &:active {
-    transform: scale(0.95); /* Effet de clic */
-  }
-
-  &:hover {
-    opacity: 0.8;
+    transform: scale(0.95);
   }
 `;
 
 const Tip = styled.div`
-  animation: animate__fadeIn 5s; // Assurez-vous que les animations sont bien importées et définies
+  animation: animate__fadeIn 5s;
   margin: 0;
   position: absolute;
   top: 80%;
@@ -106,14 +103,16 @@ function Index() {
   const { t } = useTranslation();
   const [animate, setAnimate] = useState(false);
   const [hideContent, setHideContent] = useState(false);
+  const [isHovered, setIsHovered] = useState(false); // État pour gérer l'effet d'hover sur le bouton
   const navigate = useNavigate();
 
   const handleRight = useCallback(() => {
-    setAnimate(true);
+    setIsHovered(true); // Active l'effet d'hover
+    setAnimate(true); // Active l'animation générale
     setTimeout(() => {
       setHideContent(true);
       navigate('/aboutme');
-    }, 500); // Assurez-vous que cette durée est égale à la durée de l'animation
+    }, 500); 
   }, [navigate]);
 
   const handleLeft = useCallback(() => {
@@ -121,14 +120,15 @@ function Index() {
     setTimeout(() => {
       setHideContent(true);
       navigate('/contact');
-    }, 500); // Assurez-vous que cette durée est égale à la durée de l'animation
+    }, 500); 
   }, [navigate]);
 
   useEffect(() => {
     if (animate) {
       const timer = setTimeout(() => {
         setAnimate(false);
-      }, 500); // Assurez-vous que cette durée est égale à la durée de l'animation
+        setIsHovered(false); // Désactive l'effet de hover après l'animation
+      }, 500);
       return () => clearTimeout(timer);
     }
   }, [animate]);
@@ -155,7 +155,12 @@ function Index() {
       <br />
       <IndexTitle>{t('index.title')}</IndexTitle>
       <br />
-      <IndexButton onClick={handleRight}>{t('index.button')}</IndexButton>
+      <IndexButton 
+        onClick={handleRight} 
+        isHovered={isHovered} 
+      >
+        {t('index.button')}
+      </IndexButton>
       <Tip>{t('index.tip')}</Tip>
     </Indexcontainer>
   );
