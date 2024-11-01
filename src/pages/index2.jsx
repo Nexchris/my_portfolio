@@ -180,7 +180,7 @@ function Index() {
       <IndexTitle>{t('index.title')}</IndexTitle>
       <br />
       <IndexButton 
-        onClick={handleRight}
+        onClick={handleRight} 
         isHovered={isHovered} 
       >
         {t('index.button')}
