@@ -5,7 +5,7 @@ import Index from './index';
 import 'animate.css';
 import { useTranslation } from 'react-i18next';
 
-// Animation fadeOutLeft
+// Animation fadeOut
 const fadeOut = keyframes`
   from {
     opacity: 1;
@@ -40,7 +40,7 @@ const MainContainer = styled.div`
   opacity: ${(props) => (props.hideContent ? 0 : 1)};
   visibility: ${(props) => (props.hideContent ? 'hidden' : 'visible')};
   @media (max-width: 1600px) {
-  margin-top: 1.5vh;
+    margin-top: 1.5vh;
   }
 `;
 
@@ -243,24 +243,9 @@ const Title2 = styled(Title)`
 const Navupdown = styled.div`
 display: flex;
 flex-direction: column;
-d
 `
-const scrollToSection = (id) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-};
 
-// Fonction pour remplacer les sauts de ligne par <br />
-const formatContent = (text) => {
-  return text.split('\n').map((str, index) => (
-    <React.Fragment key={index}>
-      {str}
-      <br />
-    </React.Fragment>
-  ));
-};
-
-function Aboutme() {
-  const [startX, setStartX] = useState(0);
+const Aboutme = () => {
   const { t } = useTranslation();
   const [animate, setAnimate] = useState(false);
   const [showIndex, setShowIndex] = useState(false);
@@ -270,6 +255,13 @@ function Aboutme() {
   const navigate = useNavigate();
 
   const sections = useMemo(() => ['section1', 'section2', 'section3', 'section4'], []);
+  
+  // Variables for swipe tracking
+  const [startX, setStartX] = useState(0);
+
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const scrollToNextSection = useCallback(() => {
     const currentIndex = sections.indexOf(currentSection);
@@ -304,6 +296,24 @@ function Aboutme() {
     }, 200);
   }, [navigate]);
 
+  // Swipe Handling
+  const handleTouchStart = (e) => {
+    setStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const deltaX = endX - startX;
+    const threshold = 50; // Threshold to recognize a swipe
+
+    if (deltaX > threshold) {
+      scrollToPreviousSection();
+    } else if (deltaX < -threshold) {
+      scrollToNextSection();
+    }
+  };
+
+  // Key down handling
   const handleKeyDown = useCallback((event) => {
     if (event.key === 'ArrowUp') {
       event.preventDefault();
@@ -320,23 +330,19 @@ function Aboutme() {
     }
   }, [scrollToPreviousSection, scrollToNextSection, handleLeft, handleRight]);
 
-  const handleSpace = useCallback((event) => {
-    if ( event.key === 'Enter') {
-      handleRight();
-    }
-  }, [handleRight]);
-
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keydown', handleSpace);
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchend', handleTouchEnd);
     window.addEventListener('resize', () => setIsMobile(window.innerWidth <= 768));
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keydown', handleSpace);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
       window.removeEventListener('resize', () => setIsMobile(window.innerWidth <= 768));
     };
-  }, [handleKeyDown, handleSpace]);
+  }, [handleKeyDown]);
 
   useEffect(() => {
     if (animate) {
@@ -346,24 +352,6 @@ function Aboutme() {
       return () => clearTimeout(timer);
     }
   }, [animate]);
-
-
-    // Gestion du swipe
-    const handleTouchStart = (e) => {
-      setStartX(e.touches[0].clientX); // Enregistre la position initiale du toucher
-    };
-  
-    const handleTouchEnd = (e) => {
-      const endX = e.changedTouches[0].clientX; // Position finale
-      const deltaX = endX - startX; // Différence entre début et fin du mouvement
-      const threshold = 50; // Seuil pour déclencher le swipe
-  
-      if (deltaX > threshold) {
-        handleRight();
-      } else if (deltaX < -threshold) {
-        handleLeft();
-      }
-    };
 
   return (
     <>

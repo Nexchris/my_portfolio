@@ -5,7 +5,8 @@
     "name": "Chris Ngabala",
     "title": "Fullstack Web Developer",
     "button": "View Portfolio",
-    "tip": "Use the left and right arrows to navigate smoothly through the site."
+    "tip": "Use the left and right arrows to navigate smoothly through the site.",
+     "tipmobile": "Swipe right to move forward on the site, and left to go back."
   },
   "aboutme": {
     "title": "About Me",

@@ -39,8 +39,11 @@ const Container = styled.div`
   width: 100vw;
   text-align: center;
   position: relative;
-   @media (min-width: 300px) and (max-width: 500px) {
+   @media (min-width: 300px) and (max-width: 1600px) {
        font-size: 1.5rem;
+               overflow: scroll;
+        height: 80vh;
+    }
   }
 `
 ;
@@ -65,7 +68,7 @@ const IconsContainer = styled.div`
   justify-content: center;
   width: auto;
   @media (max-width: 768px) {
-    display: none;
+    display: block;
   }
 `;
 
@@ -92,6 +95,9 @@ const Icon = styled.img`
     transform: scale(1.1);
     opacity: 0.8;
   }
+      @media (max-width: 500px) {
+    width: 2rem;
+    height: 2rem;}
 `;
 
 const Navflex = styled.div`
@@ -137,7 +143,7 @@ const Button = styled.button`
 
 const Pageflex = styled.div`
   display: flex;
-   @media (min-width: 300px) and (max-width: 500px) {
+   @media (min-width: 300px) and (max-width: 1200px) {
      display: block;
   }
 `;
@@ -162,6 +168,9 @@ border-radius: 1vw;
     font-size: 1rem;
     font-weight:bold;
       font-family: "Unbounded", sans-serif;
+      @media (max-width: 500px) {
+width: -webkit-fill-available;
+    }
 `
 
 const CVButton = styled.button`

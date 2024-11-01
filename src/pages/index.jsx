@@ -93,10 +93,19 @@ const Tip = styled.div`
   font-family: "Unbounded", sans-serif;
   color: white;
   width: 100vw;
+  display: ${(props) => (props.isMobile ? 'none' : 'block')}; // Affichage conditionnel en fonction de la largeur d'écran
+`;
 
-  @media (max-width: 1919px) {
-    display: none;
-  }
+const Tipmobile = styled.div`
+  animation: animate__fadeIn 5s;
+  margin: 0;
+  position: absolute;
+  top: 80%;
+  font-size: 1rem;
+      width: 70vw;
+  font-family: "Unbounded", sans-serif;
+  color: white;
+  display: ${(props) => (props.isMobile ? 'block' : 'none')}; // Affichage conditionnel pour l'affichage mobile
 `;
 
 function Index() {
@@ -104,6 +113,7 @@ function Index() {
   const [animate, setAnimate] = useState(false);
   const [hideContent, setHideContent] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1920); // État pour gérer l'affichage mobile
   const navigate = useNavigate();
 
   // Variables pour les positions de swipe
@@ -153,6 +163,13 @@ function Index() {
     }
   };
 
+  // Fonction de mise à jour de l'état isMobile lors du redimensionnement
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1920);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'ArrowLeft') {
@@ -185,7 +202,8 @@ function Index() {
       >
         {t('index.button')}
       </IndexButton>
-      <Tip>{t('index.tip')}</Tip>
+      <Tip isMobile={isMobile}>{t('index.tip')}</Tip>
+      <Tipmobile isMobile={isMobile}>{t('index.tipmobile')}</Tipmobile>
     </Indexcontainer>
   );
 }

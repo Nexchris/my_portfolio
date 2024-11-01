@@ -5,7 +5,8 @@
       "name": "Chris Ngabala",
       "title": "Développeur Web Fullstack",
       "button": "Voir le Portfolio",
-      "tip": "Utilisez les flèches gauche et droite pour naviguer facilement sur le site."
+      "tip": "Utilisez les flèches gauche et droite pour naviguer facilement sur le site.",
+      "tipmobile": "Glissez vers la droite pour avancer sur le site, et vers la gauche pour revenir en arrière."
     },
     "aboutme": {
       "title": "A propos de moi",
