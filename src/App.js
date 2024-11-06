@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Squash as Hamburger } from 'hamburger-react';
 import styled, { keyframes, css } from 'styled-components';
+import 'animate.css';
 import './i18n';
 
 // Import de mes routes
