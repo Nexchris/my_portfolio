@@ -1,0 +1,18 @@
+1/
+
+<Projectflex>
+  <Projecttitlecontainer>
+      <Projectitle>La Boite à Momes</Projectitle>
+      <Projectitle>Webdoc Interactif</Projectitle>
+      <Projectitle>Records On Shelf</Projectitle>
+</Projecttitlecontainer>
+      <Projectcontainer>
+        <Projectimage src={BAM} alt="" />
+        <Projectcontent>Langages utiles : Jimdo(CMS), HTML, CSS, Javascript
+
+        </Projectcontent>
+        <br />
+        <Projectcontent>J'ai eu la fonction de developpeur web Front-End pour but de la refonte du site, j'ai pris en charge la nouvelle conception du site via le CMS Jimdo et personnaliser via des widgets Javascripts interactifs.</Projectcontent>
+        <IndexButton >Voir le Site</IndexButton>
+      </Projectcontainer>
+</Projectflex>

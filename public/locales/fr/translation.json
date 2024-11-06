@@ -1,0 +1,100 @@
+{
+    "welcome": "Bienvenue",
+    "button": "EN",
+    "index": {
+      "name": "Chris Ngabala",
+      "title": "Développeur Web Fullstack",
+      "button": "Voir le Portfolio",
+      "tip": "Utilisez les flèches gauche et droite pour naviguer facilement sur le site.",
+      "tipmobile": "Faites glisser votre pouce vers la droite pour passer de page",
+        "loading1": "Initialisation du portfolio en cours...",
+        "loading2": "Construction des pages (React Router DOM)...",
+        "loading3": "Activation du thème musical et des effets sonores...",
+        "loading4": "Assemblage du format responsive...",
+        "loading5": "Intégration des médias visuels...",
+        "loading6": "Initialisation de l'internationalisation (React-i18n)...",
+        "loading7": "Activation des animations et transitions...",
+        "loading8": "Initialisation du menu...",
+        "loading9": "Assemblage final du site...",
+        "loading10": "Bienvenue sur votre portfolio!"
+    },
+    "aboutme": {
+      "title": "A propos de moi",
+      "scroll1": "Profil",
+      "scroll2": "Parcours",
+      "scroll3": "Compétences",
+      "scroll4": "Objectifs",
+      "section1": {
+        "intro": "Bonjour ! Je m'appelle Chris Ngabala, 20 ans et je suis un développeur dans le monde du web et digital."
+      },
+      "section2": {
+        "title": "Mon Parcours",
+        "content": "Mon parcours a débuté à l'École Multimédia, où j'ai reçu une formation solide en programmation et développement web.\n\n Dès la première année, j'ai appris les bases essentielles du code, posant ainsi les fondations de mes compétences en HTML, CSS et JavaScript.\n\n Grâce à cette base, j'ai pu aborder des concepts plus complexes et avancés lors de ma deuxième année."
+      },
+      "section3": {
+        "title": "Mes Compétences",
+        "content": "En deuxième année, j'ai considérablement élargi mes compétences en explorant divers outils et frameworks, ce qui m'a permis de réaliser des projets plus complexes : \n\n- Back-End : maîtrise de PHP, MySQL, Symfony, et SQLite pour le développement backend, ainsi que de solutions serverless telles que Firebase. \n\n - Front-End : React/Native, TypeScript, et Node.js pour le développement frontend."
+      },
+      "section4": {
+        "title": "Objectifs et aspirations",
+        "content": "Je suis actuellement à la recherche d'une alternance disponible dès maintenant, avec un rythme de 1 semaine en cours / 3 semaines en entreprise, en vue de ma troisième année au Yutopia Meta Campus Paris. \n\n Je suis particulièrement motivé par les opportunités qui me permettront de travailler sur des projets innovants et stimulants, tout en développant mes compétences en tant que développeur Fullstack. N'hésitez pas à me contacter par message ou téléphone via ma page de contact.",
+        "button": "Compétences"
+      }
+    },
+        "menu": {
+          "home": "Accueil",
+          "about": "À Propos de moi",
+          "skills": "Compétences",
+          "projects": "Projets",
+          "contact": "Me Contacter"
+        },
+        "skills": {
+          "title": "Compétences",
+          "project":"Mes Projets",
+          "front":"Mes Compétences - Front-End",
+          "back":"Mes Compétences - Back-End",
+          "cms":"Mes Compétences - CMS et outils de développement",
+          "HTML" : "HTML - Avancé",
+          "CSS" : "CSS - Avancé",
+          "JavaScript" : "JavaScript - Intermédiaire",
+          "Jquery" : "Jquery - Notions",
+          "TypeScript" : "TypeScript - Intermédiaire",
+          "React" : "React - Avancé",
+          "ReactNative" : "React Native - Intermédiaire",
+          "PHP" : "PHP - Intermédiaire",
+          "NodeJS" : "NodeJS - Intermédiaire",
+          "MySQL" : "MySQL - Intermédiaire",
+          "Python" : "Python - Notions",
+          "Syfmony": "Symfony - Intermédiaire",
+          "Firebase": "Firebase - Avancé",
+          "Wordpress" : "Wordpress - Intermédiaire",
+          "Git" : "Git - Intermédiaire",
+          "GitHub" : "GitHub - Intermédiaire",
+          "Figma" : "Figma - Avancé",
+          "ShowCV" : "Afficher le CV",
+          "DownloadCV": "Télécharger le CV"
+          
+        },
+        "project": {
+          "title": "Mes Projets",
+          "section1.content1":"Langages utilisés : Jimdo(CMS), HTML, CSS, Javascript",
+            "section1.content2":" J'ai eu la fonction de developpeur web Front-End pour but de la refonte du site, j'ai pris en charge la nouvelle conception du site via le CMS Jimdo et personnaliser via des widgets Javascripts interactifs.",
+            "button0":"Me Contacter",
+            "button1" : "Voir la page",
+            "section2.content1":"Langages utilisés : HTML, CSS, Javascript, Firebase, React, TypeScript",
+            "section2.content2":"J'ai eu la fonction de developpeur web Front-End pour but de la refonte du site, j'ai pris en charge la nouvelle conception du site via le CMS Jimdo et personnaliser via des widgets Javascripts interactifs.",
+            "button2" : "Voir le Github",
+            "section3.content1":"Langages utilisés : CSS, Javascript, React, Syfmony, SQLite",
+            "section3.content2":"Pour ce projet scolaire individuel, l'objectif était de développer un site permettant à l'utilisateur de définir son nom et de créer des vinyles, en modifer, les supprimer et les catégoriser. Le projet est divisé en deux parties : une interface utilisateur en React et un back-end en Symfony, reliés par des API RESTful, avec SQLite comme base de données.",
+            "button3" : "Voir le Github"
+         
+        },
+        "contact": {
+          "title":"Me Contacter",
+          "text":"Ou",
+          "name":"Nom",
+          "email":"Email",
+          "message":"Message",
+          "submit":"Envoyer"
+  }}
+  

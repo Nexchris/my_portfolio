@@ -1,0 +1,98 @@
+{
+  "welcome": "Welcome",
+  "button": "FR",
+  "index": {
+    "name": "Chris Ngabala",
+    "title": "Fullstack Web Developer",
+    "button": "View Portfolio",
+    "tip": "Use the left and right arrows to navigate smoothly through the site.",
+     "tipmobile": "Swipe your thumb to the right to turn the page.",
+     "loading1": "Initializing the portfolio...",
+     "loading2": "Building the pages (React Router DOM)...",
+     "loading3": "Activating the music theme and sound effects...",
+     "loading4": "Assembling the responsive layout...",
+     "loading5": "Integrating visual media...",
+     "loading6": "Initializing internationalization (React-i18n)...",
+     "loading7": "Activating animations and transitions...",
+     "loading8": "Initializing the menu...",
+     "loading9": "Final assembly of the site...",
+     "loading10": "Welcome to your portfolio!"
+  },
+  "aboutme": {
+    "title": "About Me",
+    "scroll1": "Profile",
+    "scroll2": "Journey",
+    "scroll3": "Expertise",
+    "scroll4": "Goals",
+    "section1": {
+      "intro": "Hello! My name is Chris Ngabala, I'm 20 years old, and I'm a developer in the web and digital field."
+    },
+    "section2": {
+      "title": "My Journey",
+      "content": "My journey began at the Multimedia School, where I received a solid foundation in programming and web development.\n\n In my first year, I learned the essential basics of coding, laying the groundwork for my skills in HTML, CSS, and JavaScript.\n\n Thanks to this foundation, I was able to tackle more complex and advanced concepts in my second year."
+    },
+    "section3": {
+      "title": "My Expertise",
+      "content": "In my second year, I significantly expanded my skills by exploring a variety of technologies and frameworks, allowing me to develop more complex projects:\n\n - Back-End: PHP, MySQL, Symfony, and SQLite for backend development, including serverless solutions like Firebase.\n\n - Front-End: React/Native, TypeScript, Node.js for frontend development."
+    },
+    "section4": {
+      "title": "Goals and Aspirations",
+      "content": "I am currently looking for an apprenticeship available immediately, with a schedule of 1 week in classes and 3 weeks in the company, in preparation for my third year at Yutopia Meta Campus Paris. \n\n I am particularly motivated by opportunities that will allow me to work on innovative and stimulating projects while continuing to develop my skills as a Fullstack developer. Please feel free to contact me by message or phone through my contact page.",
+      "button": "Skills"
+    }
+  },
+  "menu": {
+    "home": "Home",
+    "about": "About Me",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact Me"
+  },
+  "skills": {
+    "title": "Skills",
+    "project": "My Projects",
+    "front": "My Skills - Front-End",
+    "back": "My Skills - Back-End",
+    "cms": "My Skills - CMS and Development Tools",
+    "HTML": "HTML - Advanced",
+    "CSS": "CSS - Advanced",
+    "JavaScript": "JavaScript - Intermediate",
+    "Jquery": "Jquery - Basics",
+    "TypeScript": "TypeScript - Intermediate",
+    "React": "React - Advanced",
+    "ReactNative": "React Native - Intermediate",
+    "PHP": "PHP - Intermediate",
+    "NodeJS": "NodeJS - Intermediate",
+    "MySQL": "MySQL - Intermediate",
+    "Python": "Python - Basics",
+    "Symfony": "Symfony - Intermediate",
+    "Firebase": "Firebase - Advanced",
+    "Wordpress": "WordPress - Intermediate",
+    "Git": "Git - Intermediate",
+    "GitHub": "GitHub - Intermediate",
+    "Figma": "Figma - Advanced",
+    "ShowCV": "Show CV",
+    "DownloadCV": "Download CV"
+},
+  "project": {
+    "title": "My Projects",
+    "section1.content1": "Languages used: Jimdo(CMS), HTML, CSS, JavaScript",
+    "section1.content2": "I worked as a Front-End web developer with the goal of redesigning the site. I handled the new design of the site via the Jimdo CMS and customized it with interactive JavaScript widgets.",
+    "button0":"Me Contacter",
+    "button1": "View Page",
+    "section2.content1": "Languages used: HTML, CSS, JavaScript, Firebase, React, TypeScript",
+    "section2.content2": "I worked as a Front-End web developer with the goal of redesigning the site. I handled the new design of the site via the Jimdo CMS and customized it with interactive JavaScript widgets.",
+    "button2": "View on GitHub",
+    "section3.content1": "Languages used: CSS, JavaScript, React, Symfony, SQLite",
+    "section3.content2": "For this individual school project, the goal was to develop a site allowing the user to define their name and create, modify, delete, and categorize vinyl records. The project is divided into two parts: a user interface in React and a back-end in Symfony, connected via RESTful APIs, with SQLite as the database.",
+    "button3": "View on GitHub"
+  },
+  "contact": {
+          "title":"Contact Me",
+          "text":"Or",
+          "name":"Name",
+          "email":"Mail",
+          "message":"Message",
+          "submit":"Send"
+  }
+}
