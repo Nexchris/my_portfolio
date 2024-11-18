@@ -162,11 +162,11 @@ const Storytelling = styled.div`
 
 const Content = styled.div`
   font-size: 4rem;
-  font-weight: 400;
+  font-weight: 100;
   font-family: "Unbounded", sans-serif;
 
    @media (min-width: 200px ) and (max-width: 600px) { 
-    font-size: x-large;
+    font-size: large;
   }
 
    @media (min-width: 601px) and (max-width:1600px) {
@@ -177,11 +177,11 @@ const Content = styled.div`
 
 const Content2 = styled.div`
   font-size: 2rem;
-  font-weight: 400;
+  font-weight: 100;
   font-family: "Unbounded", sans-serif;
 
    @media (min-width: 100px ) and (max-width: 600px) { 
-    font-size: x-large;
+    font-size: large;
   }
 
    @media (min-width: 601px) and (max-width:1600px) {
