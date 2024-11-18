@@ -33,7 +33,8 @@ const Indexcontainer = styled.div`
 
     @media (max-width: 500px) {
     position: relative;
-    height:100vh;
+    height:auto;
+    margin-top:10rem;
   }
 
   @media (min-width:501px) and (max-width: 1200px) {
@@ -56,8 +57,13 @@ const IndexTitle = styled.h1`
   animation: animate__bounceIn 2s;
 
 
-    @media (min-width: 100px ) and (max-width: 400px) { 
+       @media (min-width: 100px ) and (max-width: 298px) { 
     font-size: large;
+    width: 90vw;
+  }
+
+    @media (min-width: 299px ) and (max-width: 400px) { 
+    font-size: xx-large;
     width: 90vw;
   }
 
@@ -96,7 +102,8 @@ const IndexButton = styled.button`
   background: transparent;
     border: 1px solid #ddd;
     color: white;
-        font-family: "Zen Dots";
+        font-family: "Kanit";
+        font-weight:bold;
 
   &:hover {
     color: white;
@@ -120,7 +127,12 @@ const IndexButton = styled.button`
     }
   
 
-    @media (min-width: 100px) and (max-width: 400px) { 
+    @media (min-width: 299px) and (max-width: 400px) { 
+    font-size: larger;
+
+  }
+
+    @media (min-width: 100px) and (max-width: 298px) { 
     font-size: smaller;
   }
 `;
@@ -134,7 +146,9 @@ const Tip = styled.div`
   color: white;
   width: 100vw;
   display: ${(props) => (props.isMobile ? 'none' : 'block')}; 
-      font-family: "Zen Dots";
+  font-family: "Kanit";
+  font-weight:600;
+
 `;
 
 const Tipmobile = styled.div`
@@ -146,14 +160,20 @@ const Tipmobile = styled.div`
   width: 70vw;
   color: white;
   display: ${(props) => (props.isMobile ? 'block' : 'none')}; 
-  font-family: "Zen Dots";
-  
+  font-family: "Kanit";
+  font-weight:600;
 
-  @media (max-width: 1600px) {
+   @media (min-width: 299px) and (max-width: 400px) { 
+     margin-top: 3rem;
+       display: block;
+    position: relative;
+
+  }
+
+  @media(min-width: 401px) and (max-width: 1600px) {
   display: block;
     position: relative;
     top: 0%;
-    margin-top: 5vh;
     margin-bottom: 10vh;
 
   }

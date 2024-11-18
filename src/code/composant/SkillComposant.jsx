@@ -151,8 +151,8 @@ const Skillflex = styled.div`
 `;
 
 const Skilltext = styled.h1`
-    font-family: "Zen Dots";
-    font-weight: 100;
+font-family: 'Kanit';
+    font-weight: 600;
   font-size: 1.5rem;
       @media (max-width: 499px) {
           font-size: x-large;
@@ -168,7 +168,8 @@ const SkillInput = styled.input`
   text-align: center;
   font-size: 1rem;
   font-weight: bold;
-  font-family: "Unbounded", sans-serif;
+font-family: 'Kanit';
+    font-weight: 500;
 
   @media (max-width: 500px) {
     width: -webkit-fill-available;
@@ -185,7 +186,8 @@ const CVShowButton = styled.button`
   padding: 0.5rem 1.5rem;
   width: auto;
   font-size: 1.5rem;
-  font-family: "Bebas Neue", sans-serif;
+font-family: 'Kanit';
+    font-weight: 500;
   color: black;
   background-color: white; /* Bleu modéré pour le fond */
   border: none;

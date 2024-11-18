@@ -162,8 +162,8 @@ const Storytelling = styled.div`
 
 const Content = styled.div`
   font-size: 4rem;
-  font-weight: 300;
-
+  font-weight: 400;
+  font-family: "Unbounded", sans-serif;
 
    @media (min-width: 200px ) and (max-width: 600px) { 
     font-size: x-large;
@@ -176,8 +176,9 @@ const Content = styled.div`
 `;
 
 const Content2 = styled.div`
-  font-size: 2.1rem;
-  font-weight: 300;
+  font-size: 2rem;
+  font-weight: 400;
+  font-family: "Unbounded", sans-serif;
 
    @media (min-width: 100px ) and (max-width: 600px) { 
     font-size: x-large;
@@ -206,7 +207,7 @@ const StorytellingList2 = styled(Storytelling)`
 
 const Title = styled.h1`
   margin: 0;
-  font-size: 8rem;
+  font-size: 6rem;
   margin-top: 5vh;
   margin-bottom: 10vh;
   font-family: "Bebas Neue", sans-serif;
@@ -214,7 +215,7 @@ const Title = styled.h1`
   font-style: normal;
 
   @media (max-width: 399px) {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-top: 5vh;
     margin-bottom: 2vh;
   }
@@ -232,9 +233,10 @@ const Title = styled.h1`
 const Title2 = styled(Title)`
   font-size: 6rem;
   margin-bottom: 5vh;
+    font-family: "Bebas Neue", sans-serif;
 
     @media (max-width: 399px) {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-top: 5vh;
     margin-bottom: 2vh;
   }

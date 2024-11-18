@@ -120,7 +120,6 @@ function App() {
       </BackgroundWrapper>
       {isOpen && <Menu onClose={() => setOpen(false)} />}
       <MainContent isOpen={isOpen}>
-        {isIndexVisible && (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/aboutme" element={<About />} />
@@ -128,7 +127,6 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/project" element={<Project />} />
           </Routes>
-        )}
       </MainContent>
     </GlobalContainer>
   );
