@@ -55,6 +55,9 @@ const Form = styled.form`
   width: 90%;
   max-width: 500px;
   margin-top: 2rem;
+   @media (min-width: 299px) and (max-width: 400px) {
+      margin-top: 0rem;
+  }
 `;
 
 const Input = styled.input`
@@ -64,7 +67,7 @@ const Input = styled.input`
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
-  font-family: "Unbounded", sans-serif;
+ font-family: "Kanit";
   outline: none;
   background: transparent;
   color: white;
@@ -96,7 +99,7 @@ const Textarea = styled.textarea`
   outline: none;
   background: transparent;
   color: white;
-  font-family: "Unbounded", sans-serif;
+ font-family: "Kanit";
   transition: border-color 0.3s;
   
 
@@ -123,7 +126,7 @@ const SubmitButton = styled.button`
    outline: none;
   background: transparent;
     border: 1px solid #ddd;
-  font-family: "Unbounded", sans-serif;
+  font-family: "Kanit";
   color: white;
   font-size: 1.1rem;
   font-weight: bold;
@@ -148,7 +151,7 @@ transition: transform 0.3s ease;
 const StatusMessage = styled.div`
   margin-top: 2rem;
   font-size: 1.2rem;
-  font-family: "Unbounded", sans-serif;
+ font-family: "Kanit";
   color: ${props => (props.success ? 'white' : 'red')};
 
   @media (max-width: 768px) {
@@ -161,10 +164,16 @@ const ContactOptions = styled.div`
   gap: 30px;
   margin-top: 20px;
 
-  @media (max-width: 480px) {
+  @media (min-width: 299px) and (max-width: 400px) {
     gap: 10px;
-        margin-top: 2rem;
+        margin: 0;
   }
+
+   @media (min-width: 401px) and (max-width:600px) {
+    gap: 0;
+  }
+  
+        
 `;
 
 const ContactButton = styled.a`
@@ -199,11 +208,10 @@ const Icon = styled.img`
   width: 70%;
   height: 70%;
   object-fit: contain;
-   @media (max-width: 768px) {
-            width: 4rem;
-        height: 4rem;
-
-  }
+         @media (min-width: 299px) and (max-width: 400px){
+           width: 3rem;
+        height: 3rem;
+         }
 
 `;
 ;
