@@ -94,6 +94,10 @@ const Input = styled.input`
     font-size: 0.9rem;
     width: fit-content;
   }
+
+   @media (min-width: 601px) and (max-width:1600px){
+       width: -webkit-fill-available;
+   }
 `;
 
 const Textarea = styled.textarea`
@@ -123,7 +127,10 @@ const Textarea = styled.textarea`
     font-size: 0.9rem;
     width: fit-content;
     padding: 1rem;
+  }
 
+  @media (min-width: 601px) and (max-width:1299px) {
+    height: 20rem;
   }
 `;
 

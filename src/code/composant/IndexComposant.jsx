@@ -69,20 +69,12 @@ const IndexTitle = styled.h1`
 
   @media (min-width: 401px)  and (max-width:600px) { 
     font-size: x-large;
-    width: 90vw;
+    width: 80vw;
   }
 
-    @media (min-width: 601px) and (max-width:1023px) {
-    font-size: medium;
-  }
-
-  @media (min-width: 1024px) and (max-width:1600px) {
-    font-size: xxx-large;
-  }
-
-    @media (min-width:767px) and (max-width: 1200px) {
-       font-size: xx-large;
-  }
+    @media (min-width:601px) and (max-width: 1299px) {
+    font-size: x-large;
+    }
 `;
 
 const IndexButton = styled.button`
@@ -167,15 +159,19 @@ const Tipmobile = styled.div`
      margin-top: 3rem;
        display: block;
     position: relative;
+  }
 
+    @media (min-width: 401px)  and (max-width:600px) { 
+      margin-top: 5rem;
+       display: block;
+    position: relative;
   }
 
   @media(min-width: 401px) and (max-width: 1600px) {
   display: block;
     position: relative;
     top: 0%;
-    margin-bottom: 10vh;
-
+    margin-top: 5vh;
   }
   
       
@@ -183,8 +179,11 @@ const Tipmobile = styled.div`
 
 const Tipimg = styled.img`
    width: 4rem;
-    @media (min-width: 500px) and (max-width:1000px) {
-    display: none;
+    @media (min-width: 401px) and (max-width:600px) {
+    display: inline;
+  }
+  @media(min-width: 601px) and (max-width: 1299px){
+  display: inline;
   }
     
 `
