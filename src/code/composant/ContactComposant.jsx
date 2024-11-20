@@ -27,6 +27,10 @@ const Container = styled.div`
     padding: 15px;
             padding-left: 0px;
   }
+
+      @media (min-width: 601px) and (max-width:1600px) {
+      height: 90vh;
+  }
          
 `
 
@@ -39,8 +43,9 @@ const Title = styled.h1`
   color: white;
   font-weight:400;
 
-  @media (max-width: 768px) {
-    font-size: 2rem;
+
+  @media (min-width: 601px) and (max-width:1600px) {
+    font-size: xxx-large;
   }
 
   @media (max-width: 480px) {
@@ -55,8 +60,11 @@ const Form = styled.form`
   width: 90%;
   max-width: 500px;
   margin-top: 2rem;
-   @media (min-width: 299px) and (max-width: 400px) {
+   @media (min-width: 299px) and (max-width: 600px) {
       margin-top: 0rem;
+  }
+       @media (min-width: 601px) and (max-width:1600px) {
+    margin-top: 1rem;
   }
 `;
 
@@ -172,6 +180,12 @@ const ContactOptions = styled.div`
    @media (min-width: 401px) and (max-width:600px) {
     gap: 0;
   }
+
+     @media (min-width: 601px) and (max-width:1600px) {
+    gap: 0;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
   
         
 `;
@@ -212,6 +226,11 @@ const Icon = styled.img`
            width: 3rem;
         height: 3rem;
          }
+
+  @media (min-width: 601px) and (max-width:1600px){
+   width: 50%;
+  height: 50%;
+  }
 
 `;
 ;
